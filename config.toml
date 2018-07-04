@@ -1,0 +1,76 @@
+baseurl         = "https://rguske.github.io"
+theme           = "casper-two"
+languageCode    = "en-US"
+disqusShortname = ""
+paginate        = 6
+SectionPagesMenu = "main"
+canonifyurls    = true
+
+[params]
+  title       = "J.A.R.V.I.S"
+  subtitle    = "Sometimes you gotta walk before you can run."
+  copyright   = "© 2018"
+
+#  cover       = "img/Hamburg_Hafen.JPG"
+  description = "Here is a description of your site."
+  metaDescription = ""
+  googleAnalytics = ""
+  customCSS = []
+  RSSLink = ""
+
+  twitterName = "vmw_rguske"
+  # fbName = "fakeghost"
+  githubName = "rguske"
+  linkedinName = "robert-guske-830853111"
+  mediumName = ""
+
+  # logo = "hugo-logo.png"
+  #orgName = "EM"
+  # orgWebsite = "https://www.telematika.org"
+  # orgDescription = "Here is a description placeholder for your org"
+
+  showSupport = false
+
+  author = "Robert Guske"
+  authorAvatar = "img/profile_robert.jpg"
+  authorLocation = "Hamburg, Germany"
+  authorWebsite = "https://rguske.github.io"
+  authorDescription = "I hope you enjoyed reading."
+
+  pageNotFoundTitle = "404 - Page not found"
+
+  #casper or caspertwo
+  singleViewStyle = "casper"
+
+[permalinks]
+  post = "/post/:slug/"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 200
+
+[[menu.main]]
+  name = "About"
+  url = "/about"
+  weight = 150
+
+# [[menu.main]]
+#   name = "Post"
+#   url = "/post/post"
+#   weight = 100  
+
+[[menu.main]]
+  name = "Disclaimer"
+  url = "/disclaimer"
+  weight = 50  
+
+[[menu.main]]
+name = "Tags"
+url = "/tags/"
+weight = 40
+
+#[[menu.main]]
+#  name = "External"
+#  url = "https://google.com/"
+#  weight = 95
