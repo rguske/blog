@@ -7,14 +7,14 @@ SectionPagesMenu = "main"
 canonifyurls    = true
 
 [params]
-  title       = "J.A.R.V.I.S"
-  subtitle    = "Sometimes you gotta walk before you can run."
-  copyright   = "© 2018"
+  title       = "j.a.r.v.i.s."
+  subtitle    = "Sometimes you gotta run before you can walk!"
+  copyright   = "© All rights reserved -2018"
 
-#  cover       = "img/Hamburg_Hafen.JPG"
+  cover       = "img/blog-cover.jpg"
   description = "Here is a description of your site."
   metaDescription = ""
-  googleAnalytics = ""
+  googleAnalytics = "UA-122353302-1"
   customCSS = []
   RSSLink = ""
 
@@ -35,7 +35,7 @@ canonifyurls    = true
   authorAvatar = "img/profile_robert.jpg"
   authorLocation = "Hamburg, Germany"
   authorWebsite = "https://rguske.github.io"
-  authorDescription = "I hope you enjoyed reading."
+  authorDescription = "Read more."
 
   pageNotFoundTitle = "404 - Page not found"
 
@@ -67,7 +67,7 @@ canonifyurls    = true
 
 [[menu.main]]
 name = "Tags"
-url = "/tags/"
+url = "/tags"
 weight = 40
 
 #[[menu.main]]
