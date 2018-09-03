@@ -1,8 +1,8 @@
 ---
-title: "VIC Part I: OVA Deployment"
+title: "vSphere Integrated Containers Part I: OVA Deployment"
 date: 2018-07-13T13:18:38+02:00
 draft: false
-image: /img/Hamburg_Hafen1.JPG
+image: /img/vic_part_i_cover.jpg
 tags:
 - VIC
 - Container
@@ -88,11 +88,11 @@ If you´ve entered your credentials correctly, you´ll be forwarded to the VIC G
 ---
 Continue with:
 
-<a href="/post/vic-part-ii-vsphere-client-plug-in">**VIC Part II: vSphere Client Plug-In**</a>
+<a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vic-part-iii-deployment-of-a-virtual-container-host/">**VIC Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vic-part-iv-docker-run-a-container-vm">**VIC Part IV: docker run a Container-VM**</a>
+<a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
 Previous article:

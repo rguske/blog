@@ -1,8 +1,8 @@
 ---
-title: "VIC Part II: vSphere Client Plug-In"
+title: "vSphere Integrated Containers Part II: vSphere Client Plug-In"
 date: 2018-07-13T13:17:23+02:00
 draft: false
-image: /img/Hamburg_Hafen2.JPG
+image: /img/vic_part_ii_cover.jpg
 tags:
 - VIC
 - Container
@@ -102,13 +102,13 @@ Now we have established the **Integration** into **vSphere** but what about the 
 ---
 Continue with:
 
-<a href="/post/vic-part-iii-deployment-of-a-virtual-container-host/">**VIC Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vic-part-iv-docker-run-a-container-vm">**VIC Part IV: docker run a Container-VM**</a>
+<a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
 Previous articles:
 
-<a href="/post/vic-part-i-ova-deployment">**VIC Part I: OVA Deployment**</a>
+<a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
 <a href="/post/vmware-vsphere-integrated-containers-overview">**vSphere Integrated Containers: Overview**</a>

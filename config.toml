@@ -1,4 +1,4 @@
-baseurl         = "https://rguske.github.io"
+baseurl         = "https://rguske.github.io/"
 theme           = "casper-two"
 languageCode    = "en-US"
 disqusShortname = ""

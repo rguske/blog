@@ -1,8 +1,8 @@
 ---
-title: "VIC Part IV: docker run a Container-VM"
+title: "vSphere Integrated Containers Part IV: docker run a Container-VM"
 date: 2018-07-13T13:15:42+02:00
 draft: false
-image: /img/Hamburg_Hafen4.JPG
+image: /img/vic_part_iv_cover.jpg
 tags:
 - VIC
 - Container
@@ -30,7 +30,7 @@ docker -H 192.168.100.222:2376 --tls run --name nginx1 -m 512M -d -p 8080:80 vmw
 
 Let´s check if our container is up and running. First in vCenter:
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180712_110920.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180712_110920.jpg" width="850"</img></a>
+<a href="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg" width="850"</img></a>
 
 ...and second via command line:
 
@@ -171,10 +171,10 @@ Isn´t that cool?! :-) Try it out!
 ---
 Previous articles:
 
-<a href="/post/vic-part-iii-deployment-of-a-virtual-container-host/">**VIC Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vic-part-ii-vsphere-client-plug-in">**VIC Part II: vSphere Client Plug-In**</a>
+<a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vic-part-i-ova-deployment">**VIC Part I: OVA Deployment**</a>
+<a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
 <a href="/post/vmware-vsphere-integrated-containers-overview">**vSphere Integrated Containers: Overview**</a>

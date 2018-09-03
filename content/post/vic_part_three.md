@@ -1,8 +1,8 @@
 ---
-title: "VIC Part III: Deployment of a Virtual Container Host"
+title: "vSphere Integrated Containers Part III: Deployment of a Virtual Container Host"
 date: 2018-07-13T13:16:33+02:00
 draft: false
-image: /img/Hamburg_Hafen3.JPG
+image: /img/vic_part_iii_cover.jpg
 tags:
 - VIC
 - Container
@@ -220,13 +220,13 @@ Alright, we´ve deployed our first Virtual Container Host we can go ahead with P
 ---
 Continue with:
 
-<a href="/post/vic-part-iv-docker-run-a-container-vm">**VIC Part IV: docker run a Container-VM**</a>
+<a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
 Previous articles:
 
-<a href="/post/vic-part-ii-vsphere-client-plug-in">**VIC Part II: vSphere Client Plug-In**</a>
+<a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vic-part-i-ova-deployment">**VIC Part I: OVA Deployment**</a>
+<a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
 <a href="/post/vmware-vsphere-integrated-containers-overview">**vSphere Integrated Containers: Overview**</a>
