@@ -76,7 +76,7 @@ service-control --stop vsphere-ui && service-control --start vsphere-ui
 service-control --stop vsphere-client && service-control --start vsphere-client
 ```
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg" height="250"</img></a>
+<a href="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg" height="260"</img></a>
 Because we want to hold our vCSA as clean as a Appliance should be, we have to get rid of our tracks by starting the cleaning process through the deletion of the unpacked tar-file.
 
 ```

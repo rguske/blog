@@ -28,7 +28,7 @@ In my role as a VMware Technical Account Manager I have the chance to meet indiv
 
 vSphere Integrated Containers can leverage a solution for use cases like <a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/solutionbrief/vmware-vic-app-repackaging-use-case.pdf" target="_blank">App Repackaging</a> and <a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/solutionbrief/vmware-vic-developer-sandbox-use-case.pdf" target="_blank">Developer Sandbox</a>. Just to name a few.
 
-VMware vSphere Integrated Containers Version 1.4 was already launched by our Cloud-Native Business Unit (CNABU) on the 15th of March this year. 
+VMware vSphere Integrated Containers Version 1.4 was already launched by our Cloud-Native Business Unit (CNABU) on the 15th of March this year.
 {{< tweet 996453354812342274 >}}
 
 And while I´m writing this series...
@@ -99,6 +99,10 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 * <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4/rn/vsphere-integrated-containers-14-release-notes.html" target="_blank">Release Notes Version 1.4</a>
 
 * <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.1/rn/vsphere-integrated-containers-141-release-notes.html" target="_blank">Release Notes Version 1.4.1</a>
+
+* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.2/rn/vsphere-integrated-containers-142-release-notes.html" target="_blank">Release Notes Version 1.4.2</a>
+
+* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.3/rn/vSphere-Integrated-Containers-143-Release-Notes.html" target="_blank">Release Notes Version 1.4.3</a>
 
 **[VMware Hands-on Labs]**
 
