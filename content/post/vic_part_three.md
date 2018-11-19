@@ -133,7 +133,7 @@ As you can see through the picture above, we can make use of <a href="https://vm
 This part is a little bit more comprehensive and like in most cases a picture quickly creates clarity.
 
 <img src="/img/posts/vic_getting_started/vic_networking.png" height="500" </img>
-Credits: <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/graphics/vic_networking.png" target="_blank">VIC Documentation Networking Requirements</a>
+Credits: <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/vch_networking.html" target="_blank">VIC Documentation Networking Requirements</a>
 
 The picture above shows you the available networks, which are described by the following:
 
