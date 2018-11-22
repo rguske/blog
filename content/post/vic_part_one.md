@@ -29,34 +29,44 @@ tags:
 To start with, we have to download the latest bits from myvmware.com here --> <a href="https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere_integrated_containers/1_4" target="_blank">VIC Version 1.4.1</a>. After having downloaded the 3,12 GB ova-file we´ll start provisioning the VIC Virtual Appliance over the vSphere Web Client onto your vSphere Datacenter, Cluster or ESXi Host. I suppose that you are already familiar with these steps but if not, please go <a href="https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.vm_admin.doc/GUID-17BEDA21-43F6-41F4-8FB2-E01D275FE9B4.html" target="_blank">here</a> first.
 
 If you´re already familiar with it and you´re more interested in automting an OVA deployment, I´d recommend reading this <a href="http://cloudmaniac.net/ova-ovf-deployment-using-govc-cli/" target="_blank"> Post </a> by <a href="https://twitter.com/woueb" target="_blank"> Romain Decker </a>.
+
+*Select an OVF template*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg" height="600"</img></a>
 
+*Select a compute resource*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg" height="600"</img></a>
 
+*Review details*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg" height="600"</img></a>
 
+*License agreements*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg" height="600"</img></a>
 
+*Select storage*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg" height="600"</img></a>
 
+*Select networks*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg" height="600"</img></a>
 
 At this point, I´d like to stress out again to the VIC documentation regarding the <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/deploy_vic_appliance.html" target"_blank">use of SSH</a>. SSH is needed when you perform upgrades or the following:
 
 <a href="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg" width="700"</img></a>
 
+*Appliance Configuration*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" height="600"</img></a>
 
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" height="600"</img></a>
 
 If you decide to use static IP-Addresses like me, please use spaces and not commas to separate multiple DNS-Servers.
 
+*Network Properties*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg" height="600"</img></a>
 
 I´ve also decided to create an example user through the wizard, which gets the username prefix you´ve chosen in point 5 in this section. I´m fine with the predetermined prefix *vic*.
 
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg" height="700"</img></a>
 
+*Ready to complete*
 <a href="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg" height="600"</img></a>
 
 Lean back and let the vCenter do its job... ... ...FINISHED!
