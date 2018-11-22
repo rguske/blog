@@ -205,17 +205,17 @@ Password:
 Use `cd /etc/vmware/upgrade` to go into the directory which contains the `./upgrade.sh` script and execute it. You´ll be promped to enter the neccassary information. As an alternative you can also specify the neccassary arguments upfront like this:
 
 ```
-./upgrade.sh --target 192.168.178.72 \    ### vCenter Server
---username administrator@jarvis.local \   ### User with appropriate permissions
---password *********     \                ### Password
---fingerprint 192.168.178.72 4F:D3:9B.. \ ### vCenter Server Fingerprint
---dc Datacenter-North \                   ### vSphere Datacenter
---embedded-psc \                          ### Platform Service Controller (--embedded-psc or --external-psc)
---appliance-target 192.168.100.160 \      ### VIC Appliance where we´d upgrade from
---appliance-username root \               ### VIC Appliance root user
---appliance-password VMware1234!?! \      ### root user password  
---appliance-version v1.3.1 \              ### VIC Appliance version where we come from
---destroy                                 ### Destroy the the old appliance after the upgrade is finished.
+./upgrade.sh --target 192.168.178.72 \        ### vCenter Server
+--username 'administrator@jarvis.local' \     ### User with appropriate permissions
+--password '*********'   \                    ### Password
+--fingerprint '192.168.178.72 4F:D3:9B...' \  ### vCenter Server Fingerprint
+--dc Datacenter-North \                       ### vSphere Datacenter
+--embedded-psc \                              ### Platform Service Controller (--embedded-psc or --external-psc)
+--appliance-target 192.168.100.160 \          ### VIC Appliance where we´d upgrade from
+--appliance-username root \                   ### VIC Appliance root user
+--appliance-password VMware1234!?! \          ### root user password  
+--appliance-version v1.3.1 \                  ### VIC Appliance version where we come from
+--destroy                                     ### Destroy the the old appliance after the upgrade is finished.
 ```
 See: <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/upgrade_appliance.html#upgradeoptions" target="_blank"> Specify Command Line Options During Appliance Upgrade </a>
 
