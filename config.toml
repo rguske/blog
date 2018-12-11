@@ -5,6 +5,7 @@ disqusShortname = ""
 paginate        = 6
 SectionPagesMenu = "main"
 canonifyurls    = true
+enableEmoji     = true
 
 [params]
   title       = "j.a.r.v.i.s."
