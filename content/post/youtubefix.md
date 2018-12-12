@@ -17,7 +17,7 @@ See how Michael fixed the normal behavior for the Twitter Shortcode `{{</* tweet
 
 ### *When `{{</* youtube */>}}` won´t work for your theme*
 
-Besides embedding a tweet into your post e.g. to give a statement more expression/ more emphasis, or to comment a topic-related tweet, or simply because it´s pretty cool, a Youtube-Video is also a good alternative.
+Besides embedding a tweet into your post e.g. to give a statement more expression/ more emphasis, or to comment a topic related tweet, or simply because it´s pretty cool, a Youtube-Video is also a good alternative.
 
 I´m running the <a href="https://themes.gohugo.io/hugo-casper-two/" target="_blank">*Casper-Two*</a> Theme for my Blog and back when I wrote <a href="https://rguske.github.io/post/sometimes-you-gotta-run-before-you-can-walk/" target="_blank">"*Sometimes you gotta run before you can walk*"</a>, I absolutely wanted to have the <a href="https://www.youtube.com/watch?time_continue=2&v=1VrHeInDwwg" target="_blank">*IRON MAN I First Armor test*</a> Video included and it didn´t work straight from the start.
 
@@ -57,7 +57,7 @@ Put the following lines of code into the `yt.html` file and save it.
   sandbox="allow-scripts allow-same-origin">
 </iframe>
 
-This time I´ll make use of our new Shortcode `{{</* yt */>}}` instead of `{{</* youtube */>}}` *et voilà*...
+This time I´ll make use of our new Shortcode `{{</* yt */>}}` instead of `{{</* youtube */>}}` *et voilà*... 
 
 {{< yt 2xkNJL4gJ9E >}}
 
