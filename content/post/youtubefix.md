@@ -17,11 +17,11 @@ See how Michael fixed the normal behavior for the Twitter Shortcode `{{</* tweet
 
 ### *When `{{</* youtube */>}}` won´t work for your theme*
 
-Besides embedding a tweet into your post e.g. to give a statement more expression/ more emphasis, or to comment a topic-related tweet, or simply because it´s pretty cool, a Youtube-Video is also a good alternative.
+Besides embedding a tweet into your post e.g. to give a statement more expression/ more emphasis, or to comment a topic related tweet, or simply because it´s pretty cool, a Youtube-Video is also a good alternative.
 
 I´m running the <a href="https://themes.gohugo.io/hugo-casper-two/" target="_blank">*Casper-Two*</a> Theme for my Blog and back when I wrote <a href="https://rguske.github.io/post/sometimes-you-gotta-run-before-you-can-walk/" target="_blank">"*Sometimes you gotta run before you can walk*"</a>, I absolutely wanted to have the <a href="https://www.youtube.com/watch?time_continue=2&v=1VrHeInDwwg" target="_blank">*IRON MAN I First Armor test*</a> Video included and it didn´t work straight from the start.
 
-###### *Let me show you what I mean* 
+###### *Let me show you what I mean*
 
 I´ll add the video <a href="https://www.youtube.com/watch?v=2xkNJL4gJ9E&list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3&index=9" target="_blank">"Shortcodes | Hugo - Static Site Generator | Tutorial 9"</a> here at this point of the post by using `{{</* youtube 2xkNJL4gJ9E */>}}` in my post `*.md` file. :point_down:
 
@@ -30,13 +30,13 @@ I´ll add the video <a href="https://www.youtube.com/watch?v=2xkNJL4gJ9E&list=PL
 
 ---
 
-Normally you would see the mentioned Youtube video here :point_up: but it seems that the Shortcode won´t work for my chosen theme. 
+Normally you would see the mentioned Youtube video here :point_up: but it seems that the Shortcode won´t work for my chosen theme.
 
 ###### You are not alone!
 
-The best thing to do first, from my point of view, is not to google the (mis-)behavior, but rather go to the Github-Repo from your theme and have a look at the *Issues*. If there exists one, comment...if not...raise one. 
+The best thing to do first, from my point of view, is not to google the (mis-)behavior, but rather go to the Github-Repo from your theme and have a look at the *Issues*. If there exists one, comment...if not...raise one.
 
-So I had a look at the issues for <a href="https://github.com/eueung/hugo-casper-two" target="_blank">Casper-Two</a> and indeed, there´s already <a href="https://github.com/eueung/hugo-casper-two/issues/5" target="_blank">one</a> open which covers this issue. I commented this as well and a really short period of time later, <a href="https://twitter.com/SalarRahmanian" target="_blank">Salar Rahmanian</a> had the code snippet for it. 
+So I had a look at the issues for <a href="https://github.com/eueung/hugo-casper-two" target="_blank">Casper-Two</a> and indeed, there´s already <a href="https://github.com/eueung/hugo-casper-two/issues/5" target="_blank">one</a> open which covers this issue. I commented this as well and a really short period of time later, <a href="https://twitter.com/SalarRahmanian" target="_blank">Salar Rahmanian</a> had the code snippet for it.
 
 This is simply great and one of thousands of things I´m really impressed with regarding Github and the Community.
 
@@ -46,7 +46,7 @@ As Michael already described it in his post, we have to create a new empty file 
 
 ```bash
 $ cd <HUGO_BLOG_ROOT>
-$ touch layouts/shortcodes/yt.htmls
+$ touch layouts/shortcodes/yt.html
 ```
 
 Put the following lines of code into the `yt.html` file and save it.
