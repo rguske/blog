@@ -46,7 +46,7 @@ As Michael already described it in his post, we have to create a new empty file 
 
 ```bash
 $ cd <HUGO_BLOG_ROOT>
-$ touch layouts/shortcodes/yt.htmls
+$ touch layouts/shortcodes/yt.html
 ```
 
 Put the following lines of code into the `yt.html` file and save it.
