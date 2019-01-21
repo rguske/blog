@@ -1,52 +1,92 @@
 ---
-title: "Monitor vSphere Integrated Containers"
-date: 2018-11-10T13:24:09+01:00
-draft: true
+title: "Monitoring Container VMs with vRealize Operations Manager"
+date: 2019-01-21T23:00:09+01:00
+draft: false
 image: /img/vic_monitoring_cover.jpg
 tags:
 - VIC
 - Container
 - vSphere
 - Monitoring
-- vROps
+- vRealize Operations Manager
 - Dashboard
 ---
-Treating Containers as <a href="https://en.wikipedia.org/wiki/First-class_citizen" target="_blank">First-Class Citizens</a> is what vSphere Integrated Containers can leverage to IT-Ops Teams through instantiating a Container-Image as a Virtual Machine, as I´ve already described it in more details in my previous posts.
+Based on talks with customers who already made their experiences running containerized applications in test as well as in production and who are using vSphere Integrated Containers for their way to go, I decided to build a dashboard to monitor those workloads (Container-VMs) with VMware´s Cloud Management Solution, <a href="https://www.vmware.com/products/vrealize-operations.html" target="_blank">*vRealize Operations Manager (vR Ops)*</a>.
+
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190120_030628.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190120_030628.jpg" width="850"></img></a>
+<center>*Figure I: VIC monitoring high level overview*</center>
+
+## **The Dashboard**
+Treating Containers as <a href="https://en.wikipedia.org/wiki/First-class_citizen" target="_blank">"First-Class Citizens"</a> is what vSphere Integrated Containers can offer to IT-(Dev)Ops Teams through instantiating a Container-Image as a Virtual Machine.
 
 > Therefore you don´t have to build out a separate, tailored infrastructure stack and can continue to leverage existing Scalability, Security and **Monitoring** capabilities.
 
-#### **Monitoring** is the keyword for this post
-Based on several talks with customers and colleagues who already made their experiences running containerized applications in production and are using vSphere Integrated Containers for their way to go, I´ve thought it´s time to create a Dashboard to monitor those workloads with VMware´s Cloud-Management Solution, vRealize Operations Manager (vROps), to show the value, because they are virtual machines. The granularity vROps has inside vSphere will help us here to collect and show performance and utilization metrics.
+> *Source: <a href="https://rguske.github.io/post/vmware-vsphere-integrated-containers-overview/" target="_blank">VMware vSphere Integrated Containers: Overview</a>*
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181220_125457.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181220_125457.jpg" width="850"></img></a>
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190114_100348.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190114_100348.jpg" width="850"></img></a>
 
-The dashboard is splitted into two "parts". The upper part gives you more details about the utilization and properties of the Virtual Container Host itself. This means that both one and the other part, Resource Pool and VCH-VM (Docker endpoint) are covered by the upper part.
+I´ve splitted the dashboard into two parts because I wanted to get as most as valuable content displayed on the screen without scrolloing down the page (depending on your resolution :wink:). The upper part gives you more details about the **utilization** and properties of the Virtual Container Host itself. Thus resource pool as well as the Virtual Container Host VM (Docker endpoint) are covered by the <span style="color:blue">upper part</span>.
 
-The lower part gives you more details of the performance and VM-properties of a specific service of an application (instantiated Container-VM).
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190114_103053.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190114_103053.jpg" width="950"></img></a>
 
-<a href="/img/posts/201811_post_monitoring/dashboard_parts.jpg"><img src="/img/posts/201811_post_monitoring/dashboard_parts.jpg" width="850"></img></a>
+The <span style="color:orange">lower part</span> is focused on the **performance** of each Container-VM (by selecting the cVM) running inside the resource pool, and by the end of the day, on the service which will be provided by the container.
 
-I´ve also considered to build out each part in a seperate dashboard, so one for the VCH and another one for the Container-VM, but nevertheless I thought its better to handle it with an "All-in-One" variant.
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190114_103149.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190114_103149.jpg" width="950"></img></a>
 
-###### Things you have to do first before the import
+I also considered to build out each part in a separate dashboard, so one for the Virtual Container Host(s) and another one for the Container-VM(s), but nevertheless I decided to go with the "All-in-One" variant.
 
-1. <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-43ACB276-C9A3-490A-B65E-3D0EA66E8AC8.html" target="_blank">Group Type</a> (To categorize your objects in vR Ops)
-2. <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-7CD02B2B-4BB1-4BD3-B24E-5F630B94A7EF.html" target="_blank">Dynamic Custom Group</a> (Dynamic assignment of VCH´s through membership criteria)
-3. <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-75E5B784-6CE7-4048-AD77-89A9E21C2AC2.html" target="blank">Metric Configuration</a> (To define a specific set of metrics)
+## Download via VMware {code}
+If you like the dashboard and you are interested to monitor your containerized applications in terms of performance and utilization, you can download it through the following link: https://code.vmware.com/samples?id=5283
+
+**But** before you can make use of it you have to do some preperations first.
+
+#### Things you have to do first before the import
+
+**In vSphere**
+
+1. Create a new <a href="https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.vcenterhost.doc/GUID-E8E854DD-AA97-4E0C-8419-CE84F93C4058.html" target="_blank">vSphere-Tag</a>
+
+Open up the vSphere-Client and create a new vSphere-Tag called *Virtual Container Host* and assign it to every Virtual Container Host **Resource Pool(!)**.
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_101420.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_101420.jpg" width="550"></img></a>
+
+I´m going to explain the reason why we need this in a moment.
+
+**In vR Ops**
+
+1. Create a <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-43ACB276-C9A3-490A-B65E-3D0EA66E8AC8.html" target="_blank">Group Type</a> to categorize objects in vR Ops.
+2. Create a <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-7CD02B2B-4BB1-4BD3-B24E-5F630B94A7EF.html" target="_blank">Dynamic Custom Group</a> for dynamic assignment of Virtual Container Hosts through a membership criteria.
+3. Create two new <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-75E5B784-6CE7-4048-AD77-89A9E21C2AC2.html" target="blank">Metric Configurations</a> to define a specific set of metrics for the VCH as well as for the cVM.
+4. Import two new <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-BC389BD4-8F24-42D9-82B1-C33A87F738B6.html?hWord=N4IghgNiBcIGoEsCmB3AziAvkA" target="_blank">*Views*</a> (VCH properties & cVM properties)
+
+Let´s start with #1, the creation of a *Group Type*, a superior group for our *Dynamic Custom Group* which we´ll configure in step #2. When you´re already logged in into vR Ops go to *Administration* and select *Group Types* which is under *Configuration* on the left side. Create a new one and call it *vSphere Integrated Containers* for example.
 
 <a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_102513.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_102513.jpg" width="850"></img></a>
 
+It is followed by the mentioned *Dynamic Custom Group* which is not found under *Administration* but under *Environment* and then *Groups and Applications*. Create a new one and call it e.g. *Virtual Container Hosts*.
+
 <a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_102917.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_102917.jpg" width="850"></img></a>
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_103022.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_103022.jpg" width="850"></img></a>
+One striking aspect about *Dynamic Custom Groups* is the fact that we can define the *Membership* based on a specific criteria. During my first tests, I´ve defined the membership based on the *Prefix* of a Virtual Container Host name like **vch-**app01 for example. Asking me naming conventions is an important topic and every organization has its own, so it won´t fit for everyone and therefore I had to find another criteria to let the dynamic assignment to this group happen.
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_103104.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_103104.jpg" width="400"></img></a>
+I thought *vSphere-Tags* is a perfect alternative as a criteria. Consequently, we have to configure it for the *Object Type Resource Pool* like the screenshot below shows.
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_104030.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_104030.jpg" width="850"></img></a>
+*Properties* --> *Summary|vSphere Tag* is *Virtual Container Host*
 
-Name: rg_vch_resource_overview
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190107_101933.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190107_101933.jpg" width="850"></img></a>
 
-```
+Hit *Preview* to see if it works.
+
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190107_110525.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190107_110525.jpg" width="400"></img></a>
+
+The next step is the configuration of a specific metric set which will only show us what we´ll see in our dashboard reagrding the Virtual Container Host Resource Pool as well as the Container-VM. To configure those, go to *Administration* and *Configuration* again and select this time *Metric Configurations*.
+
+Select the folder *ReskndMetric* and hit the plus sign above to create a new one. I´ve named the first of my two configurations *vch_resource_utilization*. Of course you can title it as you like but we have to keep in mind that we have to select this one after the dashboard import.
+
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_103948.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_103948.jpg" width="400"></img></a>
+
+After assigning the name, please copy the following xml code and paste it into your new metric configuration.
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <AdapterKinds>
     <AdapterKind adapterKindKey="VMWARE">
@@ -66,10 +106,13 @@ Name: rg_vch_resource_overview
 </AdapterKinds>
 ```
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_104204.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_104204.jpg" width="850"></img></a>
+The second metric configuration is specific for the performance of the Container-VM. I´ve named it *container_vm_performance*.
 
-Name: 
-```
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_103638.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_103638.jpg" width="400"></img></a>
+
+Copy the xml code and again simply paste it into.
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <AdapterKinds>
     <AdapterKind adapterKindKey="VMWARE">
@@ -90,24 +133,43 @@ Name:
 </AdapterKinds>
 ```
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_110238.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_110238.jpg" width="850"></img></a>
+The last point (#4) is to ensure that the dashboard will work smoothly after importing it. To do so, simply check if the import of the two custom *Views* were successfull. Just filter by *"vm properties"* and your search should result in the following:
 
-<a href="/img/posts/201811_post_monitoring/CapturFiles-20181204_105712.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20181204_105712.jpg" width="850"></img></a>
-
-If you would like to make use of what the vCommunity already made publicly available or (even better) if you would like to share your own creations, please go here: https://vrealize.vmware.com/sample-exchange/
-
-The vR Ops-Team will appreciate this :thumbsup:
-
-{{< tweet 1072175444370305025 >}}
-
-And if you are already a *vR Ops-Ninja* and you are not already on this list, reach out to <a href="https://twitter.com/johnddias" target="_blank">John Dias</a> and he´ll put your name on the list as well.
-
-{{< tweet 1068561326216228865 >}}
-
-Here´s the list: https://twitter.com/johnddias/lists/vrops-friends1
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_105533.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_105533.jpg" width="800"></img></a>
 
 ---
 
-I´d like to explain you how I´ve created a Dasboard in vRealize Operations Manager to get an overview or to *monitor* the utilization of a <a href="https://rguske.github.io/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/" target="_blank">Virtual Container Host</a> as well as the performance of the <a href="https://rguske.github.io/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm/" target="_blank">Container-VM´s</a> which are running inside the (VCH-)Resource-Boundary.
+## Conclusion
 
-Part of the <a href="https://www.vmware.com/products/vrealize-operations.html" target="_blank">Advanced Edition</a>.
+vRealize Operations Manager has evolved greatly over time and building custom dashboards according to your own ideas and demands is quite fun. Let´s just take the new *Dashboard Canvas* which was shipped with version 7.0 as an example. It´s not all about how cool it looks like but rather than the simplicity it brings during the creation of an dashboard.
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_111340.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_111340.jpg" width="850"></img></a>
+*Widget interactions of the Virtual Container Host(s) dashboard*
+
+Here are two posts I would like to recommend to read with regard to:
+
+1. <a href="https://blogs.vmware.com/management/2018/10/dashboards-made-easy-with-vrealize-operations.html" target="_blank">Dashboards Made Easy with vRealize Operations</a>
+
+2. <a href="https://blogs.vmware.com/management/2018/10/bigger-stronger-faster-dashboards-using-vrealize-operations-7-0.html" target="_blank">Bigger, Stronger, Faster Dashboards using vRealize Operations 7.0</a>
+
+The <a href="https://twitter.com/search?q=%23vcommunity&src=typd" target="_blank">#vCommunity</a> is more active than ever on sharing great work and if you like to make use of what the #vCommunity already cooked or even better if you like to share your own creations, please go here: https://vrealize.vmware.com/sample-exchange/ and give it a shout-out on Twitter. Our great Product-Manager´s will hear you :sunglasses:.
+
+{{< tweet-single 1079442191972483073 >}}
+
+{{< tweet 1081415672712679429 >}}
+
+And in case you are already a *vR Ops-Ninja* and you are not on this list https://twitter.com/johnddias/lists/vrops-friends1 reach out to <a href="https://twitter.com/johnddias" target="_blank">John Dias</a> and he´ll put your name on the list as well.
+{{< tweet 1068561326216228865 >}}
+
+<a href="/img/posts/201811_post_monitoring/CapturFiles-20190117_085401.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190117_085401.jpg" width="150"></img></a>
+
+**THANK YOU**
+
+---
+
+## Resources
+Article   | Link
+-------------  | -------------
+**[@VMware Blog] Dashboards Made Easy with vRealize Operations** | https://blogs.vmware.com/management/2018/10/dashboards-made-easy-with-vrealize-operations.html
+**[@VMware Blog] Bigger, Stronger, Faster Dashboards using vRealize Operations 7.0** | https://blogs.vmware.com/management/2018/10/bigger-stronger-faster-dashboards-using-vrealize-operations-7-0.html
+**[@VMware Blog] VMware´s Cloud Management Blog** | https://blogs.vmware.com/management/
+**[@VMware Blog] VMware´s Cloud-Native Blog** | https://blogs.vmware.com/cloudnative
