@@ -1,6 +1,6 @@
 ---
 title: "vSphere Integrated Containers Part III: Deployment of a Virtual Container Host"
-date: 2018-07-13T13:16:33+02:00
+date: 2018-07-13T13:21:33+02:00
 draft: false
 image: /img/vic_part_iii_cover.jpg
 tags:

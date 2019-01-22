@@ -1,6 +1,6 @@
 ---
 title: "VMware vSphere Integrated Containers: Overview"
-date: 2018-07-13T13:30:26+02:00
+date: 2018-07-13T13:03:26+02:00
 draft: false
 image: /img/Hamburg_Hafen.JPG
 tags:
