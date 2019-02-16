@@ -13,7 +13,7 @@ tags:
 ---
 
 I like upgrades! Because mostly they bring cool new features with them or eliminate disturbing issues.
-In this post I´d like to guide you through the upgrade process of <a href="/post/vmware-vsphere-integrated-containers-overview">VMware vSphere Integrated Containers </a> from version v1.3.1 to v1.4.1 which is a major upgrade and also to v1.4.3 which is a minor upgrade.
+In this post I´d like to guide you through the upgrade process of <a href="/post/vmware-vsphere-integrated-containers-introduction">VMware vSphere Integrated Containers </a> from version v1.3.1 to v1.4.1 which is a major upgrade and also to v1.4.3 which is a minor upgrade.
 
 Thanks <a href="https://twitter.com/tom_schwaller" target="_blank">Tom Schwaller</a> for reviewing this article.
 

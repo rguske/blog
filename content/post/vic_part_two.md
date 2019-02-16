@@ -111,4 +111,4 @@ Previous articles:
 
 <a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
-<a href="/post/vmware-vsphere-integrated-containers-overview">**vSphere Integrated Containers: Overview**</a>
+<a href="/post/vmware-vsphere-integrated-containers-introduction">**vSphere Integrated Containers: Introduction**</a>

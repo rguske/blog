@@ -107,4 +107,4 @@ Continue with:
 ---
 Previous article:
 
-<a href="/post/vmware-vsphere-integrated-containers-overview">**vSphere Integrated Containers: Overview**</a>
+<a href="/post/vmware-vsphere-integrated-containers-introduction">**vSphere Integrated Containers: Introduction**</a>
