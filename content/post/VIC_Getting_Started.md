@@ -1,8 +1,8 @@
 ---
-title: "VMware vSphere Integrated Containers: Overview"
+title: "VMware vSphere Integrated Containers: Introduction"
 date: 2018-07-13T13:03:26+02:00
 draft: false
-image: /img/Hamburg_Hafen.JPG
+image: /img/Hamburg_Hafen_2.jpg
 tags:
 - VIC
 - Container
@@ -19,8 +19,7 @@ One of these Open Source Projects is <a href="https://vmware.github.io/vic-prod
 Running Containers as a Virtual Machine means that IT-Ops Teams still have the ability to treat them like classical workload before. Therefore you don´t have to build out a separate, tailored infrastructure stack and can continue to leverage existing Scalability, Security and Monitoring capabilities. 
 
 <a href="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg" width="800"</img></a>
-
-**Docker Container Hosts**
+<center>*Figure I: Virtual Container Host vs. Docker Container Host*</center>
 
 vSphere Integrated Containers also supports running native Docker container hosts on vSphere. It allows developers to self-provision Docker container hosts for use as a development sandbox, a build server or a swarm cluster. Now you can treat a Docker host as ephemerally as a container.
 
@@ -49,11 +48,12 @@ More details through the Release-Notes <a href="https://docs.vmware.com/en/VMwar
 
 ---
 
-## VIC Component Overview
+### VIC Component Overview
 
-You´ll get an quick overview over the VIC components through this Lightboard Video by <a href="https://twitter.com/pdaigle" target="_blank">Patrick Daigle</a>: <a href="https://www.youtube.com/watch?v=phsVFTVK4t4" target="_blank">vSphere Integrated Containers (VIC)</a>.
+You´ll get an quick overview over the VIC components through this Lightboard Video by <a href="https://twitter.com/pdaigle" target="_blank">Patrick Daigle</a>:
+{{< yt phsVFTVK4t4 >}}
 
-**Components:**
+#### Components:
 
 * <a href="http://vmware.github.io/vic/" target="_blank">**vSphere Integrated Containers Engine**</a>, a container runtime for vSphere that allows you to provision containers as virtual machines.
 
@@ -70,15 +70,10 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 
 * **vSphere Integrated Containers Management Portal** based on project <a href="https://github.com/vmware/admiral" target="_blank">**Admiral**</a>.
 
----
+### Download
+* <a href="https://www.vmware.com/go/download-vic" target="_blank">VMware vSphere Integrated Containers</a>
 
-## Download
-
-* <a href="https://my.vmware.com/en/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere_integrated_containers/1_4" target="_blank">VMware vSphere Integrated Containers 1.4.1</a>
-
----
-
-## More
+### More
 
 **[Whitepapers]**
 
@@ -94,15 +89,9 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 
 * <a href="https://github.com/vmware/vic-ui" target="_blank">VIC UI on Github</a>
 
-**[VIC Release Notes]**
+**[Release Notes]**
 
-* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4/rn/vsphere-integrated-containers-14-release-notes.html" target="_blank">Release Notes Version 1.4</a>
-
-* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.1/rn/vsphere-integrated-containers-141-release-notes.html" target="_blank">Release Notes Version 1.4.1</a>
-
-* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.2/rn/vsphere-integrated-containers-142-release-notes.html" target="_blank">Release Notes Version 1.4.2</a>
-
-* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/1.4.3/rn/vSphere-Integrated-Containers-143-Release-Notes.html" target="_blank">Release Notes Version 1.4.3</a>
+* <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/" target="_blank">Release Notes vSphere Integrated Containers</a>
 
 **[VMware Hands-on Labs]**
 
@@ -111,6 +100,17 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 **[Offical VMware Cloud-Native Blog]**
 
 * <a href="https://blogs.vmware.com/cloudnative" target="_blank">VMware Cloud Native Blog</a>
+* <a href="https://blogs.vmware.com/cloudnative/?s=vsphere+integrated+containers" target="_blank">Blog search query - VIC</a>
+
+**[Recommended VMworld Videos]**
+
+* <a href="https://videos.vmworld.com/global/2017/videoplayer/3703" target="_blank">vSphere Integrated Containers Deep Dive: Cool Hacks, Debugging, and Demos (CNA2547BU)</a>
+{{< yt AD7CD8Haqdc >}}
+
+<a href="https://videos.vmworld.com/global/2017/videoplayer/3238" target="_blank">Running Docker on Your Existing Infrastructure with vSphere Integrated Containers (CNA1699BU)</a>
+{{< yt d5nf8tn2MIM >}}
+
+<a href="https://videos.vmworld.com/global/2018/videoplayer/22401" target="_blank">Deploy vSphere Integrated Containers in Production: Case Study with Allegis (CNA1200BU)</a>
 
 **[Lightboard Videos]**
 
