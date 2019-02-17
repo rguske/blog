@@ -30,44 +30,53 @@ To start with, we have to download the latest bits from myvmware.com here --> <a
 
 If you´re already familiar with it and you´re more interested in automting an OVA deployment, I´d recommend reading this <a href="http://cloudmaniac.net/ova-ovf-deployment-using-govc-cli/" target="_blank"> Post </a> by <a href="https://twitter.com/woueb" target="_blank"> Romain Decker </a>.
 
-*Select an OVF template*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg" height="600"</img></a>
+1) **Select an OVF template**
 
-*Select a compute resource*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg" height="600"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_104118.jpg" width="800"</img></a></center>
 
-*Review details*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg" height="600"</img></a>
+2) **Select a compute resource**
 
-*License agreements*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg" height="600"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111348.jpg" width="800"</img></a></center>
 
-*Select storage*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg" height="600"</img></a>
+3) **Review details**
 
-*Select networks*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg" height="600"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111747.jpg" width="800"</img></a></center>
+
+4) **License agreements**
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_111946.jpg" width="800"</img></a></center>
+
+5) **Select storage**
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112111.jpg" width="800"</img></a></center>
+
+6) **Select networks**
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112335.jpg" width="800"</img></a></center>
 
 At this point, I´d like to stress out again to the VIC documentation regarding the <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/deploy_vic_appliance.html" target"_blank">use of SSH</a>. SSH is needed when you perform upgrades or the following:
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg" width="700"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180619_084703.jpg" width="800"</img></a></center>
 
-*Appliance Configuration*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" height="600"</img></a>
+7) **Appliance Configuration**
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" height="600"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" width="800"</img></a></center>
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_112527.jpg" width="800"</img></a></center>
 
 If you decide to use static IP-Addresses like me, please use spaces and not commas to separate multiple DNS-Servers.
 
-*Network Properties*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg" height="600"</img></a>
+8) **Network Properties**
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113830.jpg" width="800"</img></a></center>
 
 I´ve also decided to create an example user through the wizard, which gets the username prefix you´ve chosen in point 5 in this section. I´m fine with the predetermined prefix *vic*.
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg" height="700"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113931.jpg" width="800"</img></a></center>
 
-*Ready to complete*
-<a href="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg" height="600"</img></a>
+9) **Ready to complete**
+
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180607_113956.jpg" width="800"</img></a></center>
 
 Lean back and let the vCenter do its job... ... ...FINISHED!
 
@@ -80,7 +89,7 @@ When you add the extension, VMware will not provide support when you´re facing 
 And - I´d recommend using only browsers where the language is set to English! In other cases, you could hit the issue <a href="https://github.com/BeryJu/dark-vcenter/issues/36" target="_blank">Other browser language than English breaks CSS inject #36</a>
 
 ---
-Here you´ll find the extensions.
+**Here you´ll find the extensions.**
 
 <a href="https://chrome.google.com/webstore/search/Dark%20vCenter" target="_blank">Dark-vCenter for Google Chrome</a>
 
@@ -90,13 +99,14 @@ Here you´ll find the extensions.
 
 The next step is to complete the VIC appliance installation through the establishment of the connection to our vCenter Server as well as Platform Service Controller. Here we have to enter the vCenter Server address (FQDN) and the Single Sign-on credentials for a vSphere administrator account. In my case, I´m using an embedded PSC and thus, I can leave the fields for the External PSC Instance empty.
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180608_105035.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180608_105035.jpg" widht="800"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180608_105035.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180608_105035.jpg" widht="800"</img></a></center>
+
 If you´ve entered your credentials correctly, you´ll be forwarded to the VIC Getting Started page which you could always open by using the IP-Address or better using the FQDN (of course the short name as well) over port 9443. In my example https://vic01.lab.jarvis.local:9443/
 
-<a href="/img/posts/vic_getting_started/CapturFiles-20180608_105155.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180608_105155.jpg" width="800"</img></a>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180608_105155.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180608_105155.jpg" width="800"</img></a></center>
 
 ---
-Continue with:
+**Continue with:**
 
 <a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
@@ -105,6 +115,6 @@ Continue with:
 <a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
-Previous article:
+**Previous article:**
 
 <a href="/post/vmware-vsphere-integrated-containers-introduction">**vSphere Integrated Containers: Introduction**</a>

@@ -41,7 +41,7 @@ enableEmoji     = true
   pageNotFoundTitle = "404 - Page not found"
 
   #casper or caspertwo
-  singleViewStyle = "casper"
+  singleViewStyle = "caspertwo"
 
 [permalinks]
   post = "/post/:slug/"
@@ -59,7 +59,7 @@ enableEmoji     = true
 # [[menu.main]]
 #  name = "Post"
 #  url = "/post/post"
-#  weight = 100  
+#  weight = 100
 
 [[menu.main]]
   name = "Disclaimer"
