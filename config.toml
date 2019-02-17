@@ -23,10 +23,10 @@ enableEmoji     = true
   # fbName = "fakeghost"
   githubName = "rguske"
   linkedinName = "robert-guske-830853111"
-  mediumName = ""
+  # mediumName = ""
 
   # logo = "hugo-logo.png"
-  #orgName = "EM"
+  # orgName = "EM"
   # orgWebsite = "https://www.telematika.org"
   # orgDescription = "Here is a description placeholder for your org"
 
@@ -52,26 +52,31 @@ enableEmoji     = true
   weight = 200
 
 [[menu.main]]
-  name = "About"
+  name = "About Me"
   url = "/about"
-  weight = 150
+  weight = 100
 
 # [[menu.main]]
-#   name = "Post"
-#   url = "/post/post"
-#   weight = 100  
+#  name = "Post"
+#  url = "/post/post"
+#  weight = 100  
 
 [[menu.main]]
   name = "Disclaimer"
   url = "/disclaimer"
-  weight = 50  
+  weight = 99
 
 [[menu.main]]
-name = "Tags"
-url = "/tags"
-weight = 40
+  name = "Tags"
+  url = "/tags"
+  weight = 98
 
-#[[menu.main]]
-#  name = "External"
-#  url = "https://google.com/"
-#  weight = 95
+[[menu.main]]
+  name = "vic-machine utility examples"
+  url = "https://github.com/rguske/vic-machine"
+  weight = 97
+
+[[menu.main]]
+  name = "VMware´s Offical CNA Blog"
+  url = "https://blogs.vmware.com/cloudnative/"
+  weight = 96
