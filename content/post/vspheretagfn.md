@@ -18,7 +18,7 @@ Michael told me that he had spent some time in digging deeper and deeper into th
 
 <center> {{< tweet 1055452330064334848 >}} </center>
 
-which was far away from being experienced by myself, but he got me right away from the very beginning of his telling. For those of you who want to know more about the topic but haven't put your nose into it yet, like me before :wink:, you´ll find some links at the *Resources section* at the buttom.
+which was far away from being experienced by myself, but he got me right away from the very beginning of his telling. For those of you who want to know more about the topic but haven't put your nose into it yet, like me before, you´ll find some links at the *Resources section* at the buttom.
 
 I´m not going to explain what a Function/ FaaS is all about, instead of it Michael and I thought that this post should serve as an introduction of a project Michael is working on as well as to demonstrate how "just" two components are turning your vSphere environment into a *Event-driven construct* based on your *annotations*.
 
@@ -94,7 +94,7 @@ client (`helm`) and the Helm server (Tiller - running in the namespace kube-syst
 **2)** OpenFaaS on Kubernetes
 - deployed into the namespace *openfaas*
 
-**3)** The faas-cli by via e.g. `brew` or `curl`
+**3)** The faas-cli via e.g. `brew` or `curl`
 
 **4)** <a href="https://github.com/openfaas-incubator/vcenter-connector" target="_blank">Github Repo **`vCenter Connector`**</a>
 
