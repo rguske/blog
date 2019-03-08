@@ -39,7 +39,13 @@ Before I´m going to start with the details and what should already be up and ru
 
 At the beginning I´ve mentioned that my last post was on the topic *"Monitoring Container VMs with vRealize Operations Manager"* and that I had to built a dashboard to do so. I´m using a widget in this dashboard called *Object List* to have the ability to select a specific Virtual Container Host, the **Resource Pool** not the Docker end-point VM(!), to display the utilization in terms of Limits & Reservations (CPU & Memory) of it.
 
-While I was building this dashboard, one challange for me was, to find a way on which criteria these Resource-Pools will join a <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-7CD02B2B-4BB1-4BD3-B24E-5F630B94A7EF.html" target="_blank">Dynamic Custom Group</a> in vRealize Operations Manager (to appear automatically in the dashboard/ in the object list). Long story short, I decided to use vSphere Tags as a Membership-Criteria. But assigning a vSphere Tag is still a manually task and this is the point were Michaels function ***pytagfn*** or ***gotagfn***, depending on the language you prefer, as well as the ***vCenter Connector*** comes into play.
+While I was building this dashboard, one challange for me was, to find a way on which criteria these Resource-Pools will join a <a href="https://docs.vmware.com/en/vRealize-Operations-Manager/7.0/com.vmware.vcom.core.doc/GUID-7CD02B2B-4BB1-4BD3-B24E-5F630B94A7EF.html" target="_blank">Dynamic Custom Group</a> in vRealize Operations Manager (to appear automatically in the dashboard/ in the object list). Long story short, I decided to use vSphere Tags as a Membership-Criteria. But assigning a vSphere Tag is still a manually task (*1) and this is the point were Michaels function ***pytagfn*** or ***gotagfn***, depending on the language you prefer, as well as the ***vCenter Connector*** comes into play.
+
+---
+> ***1:** A Feature-Request for using the `vic-machine` utility to assign a vSphere-Tag during the VCH deployment is already open on Github:
+> https://github.com/vmware/vic/issues/8446)
+
+---
 
 The following flowchart will give you a high-level overview what it´s all about and what Michael and I will demo you in the Video below.
 
