@@ -43,7 +43,7 @@ While I was building this dashboard, one challange for me was, to find a way on 
 
 ---
 > ***1:** A Feature-Request for using the `vic-machine` utility to assign a vSphere-Tag during the VCH deployment is already open on Github:
-> https://github.com/vmware/vic/issues/8446)
+> https://github.com/vmware/vic/issues/8446
 
 ---
 
