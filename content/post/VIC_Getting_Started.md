@@ -76,6 +76,10 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 
 ## More
 
+**[VIC Solutions Brief]**
+
+* <a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/vsphere/vmware-vic-solutions-brief.pdf" target="_blank">Run Modern Apps with vSphere Integrated Containers</a>
+
 **[Whitepapers]**
 
 * <a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/whitepaper/vmw-wp-conatiner-on-vms-a4-final-web.pdf" target="_blank">Containers on Virtual Machines or Bare Metal?</a>
