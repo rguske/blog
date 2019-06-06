@@ -72,7 +72,7 @@ enableEmoji     = true
   weight = 98
 
 [[menu.main]]
-  name = "vic-machine utility examples"
+  name = "vic-machine examples"
   url = "https://github.com/rguske/vic-machine"
   weight = 97
 
