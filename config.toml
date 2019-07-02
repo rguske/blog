@@ -56,10 +56,10 @@ enableEmoji     = true
   url = "/about"
   weight = 100
 
-# [[menu.main]]
-#  name = "Post"
-#  url = "/post/post"
-#  weight = 100
+#[[menu.main]]
+# name = "Post"
+# url = "/post/post"
+# weight = 100
 
 [[menu.main]]
   name = "Disclaimer"
