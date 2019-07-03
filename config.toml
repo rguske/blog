@@ -16,7 +16,7 @@ enableEmoji     = true
   description = "Here is a description of your site."
   metaDescription = ""
   googleAnalytics = "UA-122353302-1"
-  customCSS = []
+  customCSS = ["dist/css/tagformatting.css"]
   RSSLink = ""
 
   twitterName = "vmw_rguske"
@@ -66,10 +66,10 @@ enableEmoji     = true
   url = "/disclaimer"
   weight = 99
 
-[[menu.main]]
-  name = "Tags"
-  url = "/tags"
-  weight = 98
+# [[menu.main]]
+#   name = "Tags"
+#   url = "/tags"
+#   weight = 98
 
 [[menu.main]]
   name = "vic-machine examples"
