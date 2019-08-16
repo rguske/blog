@@ -49,7 +49,7 @@ rguske@rguske-a01> ./vic-machine-darwin create \          ### vic-machine binary
 ---
 **Credits goes out to Ben!**
 
-<a href="https://twitter.com/bensdoings?lang=de" target="_blank">Ben Corrie</a> - the father of project vSphere Integrated Containers Engine - developed a hack back in 2017 which was born out of his own frustrations with `vic-machine`, because it takes a lot of arguments for each action like `create`, `configure` or `debug` for example. He mentioned his in his video from VMworld 2017 :point_down::
+<a href="https://twitter.com/bensdoings?lang=de" target="_blank">Ben Corrie</a> - the father of project vSphere Integrated Containers Engine - developed a hack back in 2017 which was born out of his own frustrations with `vic-machine`, because it takes a lot of arguments for each action like `create`, `configure` or `debug` for example. He mentioned this in his video from VMworld 2017 :point_down::
 
 
 {{< youtube AD7CD8Haqdc >}}
