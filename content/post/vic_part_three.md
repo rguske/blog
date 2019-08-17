@@ -21,7 +21,7 @@ Now let´s download the vic-bundle.tar.gz to our desktop locally to make use of 
 
 Open the VIC Getting Started page which you can reach by using the VIC IP, FQDN or DNS short name and port 9443. So in my case: https://vic01:9443. You´ll see in the lower left corner *Infrastructure Deployment Tools* where you can download the vic-bundle.tar.gz file. The other option is to use the url directly: https://vic01:9443/files/.
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_093754.jpg" width="500"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_093754.jpg"></img></center>
 
 It´s up to you which way you choose, it´s just important to have the vic-machine utility on the machine where you´ll execute the commands from (local or a remote-execution host). Before we finally can begin with the deployment of our first VCH, we need to *open* the *required port* for the outgoing communication, via Serial over LAN, and using port *2377* between the *ESXi Host(s)* and our VCH.
 
@@ -75,7 +75,7 @@ Switch to your downloaded and unzipped vic-bundle folder. Execute the following 
 
 You´ll get an output similar like this:
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180616_110343.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_110343.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180616_110343.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_110343.jpg"></img></a></center>
 
 Now let´s go to the point of what the title of Part III is promising you and we´ll start with the deployment of a VCH through the wizard which got available through the vic-plugin installation. Open the *vSphere Integrated Containers* subsection in your vSphere Client and under Virtual Conatiner Hosts choose + NEW VIRTUAL CONTAINER HOST.
 
@@ -84,12 +84,12 @@ The General section is more important than it appears at the first glance! Becau
 
 For instance, we could establish a <a href="https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.4/com.vmware.nsx.admin.doc/GUID-16B3134E-DDF1-445A-8646-BB0E98C3C9B5.html" target="_blank"> NSX Security Group </a> by using the naming-prefix as a membership-criteria. Consequently, our Container-VMs becomes dynamically a member of the Security Group which gives us back the control of the East-West traffic within our Datacenter.
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180707_122841.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180707_122841.jpg"></img></center>
 
 ## Compute
 Next we have to chose our Compute-Resource where our VCH runs on. That can be an ESXi Host, a Cluster or a Resource-Pool.
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_112753.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_112753.jpg"></img></center>
 
 The default settings for the CPU and Memory Limits (internally referred to as MAX) is set to *Unlimited*. I assume in most cases these settings can be untouched but if you decide to configure limits (MAX) and reservations (MIN) please remind the following:
 
@@ -120,7 +120,7 @@ A **must have** with regards to Resource Management is definetely the <a href="h
 
 ## Storage
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_112841.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_112841.jpg"></img></center>
 
 To persistently store our container-images we can configure a Datastore in point 3. It´s also possible to set a maximum for the Container-VM Image size but keep in mind, if you configure it once, it can´t be re-configured afterwards. 8GB is set by default and due to the **small footprint** of a container, what is one of the major benefits of it, this predefined size should be sufficient in most cases.
 
@@ -136,11 +136,11 @@ As you can see through the picture above, we can make use of <a href="https://vm
 
 ## Network
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_113743.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_113743.jpg"></img></center>
 
 This part is a little bit more comprehensive and like in most cases a picture quickly creates clarity.
 
-<center><img src="/img/posts/vic_getting_started/vic_networking.png" height="500"></img></center>
+<center><img src="/img/posts/vic_getting_started/vic_networking.png"></img></center>
 
 Resource: <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/vch_networking.html" target="_blank">VIC Documentation Networking Requirements</a>
 
@@ -163,18 +163,18 @@ The mapped container networks are available for use by the Docker API and with t
 
 By default, Virtual Container Hosts authenticate connections from Docker API clients by using server and client TLS certificates. This configuration is commonly referred to as `tlsverify` in documentation about containers and Docker.
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_114110.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_114110.jpg"></img></center>
 
 I like to refer you to the Offical VIC Documentation Page under Section <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/vch_security.html" target="_blank"> VCH Security</a>.
 
 ## Operations User
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_115018.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_115018.jpg"></img></center>
 
 The operations user account must exist before you create a VCH. If you are deploying the VCH to a cluster, vSphere Integrated Containers Engine can configure the operations user account with all of the necessary permissions for you.
 You can see that I use my user *Jarvis* for day-to-day operations for my VCH´s.
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180712_082018.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180712_082018.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180712_082018.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180712_082018.jpg"></img></a></center>
 
 **More here:** <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/set_up_ops_user.html" target="_blank">*Configure the Operations User*</a>
 
@@ -186,7 +186,7 @@ You can see that I use my user *Jarvis* for day-to-day operations for my VCH´s.
 ## Summary
 Like always when a summary appears by the end of a wizard - validate your configuration again!
 
-<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_115031.jpg" width="800"></img></center>
+<center><img src="/img/posts/vic_getting_started/CapturFiles-20180616_115031.jpg"></img></center>
 
 I´d recommend to copy the command lines to your notes, so that you can use them for further (manual) deployments.
 
@@ -202,7 +202,7 @@ Hit **FINISH**!
 
 Now let´s check the deployment in our vCenter...
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_105210.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_105210.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_105210.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_105210.jpg"></img></a></center>
 
 ...and over the command line by using `vic-machine` (as mentioned) as well:
 

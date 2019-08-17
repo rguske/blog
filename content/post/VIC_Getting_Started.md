@@ -18,7 +18,7 @@ One of these Open Source Projects is <a href="https://vmware.github.io/vic-prod
 
 Running Containers as a Virtual Machine means that IT-Ops Teams still have the ability to treat them like classical workload before. Therefore you don´t have to build out a separate, tailored infrastructure stack and can continue to leverage existing Scalability, Security and Monitoring capabilities.
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180710_094308.jpg"></img></a></center>
 
 <center>*Figure I: Virtual Container Host vs. Docker Container Host*</center>
 

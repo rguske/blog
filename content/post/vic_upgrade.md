@@ -17,17 +17,17 @@ In this post I´d like to guide you through the upgrade process of <a href="/pos
 
 Thanks <a href="https://twitter.com/tom_schwaller" target="_blank">Tom Schwaller</a> for reviewing this article.
 
-First of all and this applies to all upgrades, we have to check the compatibility and dependencys with our infrastructure components. This is for instance our vCenter Server where we have dependencies through the <a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">VIC vSphere Client Plug-In</a>! 
+First of all and this applies to all upgrades, we have to check the compatibility and dependencys with our infrastructure components. This is for instance our vCenter Server where we have dependencies through the <a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">VIC vSphere Client Plug-In</a>!
 
 VIC version 1.4.0 is e.g. compatible with vCenter Server version 6.0.0 U2 until 6.7.0! VIC verison 1.3.0 in contrast to leaves version 6.0.0 U2 as well as 6.5.0. See <a href="https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&2=&149=" target="_blank">VMware Product Interoperability Matrices</a>.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181017_081612.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181017_081612.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181017_081612.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181017_081612.jpg"></img></a></center>
 
 Of course the same applies to the upgrade path of the solution itself. You can check the <a href="https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#upgrade" target="_blank"> Upgrade Path </a> for every specific VMware solution also over the VMware Product Interoperability Matrices. You´ll find the available upgrade paths for VIC <a href="https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#upgrade&solution=149" target="_blank"> HERE </a>.
 
 Let´s now take a look at the interoperability for vSphere Integrated Containers:
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180815_084838.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180815_084838.jpg" width="850"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180815_084838.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180815_084838.jpg"></img></a></center>
 
 We can see that an upgrade from version 1.3.1 to 1.4(.x) is supported and this is for us the final sign to start.
 
@@ -40,7 +40,7 @@ The upgrade itself can be splitted into four phases.
 
 Before we initiate the deployment of the new VIC Appliance, we´ll validate our used versions. For the VIC Appliance itself we´ll simply start the VMware Remote Console which will then show us the currently used version.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180807_115237.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180807_115237.jpg" width="850"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180807_115237.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180807_115237.jpg"></img></a></center>
 
 **Version** (Github versioning): **1.3.1** (<a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" target="_blank">Tag</a>) **3409** (Build) **132fb13** (<a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_blank">last Commit</a>)
 
@@ -153,15 +153,15 @@ I suppose that you are familiar with the VIC Appliance deployment because this p
 
 **Download** the latest bits through this link: <a href="https://www.vmware.com/go/download-vic" target="_blank">www.vmware.com/go/download-vic</a>.
 
-Start the deployment and be aware of the fact, that _this is NOT an Inplace-Upgrade_ and therefore we have to enter a new IP address as well as FQDN.  
+Start the deployment and be aware of the fact, that _this is NOT an Inplace-Upgrade_ and therefore we have to enter a new IP address as well as FQDN.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180918_082532.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180918_082532.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20180918_082532.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20180918_082532.jpg"></img></a></center>
 
 If you wish to reuse the originally IP address after the upgrade, reconfigure the old appliance to use a temporary IP address before you start the upgrade.
 
 VIC Appliance --> Edit Settings --> vApp Options
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181016_112747.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181016_112747.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181016_112747.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181016_112747.jpg"></img></a></center>
 
 At this point I´d like to quote the following astracts from the <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/upgrade_appliance.html" target="_blank"> Upgrade section </a>of the official documentation page:
 
@@ -341,7 +341,7 @@ I´ve already covered this topic in my previous post <a href="/post/vsphere-inte
 
 Open the VIC *Getting Started* page by entering your VIC Address with port 9443 into a browser and find the download-button under the point *Infrastructure Deployment Tools*.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181001_113850.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181001_113850.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181001_113850.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181001_113850.jpg"></img></a></center>
 
 Otherwise you can go directly to: https://*your VIC Appliance address*:9443/files/
 
@@ -435,7 +435,7 @@ service-control --stop vsphere-ui && service-control --start vsphere-ui
 service-control --stop vsphere-client && service-control --start vsphere-client
 ```
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg" height="260"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180616_100412.jpg"></img></a></center>
 
 In case you are missing something here in my description, you´ll perhaps find your answer here: <a href="https://vmware.github.io/vic-product/assets/files/html/1.4/vic_vsphere_admin/upgrade_h5_plugin_vcsa.html" target="_blank"> Manually Upgrade the vSphere Client Plug-In on vCenter Server Appliance </a>
 
@@ -532,11 +532,11 @@ Starting Harbor Upgrade 2018-10-09 21:43:15 +0000 UTC
 
 In the vSphere Client you´ll see an information that plug-ins have been updated and they´ll be ready for use next time you log into vSphere Client.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115056.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115056.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115056.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115056.jpg"></img></a></center>
 
 Re-Login
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115536.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115536.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115536.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181009_115536.jpg"></img></a></center>
 
 ---
 ## Phase IV
@@ -726,15 +726,15 @@ When upgrading to a newer version we just have to observe the following aspects:
 
 > *In addition have a look at <a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">vSphere Integrated Containers Part IV: docker run a Container-VM</a>*
 
-You can easily test this by instantiating a (vmwarecna) <a href="https://hub.docker.com/r/vmwarecna/nginx/" target="_blank"> NGINX</a> Container-VM with the `--net` option, start upgrading the Virtual Container Host and see if the C-VM will become unreachable. 
+You can easily test this by instantiating a (vmwarecna) <a href="https://hub.docker.com/r/vmwarecna/nginx/" target="_blank"> NGINX</a> Container-VM with the `--net` option, start upgrading the Virtual Container Host and see if the C-VM will become unreachable.
 
 Example: `docker --tls run --name vmwarenginx --net vch-blog-net -d -p 8080:80 vmwarecna/nginx`
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_104814.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_104814.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_104814.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_104814.jpg"></img></a></center>
 
 While upgrading the VCH, the NGINX Container-VM is still reachable.
 
-<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_105153.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_105153.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_105153.jpg"><img src="/img/posts/201808_post_vic_upgrade/CapturFiles-20181014_105153.jpg"></img></a></center>
 
 Please find the Release Notes for vSphere Integrated Containers here: <a href="https://docs.vmware.com/en/VMware-vSphere-Integrated-Containers/" target="_blank">VMware vSphere Integrated Containers Docs</a>
 

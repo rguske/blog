@@ -31,7 +31,7 @@ docker -H 192.168.100.222:2376 --tls run --name nginx1 -m 512M -d -p 8080:80 vmw
 
 Let´s check if our container is up and running. First in vCenter:
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180831_125134.jpg"></img></a></center>
 
 ...and second via command line:
 
@@ -48,7 +48,7 @@ CONTAINER ID    IMAGE    COMMAND                   CREATED   STATUS          POR
 
 Just like any other Container Host, virtual or physical, you´ll reach your container via the Container Host IP-Address and port. I intended to show the same in my example before we configure a dedicated Container Network afterwards. We can reach the Nginx Web Server site via the VCH IP-Address and port 8080.
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180617_112351.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180617_112351.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180617_112351.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180617_112351.jpg"></img></a></center>
 
 
 If you´re wondering why I always used `-H vch-ip-address --tls` in my example that´s because I´ve not "exported" my VCH through it´s IP-Address and port yet. We can do this by the following:
@@ -158,7 +158,7 @@ At the end we need to validate the functionality as well and we´ll deploy a new
 docker --tls run --name nginx3 --net vic-container-network vmwarecna/nginx
 ```
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_122610.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_122610.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_122610.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_122610.jpg"></img></a></center>
 
 There you go! :-)
 
@@ -170,7 +170,7 @@ docker --tls pull cedricbl/world-cup-2018-cli-dashboard && \
 docker --tls run --name Worldcup2018 -ti -e TZ=Europe/Berlin cedricbl/world-cup-2018-cli-dashboard
 ```
 
-<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_113206.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_113206.jpg" width="800"></img></a></center>
+<center><a href="/img/posts/vic_getting_started/CapturFiles-20180713_113206.jpg"><img src="/img/posts/vic_getting_started/CapturFiles-20180713_113206.jpg"></img></a></center>
 
 Isn´t that cool?! :-) Try it out!
 

@@ -43,9 +43,6 @@ enableEmoji     = true
   #casper or caspertwo
   singleViewStyle = "caspertwo"
 
-[permalinks]
-  post = "/post/:slug/"
-
 [[menu.main]]
   name = "Home"
   url = "/"
