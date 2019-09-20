@@ -12,7 +12,7 @@ enableEmoji     = true
   subtitle    = "Sometimes you gotta run before you can walk!"
   copyright   = "© All rights reserved -2018"
 
-  cover       = "img/blog-cover.jpg"
+  cover       = "img/blog_cover_black.jpg"
   description = "Here is a description of your site."
   metaDescription = ""
   googleAnalytics = "UA-122353302-1"

@@ -2,7 +2,7 @@
 title: "VMware vSphere Integrated Containers: Introduction"
 date: 2018-07-13T13:03:26+02:00
 draft: false
-image: /img/Hamburg_Hafen_2.jpg
+image: /img/vic_intro.jpg
 tags:
 - VIC
 - Container
