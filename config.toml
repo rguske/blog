@@ -69,11 +69,11 @@ enableEmoji     = true
 #   weight = 98
 
 [[menu.main]]
-  name = "vic-machine examples"
-  url = "https://github.com/rguske/vic-machine"
+  name = "Github Repo"
+  url = "https://github.com/rguske"
   weight = 97
 
 [[menu.main]]
-  name = "VMware´s Offical CNA Blog"
-  url = "https://blogs.vmware.com/cloudnative/"
+  name = "VMware Microsites"
+  url = "/post/vmwaremicrosites"
   weight = 96
