@@ -1,7 +1,7 @@
 ---
 title: "VMware Microsites You should bookmark"
-date: 2019-09-20T21:34:21+02:00
-draft: true
+date: 2019-09-24T10:00:00+02:00
+draft: false
 image: /img/vmwaremicrosites_cover.jpg
 tags:
 - VMware
@@ -29,7 +29,7 @@ This is basically how the conversation went and I told him and my TAM peer <a hr
 I will keep this site up-to-date as good as I can.
 
 ---
-## List of Microsites [<span style="color:#0037ff">September 25, 2019</span>]
+## List of Microsites [<span style="color:#0037ff">September 24, 2019</span>]
 
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
@@ -50,7 +50,7 @@ I will keep this site up-to-date as good as I can.
 |  VMware Cloud Services Homepage 	|   `https://cloud.vmware.com/  	       `     |   <a href="https://cloud.vmware.com/" target="_blank">Click</a>              |
 
 ---
-## More VMware Sites [<span style="color:#0037ff">September 25, 2019</span>]
+## More VMware Sites [<span style="color:#0037ff">September 24, 2019</span>]
 
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
