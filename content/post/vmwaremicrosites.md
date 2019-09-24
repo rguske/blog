@@ -36,7 +36,9 @@ I will keep this site up-to-date as good as I can.
 |  Product Walkthrough              |   `https://featurewalkthrough.vmware.com/`     |   <a href="https://featurewalkthrough.vmware.com/" target="_blank">Click</a> |
 |  vSphere Central                  |   `https://vspherecentral.vmware.com/	   `     |   <a href="https://vspherecentral.vmware.com/" target="_blank">Click</a>     |
 |  Storagehub 	                    |   `https://storagehub.vmware.com/	       `     |   <a href="https://storagehub.vmware.com/" target="_blank">Click</a>         |
+| vSAN Ready Node Sizer             |   `https://vsansizer.vmware.com/`              |  <a href="https://vsansizer.vmware.com/" target="_blank">Click</a>           |
 |  vRealize Product Walkthroughs	|   `https://vrealize.vmware.com/	       `     |   <a href="https://vrealize.vmware.com/" target="_blank">Click</a>           |
+|vRealize Operations Manager Sizing |   `https://vropssizer.vmware.com/`             |  <a href="https://vropssizer.vmware.com/" target="_blank">Click</a>          |
 |  Ports and Protocols	            |   `https://ports.vmware.com/	           `     |   <a href="https://ports.vmware.com/" target="_blank">Click</a>              |
 |  VMworld On-Demand Video Library	|   `https://videos.vmworld.com/ 	       `     |   <a href="https://videos.vmworld.com/" target="_blank">Click</a>            |
 |  VMware Hands-on Labs	            |   `https://labs.hol.vmware.com/ 	       `     |   <a href="https://labs.hol.vmware.com/" target="_blank">Click</a>           |
