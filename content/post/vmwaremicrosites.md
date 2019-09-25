@@ -29,17 +29,21 @@ This is basically how the conversation went and I told him and my TAM peer <a hr
 I will keep this site up-to-date as good as I can.
 
 ---
-## List of Microsites [<span style="color:#0037ff">September 24, 2019</span>]
+## List of Microsites [<span style="color:#0037ff">September 25, 2019</span>]
 
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
 |  Product Walkthrough              |   `https://featurewalkthrough.vmware.com/`     |   <a href="https://featurewalkthrough.vmware.com/" target="_blank">Click</a> |
 |  vSphere Central                  |   `https://vspherecentral.vmware.com/	   `     |   <a href="https://vspherecentral.vmware.com/" target="_blank">Click</a>     |
+| VMware Configuration Maximums     |   `https://configmax.vmware.com/`              |  <a href="https://configmax.vmware.com/" target="_blank">Click</a>           |
 |  Storagehub 	                    |   `https://storagehub.vmware.com/	       `     |   <a href="https://storagehub.vmware.com/" target="_blank">Click</a>         |
 | vSAN Ready Node Sizer             |   `https://vsansizer.vmware.com/`              |  <a href="https://vsansizer.vmware.com/" target="_blank">Click</a>           |
 |  vRealize Product Walkthroughs	|   `https://vrealize.vmware.com/	       `     |   <a href="https://vrealize.vmware.com/" target="_blank">Click</a>           |
 |vRealize Operations Manager Sizing |   `https://vropssizer.vmware.com/`             |  <a href="https://vropssizer.vmware.com/" target="_blank">Click</a>          |
 |  Ports and Protocols	            |   `https://ports.vmware.com/	           `     |   <a href="https://ports.vmware.com/" target="_blank">Click</a>              |
+|  VMware Docs 	                    |   `https://docs.vmware.com/ 	           `     |   <a href="https://docs.vmware.com/" target="_blank">Click</a>               |
+| VMware Knowledge Base             |   `https://kb.vmware.com/`                     |  <a href="https://kb.vmware.com/" target="_blank">Click</a>                  |
+| VMware {code}                     |   `https://code.vmware.com/`                   |  <a href="https://code.vmware.com/" target="_blank">Click</a>                |
 |  VMworld On-Demand Video Library	|   `https://videos.vmworld.com/ 	       `     |   <a href="https://videos.vmworld.com/" target="_blank">Click</a>            |
 |  VMware Hands-on Labs	            |   `https://labs.hol.vmware.com/ 	       `     |   <a href="https://labs.hol.vmware.com/" target="_blank">Click</a>           |
 |  Solution Exchange	            |   `https://marketplace.vmware.com/ 	   `     |   <a href="https://marketplace.vmware.com/" target="_blank">Click</a>        |
@@ -48,7 +52,6 @@ I will keep this site up-to-date as good as I can.
 |  VMware Certified Design Experts 	|   `https://vcdx.vmware.com/ 	           `     |   <a href="https://vcdx.vmware.com/" target="_blank">Click</a>               |
 |  VMware Blogs Beat 	            |   `https://blogs.vmware.com/	           `     |   <a href="https://blogs.vmware.com/" target="_blank">Click</a>              |
 |  Office of the CTO Blog           |   `https://octo.vmware.com/`                   |   <a href="https://octo.vmware.com/" target="_blank">Click</a>               |
-|  VMware Docs 	                    |   `https://docs.vmware.com/ 	           `     |   <a href="https://docs.vmware.com/" target="_blank">Click</a>               |
 |  VMware Cloud Services Homepage 	|   `https://cloud.vmware.com/  	       `     |   <a href="https://cloud.vmware.com/" target="_blank">Click</a>              |
 
 ---
@@ -57,6 +60,7 @@ I will keep this site up-to-date as good as I can.
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
 |  Kubernetes Academy by VMware     |   `https://kubernetes.academy/`                |   <a href="https://kubernetes.academy/" target="_blank">Click</a>            |
+| VMware Open Source                |   `https://github.com/vmware`                  |  <a href="https://github.com/vmware" target="_blank">Click</a>               |
 |  User Group Communities           |   `https://community.vmug.com/`                |   <a href="https://community.vmug.com/" target="_blank">Click</a>            |
 |  VMworld Homepage                 |   `https://vmworld.com/`                       |   <a href="https://vmworld.com/" target="_blank">Click</a>                   |
 
