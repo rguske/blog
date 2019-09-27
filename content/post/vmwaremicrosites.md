@@ -29,7 +29,7 @@ This is basically how the conversation went and I told him and my TAM peer <a hr
 I will keep this site up-to-date as good as I can.
 
 ---
-## List of Microsites [<span style="color:#0037ff">September 25, 2019</span>]
+## List of Microsites [<span style="color:#0037ff">September 26, 2019</span>]
 
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
@@ -53,6 +53,7 @@ I will keep this site up-to-date as good as I can.
 |  VMware Blogs Beat 	            |   `https://blogs.vmware.com/	           `     |   <a href="https://blogs.vmware.com/" target="_blank">Click</a>              |
 |  Office of the CTO Blog           |   `https://octo.vmware.com/`                   |   <a href="https://octo.vmware.com/" target="_blank">Click</a>               |
 |  VMware Cloud Services Homepage 	|   `https://cloud.vmware.com/  	       `     |   <a href="https://cloud.vmware.com/" target="_blank">Click</a>              |
+| VMware Tech Zone                  |   `https://techzone.vmware.com/`               |   <a href="https://techzone.vmware.com/" target="_blank">Click</a>           |
 
 ---
 ## More VMware Sites [<span style="color:#0037ff">September 24, 2019</span>]

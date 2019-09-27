@@ -78,7 +78,7 @@ Another pretty cool alternative way to run OpenFaaS on k8s is <a href="https://g
 <center><a href="/img/posts/201902_vspheretagfn/CapturFiles-20190228_092541.jpg"><img src="/img/posts/201902_vspheretagfn/CapturFiles-20190228_092541.jpg" width="400"></img></a></center>
 <center>**Source:** https://github.com/kubernetes-sigs/kind</center>
 
-Alex Ellis has already written a nice blog-post on it: <a href="https://blog.alexellis.io/get-started-with-openfaas-and-kind/" target="_blank">*"Get started with OpenFaaS and KinD"*</a>. Check it out!
+<a href="https://twitter.com/alexellisuk" target="_blank">Alex Ellis</a> has already written a nice blog-post on it: <a href="https://blog.alexellis.io/get-started-with-openfaas-and-kind/" target="_blank">*"Get started with OpenFaaS and KinD"*</a>. Check it out!
 
 ---
 
