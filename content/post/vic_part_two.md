@@ -112,13 +112,13 @@ Now we have established the **Integration** into **vSphere** but what about the 
 ---
 **Continue with:**
 
-<a href="/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vic_part_three/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
+<a href="/post/vic_part_four/">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
 **Previous articles:**
 
-<a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
+<a href="/post/vic_part_one/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
-<a href="/post/vmware-vsphere-integrated-containers-introduction">**vSphere Integrated Containers: Introduction**</a>
+<a href="/post/vic_getting_started/">**vSphere Integrated Containers: Introduction**</a>

@@ -44,7 +44,6 @@ I will keep this site up-to-date as good as I can.
 |  VMware Docs 	                    |   `https://docs.vmware.com/ 	           `     |   <a href="https://docs.vmware.com/" target="_blank">Click</a>               |
 | VMware Knowledge Base             |   `https://kb.vmware.com/`                     |  <a href="https://kb.vmware.com/" target="_blank">Click</a>                  |
 | VMware {code}                     |   `https://code.vmware.com/`                   |  <a href="https://code.vmware.com/" target="_blank">Click</a>                |
-|  VMworld On-Demand Video Library	|   `https://videos.vmworld.com/ 	       `     |   <a href="https://videos.vmworld.com/" target="_blank">Click</a>            |
 |  VMware Hands-on Labs	            |   `https://labs.hol.vmware.com/ 	       `     |   <a href="https://labs.hol.vmware.com/" target="_blank">Click</a>           |
 |  Solution Exchange	            |   `https://marketplace.vmware.com/ 	   `     |   <a href="https://marketplace.vmware.com/" target="_blank">Click</a>        |
 |  VMware Education                 |   `https://mylearn.vmware.com/	       `     |   <a href="https://mylearn.vmware.com/" target="_blank">Click</a>            |
@@ -61,6 +60,7 @@ I will keep this site up-to-date as good as I can.
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------   	                                 |-------:                                                                      |
 |  Kubernetes Academy by VMware     |   `https://kubernetes.academy/`                |   <a href="https://kubernetes.academy/" target="_blank">Click</a>            |
+|  VMworld On-Demand Video Library	|   `https://videos.vmworld.com/ 	       `     |   <a href="https://videos.vmworld.com/" target="_blank">Click</a>            |
 | VMware Open Source                |   `https://github.com/vmware`                  |  <a href="https://github.com/vmware" target="_blank">Click</a>               |
 |  User Group Communities           |   `https://community.vmug.com/`                |   <a href="https://community.vmug.com/" target="_blank">Click</a>            |
 |  VMworld Homepage                 |   `https://vmworld.com/`                       |   <a href="https://vmworld.com/" target="_blank">Click</a>                   |

@@ -179,10 +179,10 @@ Isn´t that cool?! :-) Try it out!
 ---
 **Previous articles:**
 
-<a href="/post/vsphere-integrated-containers-part-iii-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vic_part_three/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vsphere-integrated-containers-part-ii-vsphere-client-plug-in">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
+<a href="/post/vic_part_two/">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vsphere-integrated-containers-part-i-ova-deployment">**vSphere Integrated Containers Part I: OVA Deployment**</a>
+<a href="/post/vic_part_one/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
-<a href="/post/vmware-vsphere-integrated-containers-introduction">**vSphere Integrated Containers: Introduction**</a>
+<a href="/post/vic_getting_started/">**vSphere Integrated Containers: Introduction**</a>
