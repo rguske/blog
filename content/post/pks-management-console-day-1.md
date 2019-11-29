@@ -225,11 +225,7 @@ Availability Zones (AZ) are one of four layers of fault tolerance in VMware Ente
 
 *Source:* <a href="https://docs.vmware.com/en/VMware-Validated-Design/5.1/sddc-architecture-and-design-for-vmware-enterprise-pks-with-vmware-nsx-t-workload-domains/GUID-BDF962A2-3666-45E7-9830-068A05065AD7.html" target="_blank">VMware VVD5.1 | Availability Design for Enterprise PKS with NSX-T Workload Domains</a>
 
-<<<<<<< HEAD
 As mentioned at the beginning of this post (*Prerequisites*), I created two Resource Pools and gave them the appropriate description. `az-mgmt` and `az-prod-1`.
-=======
-I´m running only one cluster in my Homelab, so I created two Resource Pools and gave them the appropriate description. `az-mgmt` and `az-prod-1`.
->>>>>>> origin/master
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092815.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092815.jpg"></img></a></center>
 <center>*Figure XI: Availability Zones*</center>
