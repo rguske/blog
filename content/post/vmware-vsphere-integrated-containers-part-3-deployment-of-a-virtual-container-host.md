@@ -236,13 +236,13 @@ Alright, we´ve deployed our first Virtual Container Host we can go ahead with P
 ---
 **Continue with:**
 
-<a href="/post/vic_part_four/">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-4-docker-run-a-container-vm/">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
 
 ---
 **Previous articles:**
 
-<a href="/post/vic_part_two/">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-2-vsphere-client-plugin/">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vic_part_one/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-1-ova-deployment/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
-<a href="/post/vic_getting_started/">**vSphere Integrated Containers: Introduction**</a>
+<a href="/post/vmware-vsphere-integrated-containers-introduction/">**vSphere Integrated Containers: Introduction**</a>

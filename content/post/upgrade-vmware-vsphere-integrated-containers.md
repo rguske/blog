@@ -13,11 +13,11 @@ tags:
 ---
 
 I like upgrades! Because mostly they bring cool new features with them or eliminate disturbing issues.
-In this post I´d like to guide you through the upgrade process of <a href="/post/vic_getting_started/">VMware vSphere Integrated Containers </a> from version v1.3.1 to v1.4.1 which is a major upgrade and also to v1.4.3 which is a minor upgrade.
+In this post I´d like to guide you through the upgrade process of <a href="/post/vmware-vsphere-integrated-containers-introduction/">VMware vSphere Integrated Containers </a> from version v1.3.1 to v1.4.1 which is a major upgrade and also to v1.4.3 which is a minor upgrade.
 
 Thanks <a href="https://twitter.com/tom_schwaller" target="_blank">Tom Schwaller</a> for reviewing this article.
 
-First of all and this applies to all upgrades, we have to check the compatibility and dependencys with our infrastructure components. This is for instance our vCenter Server where we have dependencies through the <a href="/post/vic_part_two/">VIC vSphere Client Plug-In</a>!
+First of all and this applies to all upgrades, we have to check the compatibility and dependencys with our infrastructure components. This is for instance our vCenter Server where we have dependencies through the <a href="/post/vmware-vsphere-integrated-containers-part-2-vsphere-client-plugin/">VIC vSphere Client Plug-In</a>!
 
 VIC version 1.4.0 is e.g. compatible with vCenter Server version 6.0.0 U2 until 6.7.0! VIC verison 1.3.0 in contrast to leaves version 6.0.0 U2 as well as 6.5.0. See <a href="https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&2=&149=" target="_blank">VMware Product Interoperability Matrices</a>.
 
@@ -46,7 +46,7 @@ Before we initiate the deployment of the new VIC Appliance, we´ll validate our 
 
 Next, we´ll check the version of our running Virtual Container Host(s) by using the command `docker info`. 
 
-As described in my previous post <a href="/post/vsphere-integrated-containers-part-iv-docker-run-a-container-vm/"> vSphere Integrated Containers Part IV: docker run a Container-VM </a> we can export our VCH through it´s IP-Address and port via `export DOCKER_HOST=192.168.100.220:2376`.
+As described in my previous post <a href="/post/vmware-vsphere-integrated-containers-part-4-docker-run-a-container-vm/"> vSphere Integrated Containers Part IV: docker run a Container-VM </a> we can export our VCH through it´s IP-Address and port via `export DOCKER_HOST=192.168.100.220:2376`.
 
 After we´ve exported it we´ll fire up `docker --tls info` what will show us the following output:
 
@@ -149,7 +149,7 @@ If we run `vic-machine inspect` executed from a newer VIC-Bundle like 1.4.x for 
 
 **VIC Appliance Upgrade v1.3.1 to 1.4.1**
 
-I suppose that you are familiar with the VIC Appliance deployment because this post described the upgrade of an already deployed VIC appliance but in case not, you can go <a href="/post/vsphere-integrated-containers-part-i-ova-deployment" target="_blank"> here</a> first.
+I suppose that you are familiar with the VIC Appliance deployment because this post described the upgrade of an already deployed VIC appliance but in case not, you can go <a href="/post/vmware-vsphere-integrated-containers-part-1-ova-deployment/" target="_blank"> here</a> first.
 
 **Download** the latest bits through this link: <a href="https://www.vmware.com/go/download-vic" target="_blank">www.vmware.com/go/download-vic</a>.
 
@@ -337,7 +337,7 @@ In phase two we´ll download the VIC Engine Bundle which includes the following:
 1. Scripts for the *VIC vSphere Client Plug-In* like install, upgrade, or remove
 2. The latest version of the `vic-machine` utility
 
-I´ve already covered this topic in my previous post <a href="/post/vic_part_three/" target="_blank"> vSphere Integrated Containers Part III: Deployment of a Virtual Container Host</a> right at the beginning.
+I´ve already covered this topic in my previous post <a href="/post/vmware-vsphere-integrated-containers-part-3-deployment-of-a-virtual-container-host/" target="_blank"> vSphere Integrated Containers Part III: Deployment of a Virtual Container Host</a> right at the beginning.
 
 Open the VIC *Getting Started* page by entering your VIC Address with port 9443 into a browser and find the download-button under the point *Infrastructure Deployment Tools*.
 
@@ -543,7 +543,7 @@ Re-Login
 
 **Upgrade of the Virtual Container Host(s)**
 
-Last but not least we´ll upgrade our Virtual Container Host(s). This will also be done by using the `vic-machine` utility with the option `upgrade`. Before I begin, I´ll check all current versions of my running VCH´s. 
+Last but not least we´ll upgrade our Virtual Container Host(s). This will also be done by using the `vic-machine` utility with the option `upgrade`. Before I begin, I´ll check all current versions of my running VCH´s.
 
 Use `docker --tls version` to get the desired information.
 
@@ -724,7 +724,7 @@ When upgrading to a newer version we just have to observe the following aspects:
 
 > *To avoid this, make use of one of the big benefits vSphere Integrated Containers can leverage here and configure a* ***dedicated Container-Network to your VCH!***
 
-> *In addition have a look at <a href="/post/vic_part_four">vSphere Integrated Containers Part IV: docker run a Container-VM</a>*
+> *In addition have a look at <a href="/post/vmware-vsphere-integrated-containers-part-4-docker-run-a-container-vm/">vSphere Integrated Containers Part IV: docker run a Container-VM</a>*
 
 You can easily test this by instantiating a (vmwarecna) <a href="https://hub.docker.com/r/vmwarecna/nginx/" target="_blank"> NGINX</a> Container-VM with the `--net` option, start upgrading the Virtual Container Host and see if the C-VM will become unreachable.
 
