@@ -131,10 +131,10 @@ You´ll get an quick overview over the VIC components through this Lightboard Vi
 ---
 **Continue with:**
 
-<a href="/post/vic_part_one/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-1-ova-deployment/">**vSphere Integrated Containers Part I: OVA Deployment**</a>
 
-<a href="/post/vic_part_two/">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-2-vsphere-client-plugin/">**vSphere Integrated Containers Part II: vSphere Client Plug-In**</a>
 
-<a href="/post/vic_part_three/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-3-deployment-of-a-virtual-container-host/">**vSphere Integrated Containers Part III: Deployment of a Virtual Container Host**</a>
 
-<a href="/post/vic_part_four/">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>
+<a href="/post/vmware-vsphere-integrated-containers-part-4-docker-run-a-container-vm/">**vSphere Integrated Containers Part IV: docker run a Container-VM**</a>

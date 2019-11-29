@@ -22,7 +22,7 @@ Treating Containers as <a href="https://en.wikipedia.org/wiki/First-class_citize
 
 > Therefore you don´t have to build out a separate, tailored infrastructure stack and can continue to leverage existing Scalability, Security and **Monitoring** capabilities.
 
-> *Source: <a href="https://rguske.github.io/post/vic_getting_started/" target="_blank">VMware vSphere Integrated Containers: Introduction</a>*
+> *Source: <a href="https://rguske.github.io/post/vmware-vsphere-integrated-containers-introduction/" target="_blank">VMware vSphere Integrated Containers: Introduction</a>*
 
 <center><a href="/img/posts/201811_post_monitoring/CapturFiles-20190114_100348.jpg"><img src="/img/posts/201811_post_monitoring/CapturFiles-20190114_100348.jpg"></img></a></center>
 

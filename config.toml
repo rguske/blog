@@ -8,8 +8,8 @@ canonifyurls    = true
 enableEmoji     = true
 
 [params]
-  title       = "j.a.r.v.i.s."
-  subtitle    = "Sometimes you gotta run before you can walk!"
+  title       = "rguske"
+  subtitle    = "J.A.R.V.I.S. - Sometimes you gotta run before you can walk!"
   copyright   = "© All rights reserved -2018"
 
   cover       = "img/blog_cover_black.jpg"
@@ -43,6 +43,9 @@ enableEmoji     = true
   #casper or caspertwo
   singleViewStyle = "caspertwo"
 
+[permalinks]
+  posts = "/:year/:month/:title/"
+
 [[menu.main]]
   name = "Home"
   url = "/"
@@ -63,10 +66,10 @@ enableEmoji     = true
   url = "/disclaimer"
   weight = 99
 
-# [[menu.main]]
-#   name = "Tags"
-#   url = "/tags"
-#   weight = 98
+#[[menu.main]]
+#  name = "Tags"
+#  url = "/tags"
+#  weight = 98
 
 [[menu.main]]
   name = "Github Repo"
@@ -75,5 +78,5 @@ enableEmoji     = true
 
 [[menu.main]]
   name = "VMware Microsites"
-  url = "/post/vmwaremicrosites"
+  url = "/post/vmware-microsites-you-should-bookmark"
   weight = 96
