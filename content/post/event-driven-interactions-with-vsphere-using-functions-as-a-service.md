@@ -2,7 +2,8 @@
 title: "Event-driven interactions with vSphere using Functions as a Service"
 date: 2019-02-14T17:40:38+01:00
 draft: false
-image: /img/vspheretagfn_cover.png
+image: /img/vspheretagfn_cover.jpg
+thumbnail: /img/vspheretagfn_thumbnail.jpg
 tags:
 - vSphere
 - Kubernetes

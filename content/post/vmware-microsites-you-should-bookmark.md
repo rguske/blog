@@ -3,6 +3,7 @@ title: "VMware Microsites You should bookmark"
 date: 2019-09-24T10:00:00+02:00
 draft: false
 image: /img/vmwaremicrosites_cover.jpg
+thumbnail: /img/vmwaremicrosites_thumbnail.jpg
 tags:
 - VMware
 - YouShouldBookmark

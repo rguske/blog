@@ -2,7 +2,8 @@
 title: "VMware Enterprise PKS Management Console (EPMC) - Day 1"
 date: 2019-11-27T14:53:23+01:00
 draft: false
-image: /img/epmcday1_cover.jpg
+image: /img/epmc_day1_cover.jpg
+thumbnail: /img/epmc_day1_thumbnail.jpg
 tags:
 - Kubernetes
 - PKS

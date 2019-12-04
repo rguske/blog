@@ -2,7 +2,8 @@
 title: "vSphere Integrated Containers Part II: vSphere Client Plug-In"
 date: 2018-07-13T13:17:23+02:00
 draft: false
-image: /img/vic_part_ii_cover.jpg
+image: /img/vic_part_2_cover.jpg
+thumbnail: /img/vic_part_2_thumbnail.jpg
 tags:
 - VIC
 - Container

@@ -3,6 +3,7 @@ title: "Monitoring Container VMs with vRealize Operations Manager"
 date: 2019-01-21T23:00:09+01:00
 draft: false
 image: /img/vic_monitoring_cover.jpg
+thumbnail: /img/vic_monitoring_thumbnail.jpg
 tags:
 - VIC
 - Container

@@ -3,6 +3,7 @@ title: "docker run vic-machine"
 date: 2019-07-04T22:52:18+02:00
 draft: false
 image: /img/dockerrunvicmachine_cover.jpg
+thumbnail: /img/dockerrunvicmachine_thumbnail.jpg
 tags:
 - VIC
 - Docker

@@ -2,7 +2,7 @@
 title: "About me"
 date: 2018-07-03T21:51:26+02:00
 draft: false
-image: /img/about_me_cover.jpg
+image: /img/blog_cover_black.jpg
 ---
 My name is Robert Guske and I´d like to welcome you to my blog.
 

@@ -3,6 +3,7 @@ title: "Youtube Hugo-Shortcode workaround - when {{< youtube >}} won´t work"
 date: 2018-12-09T17:23:27+01:00
 draft: false
 image: /img/youtubefix_cover.jpg
+thumbnail: /img/youtubefix_thumbnail.jpg
 tags:
 - Hugo
 - Shortcode

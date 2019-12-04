@@ -3,6 +3,7 @@ title: "Upgrade vSphere Integrated Containers"
 date: 2018-10-19T00:11:11+02:00
 draft: false
 image: /img/vic_upgrade_post_cover.jpg
+thumbnail: /img/vic_upgrade_post_thumbnail.jpg
 tags:
 - VIC
 - Container

@@ -8,13 +8,14 @@ canonifyurls    = true
 enableEmoji     = true
 
 [params]
-  title       = "rguske"
-  subtitle    = "J.A.R.V.I.S. - Sometimes you gotta run before you can walk!"
+  title       = "Robert Guske"
+  subtitle    = '"Sometimes you gotta run before you can walk!"'
+  subsubtitle = 'Anthony Edward "Tony" Stark, also known as IRON MAN'
   copyright   = "© All rights reserved -2018"
 
-  cover       = "img/blog_cover_black.jpg"
-  description = "Here is a description of your site."
-  metaDescription = ""
+  cover       = "img/blog_cover_usercon.jpeg"
+  description = "rguske.github.io is a personal website which provides informational & detailed content, based on Robert Guske´s gained experiences with solutions by VMware (primarily)."
+  metaDescription = "Only IT related content, topics are primarily Cloud-Native & VMware solutions oriented, I try not to write posts boringly."
   googleAnalytics = "UA-122353302-1"
   customCSS = ["dist/css/tagformatting.css"]
   RSSLink = ""
@@ -36,7 +37,7 @@ enableEmoji     = true
   authorAvatar = "img/profile_robert.jpg"
   authorLocation = "Hamburg, Germany"
   authorWebsite = "https://rguske.github.io"
-  authorDescription = "Read more."
+  authorDescription = "Robert is an accomplished, hands-on, & well informed IT professional with 15+ years of experience in providing strategic guidance regarding IT technology and infrastructural enhancements to clients and organizations."
 
   pageNotFoundTitle = "404 - Page not found"
 
@@ -44,7 +45,7 @@ enableEmoji     = true
   singleViewStyle = "caspertwo"
 
 [permalinks]
-  posts = "/:year/:month/:title/"
+  posts = "/post/:slug/"
 
 [[menu.main]]
   name = "Home"
@@ -58,13 +59,8 @@ enableEmoji     = true
 
 #[[menu.main]]
 # name = "Post"
-# url = "/post/post"
+# url = "/post"
 # weight = 100
-
-[[menu.main]]
-  name = "Disclaimer"
-  url = "/disclaimer"
-  weight = 99
 
 #[[menu.main]]
 #  name = "Tags"
@@ -72,11 +68,16 @@ enableEmoji     = true
 #  weight = 98
 
 [[menu.main]]
-  name = "Github Repo"
-  url = "https://github.com/rguske"
+  name = "VMware Microsites"
+  url = "/post/vmware-microsites-you-should-bookmark"
   weight = 97
 
 [[menu.main]]
-  name = "VMware Microsites"
-  url = "/post/vmware-microsites-you-should-bookmark"
+  name = "Github Repo"
+  url = "https://github.com/rguske"
   weight = 96
+
+  [[menu.main]]
+  name = "Disclaimer"
+  url = "/disclaimer"
+  weight = 95
