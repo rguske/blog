@@ -5,6 +5,7 @@ draft: false
 image: /img/youtubefix_cover.jpg
 thumbnail: /img/youtubefix_thumbnail.jpg
 tags:
+- December2018
 - Hugo
 - Shortcode
 ---

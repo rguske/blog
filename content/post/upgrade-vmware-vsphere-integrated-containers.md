@@ -5,6 +5,7 @@ draft: false
 image: /img/vic_upgrade_post_cover.jpg
 thumbnail: /img/vic_upgrade_post_thumbnail.jpg
 tags:
+- October2018
 - VIC
 - Container
 - VMware

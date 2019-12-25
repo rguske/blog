@@ -5,6 +5,7 @@ draft: false
 image: /img/dockerrunvicmachine_cover.jpg
 thumbnail: /img/dockerrunvicmachine_thumbnail.jpg
 tags:
+- July2019
 - VIC
 - Docker
 - Hack

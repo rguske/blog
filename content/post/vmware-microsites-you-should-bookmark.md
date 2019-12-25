@@ -5,6 +5,7 @@ draft: false
 image: /img/vmwaremicrosites_cover.jpg
 thumbnail: /img/vmwaremicrosites_thumbnail.jpg
 tags:
+- September2019
 - VMware
 - YouShouldBookmark
 ---

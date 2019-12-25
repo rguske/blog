@@ -5,6 +5,7 @@ draft: false
 image: /img/vic_monitoring_cover.jpg
 thumbnail: /img/vic_monitoring_thumbnail.jpg
 tags:
+- January2019
 - VIC
 - Container
 - vSphere

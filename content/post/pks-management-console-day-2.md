@@ -5,6 +5,7 @@ draft: false
 image: /img/epmc_day2_cover.jpg
 thumbnail: /img/epmc_day2_thumbnail.jpg
 tags:
+- November2019
 - Kubernetes
 - PKS
 - EPMC

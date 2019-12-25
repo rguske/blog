@@ -5,6 +5,7 @@ draft: false
 image: /img/vspheretagfn_cover.jpg
 thumbnail: /img/vspheretagfn_thumbnail.jpg
 tags:
+- February2019
 - vSphere
 - Kubernetes
 - FaaS

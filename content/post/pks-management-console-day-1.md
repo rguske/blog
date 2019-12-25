@@ -5,6 +5,7 @@ draft: false
 image: /img/epmc_day1_cover.jpg
 thumbnail: /img/epmc_day1_thumbnail.jpg
 tags:
+- November2019
 - Kubernetes
 - PKS
 - EPMC
@@ -202,8 +203,17 @@ At this point, I´d also like to point out to the documentation regarding the au
 ## Step 3: Identity
 Specify in this Step how you would like to add *Users* and *Groups* to Enterprise PKS. EPMC offers three option here:
 
-- Create Users and Groups and assign roles to those which will be stored into the **UAA database**.
-- Add an **External LDAP Server** and define the *User search base* and the *Group search base*.
+- Create Users and Groups and assign roles to those which will be stored into the **UAA database**:
+
+<center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092708.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092708.jpg"></img></a></center>
+<center>*Figure IX: Identity configuration - UAA*</center>
+
+or
+
+- Add an **External LDAP Server** and define the *User search base* and the *Group search base*:
+
+<center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191209_093203.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191209_093203.jpg"></img></a></center>
+<center>*Figure X: Identity configuration - LDAP*</center>
 
 or you can use a
 
@@ -213,23 +223,20 @@ To finish this step, enter the address for the **PKS API Server** like `pks.jarv
 
 Optionally, you can use <a href="https://en.wikipedia.org/wiki/OpenID_Connect" target="_blank">OpenID Connect</a> to authenticate users who access Kubernetes clusters with `kubectl` by using e.g. Okta as an external IDP. This will give administrators the ability to grant access on an namespace or cluster-wide level to Kubernetes end users.
 
-<center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092708.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092708.jpg"></img></a></center>
-<center>*Figure IX: Identity configuration*</center>
-
 ---
 ## Step 4: Availability Zones
 
 Availability Zones (AZ) are one of four layers of fault tolerance in VMware Enterprise PKS. As a design-recommendation, you should separate the PKS Management Plane from the Kubernetes cluster. This can easily be done by tagging the first AZ as the *Management AZ*. Click on *Save Availability Zone* and add another one for the Kubernetes cluster(s) with the recommendation to deploy more than one, for high-availability purposes.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191114_053642.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191114_053642.jpg"></img></a></center>
-<center>*Figure X: Availability Design for VMware Enterprise PKS*</center>
+<center>*Figure XI: Availability Design for VMware Enterprise PKS*</center>
 
 *Source:* <a href="https://docs.vmware.com/en/VMware-Validated-Design/5.1/sddc-architecture-and-design-for-vmware-enterprise-pks-with-vmware-nsx-t-workload-domains/GUID-BDF962A2-3666-45E7-9830-068A05065AD7.html" target="_blank">VMware VVD5.1 | Availability Design for Enterprise PKS with NSX-T Workload Domains</a>
 
 As mentioned at the beginning of this post (*Prerequisites*), I created two Resource Pools and gave them the appropriate description. `az-mgmt` and `az-prod-1`.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092815.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092815.jpg"></img></a></center>
-<center>*Figure XI: Availability Zones*</center>
+<center>*Figure XII: Availability Zones*</center>
 
 ---
 ## Step 5: Resources & Storage
@@ -243,17 +250,17 @@ b) the **Kubernetes Persistent Volume Storage** were all the *vmdks* will be sto
 c) the **Permanent Storage** for Enterprise PKS data. If you let this option default (radio switch off), the same selected datastore for Ephemeral Storage will be used for it.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092930.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_092930.jpg"></img></a></center>
-<center>*Figure XII: Resources & Storage Configuration*</center>
+<center>*Figure XIII: Resources & Storage Configuration*</center>
 
 ---
 ## Step 6: Plans
 
 Plans are configuration sets defining the sizes as well as the deployment target (AZ) of the Kubernetes clusters. The EPMC provides by default three "T-Shirt sizes": *Small, Medium and Large*. I won´t go into details regarding the other per plan available options here, however I´d like to recommend reading the documentation (Resources section).
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093112.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093112.jpg"></img></a></center>
-<center>*Figure XIII: Specification - PKS Plan Small*</center>
+<center>*Figure XIV: Specification - PKS Plan Small*</center>
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093256.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093256.jpg"></img></a></center>
-<center>*Figure XIV: PKS Plans as T-Shirt sizes*</center>
+<center>*Figure XV: PKS Plans as T-Shirt sizes*</center>
 
 ---
 ## Step 7: Integrations
@@ -261,14 +268,14 @@ Plans are configuration sets defining the sizes as well as the deployment target
 The integration of vRealize Operations Manager, vRealize Log Insight and Wavefront for monitoring, logging and enterprise observability can be all together done in Step 7. To monitor your Kubernetes clusters with vROps, it is necessary to import the *Management Pack for Container Monitoring*. A description of how to import the Management Pack as well as some more details on how it works (cAdvisor), can be found through this <a href="https://beyondelastic.com/2019/02/18/vmware-pks-1-3-monitor-k8s-with-vrops/" target="_blank">POST</a> by my friend <a href="https://twitter.com/Alec1823" target="_blank">Alex</a>.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093403.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093403.jpg"></img></a></center>
-<center>*Figure XV: Specify logging, monitoring and other integrations*</center>
+<center>*Figure XVI: Specify logging, monitoring and other integrations*</center>
 
 New in EPMC version 1.1.0 is the ability to attach a by PKS created Kubernetes cluster to <a href="https://cloud.vmware.com/tanzu-mission-control" target="_blank">VMware Tanzu Mission Control (TMC)</a> :rocket:. **Tanzu Mission Control** provides you the ability to handle multi-cluster Kubernetes deployments across multiple clouds with operational consistency.
 
 More here: https://blogs.vmware.com/cloudnative/2019/08/26/vmware-tanzu-mission-control/
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093315.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093315.jpg"></img></a></center>
-<center>*Figure XVI: Integration into Tanzu Mission Control*</center>
+<center>*Figure XVII: Integration into Tanzu Mission Control*</center>
 
 ---
 ## Step 8: Harbor
@@ -276,7 +283,7 @@ More here: https://blogs.vmware.com/cloudnative/2019/08/26/vmware-tanzu-mission-
 Running production grade Kubernetes in your organization requires the use of a container image registry as well. <a href="https://goharbor.io/" target="_blank">Harbor</a> is where your container images found a place which they can call "Home". Configure it in Step 8.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093404.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_093404.jpg"></img></a></center>
-<center>*Figure XVII: Harbor Enterprise Container Registry configuration*</center>
+<center>*Figure XVIII: Harbor Enterprise Container Registry configuration*</center>
 
 ---
 ## Step 9: CEIP
@@ -288,13 +295,13 @@ https://content.pivotal.io/blog/announcing-enhanced-telemetry-for-pks
 Also: https://docs-pcf-staging.cfapps.io/pks/1-6/telemetry.html#sample-reports
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094305.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094305.jpg"></img></a></center>
-<center>*Figure XVIII: Harbor Enterprise Container Registry configuration*</center>
+<center>*Figure XIX: Harbor Enterprise Container Registry configuration*</center>
 
 ---
 Validate your deployment config and click on **Generate Configuration**.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191106_091737.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191106_091737.jpg"></img></a></center>
-<center>*Figure XIX: Generate configuration*</center>
+<center>*Figure XX: Generate configuration*</center>
 
 ---
 ## Let the magic happen!
@@ -304,20 +311,41 @@ You can see now that every configuration we made in the past 9 steps, is availab
 Click **APPLY CONFIGURATION**
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094413.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094413.jpg"></img></a></center>
-<center>*Figure XX: Configuration as YAML editable and exportable*</center>
+<center>*Figure XXI: Configuration as YAML editable and exportable*</center>
 
 ---
 Observe the *Deployment status* and rejoice the green hooks.
 
 <center><a href="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094711.jpg"><img src="/img/posts/201911_pksmgmtconsole/CapturFiles-20191112_094711.jpg"></img></a></center>
-<center>*Figure XXI: Deployment status page*</center>
+<center>*Figure XXII: Deployment status page*</center>
 
 ---
 ## Troubleshooting
 If you are running into troubles with the Enterprise PKS Management Console, you can connect to it via `ssh` (root) and execute the following command to obtain the server log:
 
 - **Either**: `journalctl -u pks-mgmt-server > server.log` **and than** `cat server.log`
-- **Or**: `journalctl -u pks-mgmt-server.service -f`
+- **Or**: `journalctl -u pks-mgmt-server.service -f` to see more details like the following indicates:
+
+```shell
+Nov 27 21:51:50 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:51:50Z" level=info msg="Update for deployment 08fd9eeb-2ada-
+42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) configuring Harbor product on ops_manager\n"
+Nov 27 21:51:50 epmc.jarvis.lab pks-mgmt-server[939]: configuring product...
+Nov 27 21:51:55 epmc.jarvis.lab pks-mgmt-server[939]: setting up networkfinished setting up networksetting propertiesfinished setting propertiesapplying resource configuration for the following jobs:errands are not provided, nothing to do here
+Nov 27 21:51:56 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:51:56Z" level=info msg="Update for environment, _harbor.depl
+oyment_config : **********"
+Nov 27 21:51:56 epmc.jarvis.lab pks-mgmt-server[939]: finished configuring producttime="2019-11-27T21:51:56Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) installing Harbor product on ops_manager\n"
+Nov 27 21:51:57 epmc.jarvis.lab pks-mgmt-server[939]: attempting to apply changes to the targeted Ops Manager
+Nov 27 21:52:02 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:52:02Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Installing BOSH\n"
+Nov 27 21:52:38 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:52:38Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Putting Tile Credentials into CredHub\n"
+Nov 27 21:52:50 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:52:50Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Updating runtime configs for harbor-container-registry\n"
+Nov 27 21:54:33 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T21:54:33Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Installing VMware Harbor Registry\n"
+Nov 27 22:08:57 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:08:57Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Running errand smoke-testing for VMware Harbor Registry\n"
+Nov 27 22:11:38 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:11:38Z" level=info msg="Failed to read channel\n"
+Nov 27 22:11:38 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:11:38Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) Cleaning up BOSH director\n"
+Nov 27 22:11:38 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:11:38Z" level=info msg="Update for environment, _harbor.is_deployed : true"
+Nov 27 22:11:38 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:11:38Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( running) checking harbor liveness\n"
+Nov 27 22:11:41 epmc.jarvis.lab pks-mgmt-server[939]: time="2019-11-27T22:11:41Z" level=info msg="Update for deployment 08fd9eeb-2ada-42c0-8d41-dba9a1b9a2e6 - Deploy harbor-container-registry 1.9.3-build.2: state( success) finished deploying Harbor\n"
+```
 
 When it comes to **BOSH** realted issues, also have a look at this post by my colleague <a href="https://twitter.com/KeithRichardLee" target="_blank">Keith Lee</a>: <a href="http://keithlee.ie/2019/03/31/pks-troubleshooting-part-1-using-bosh-cli/" target="_blank">PKS Troubleshooting – Part 1: Using BOSH CLI</a>
 

@@ -5,6 +5,7 @@ draft: false
 image: /img/vic_part_1_cover.jpg
 thumbnail: /img/vic_part_1_thumbnail.jpg
 tags:
+- July2018
 - VIC
 - Container
 - VMware
