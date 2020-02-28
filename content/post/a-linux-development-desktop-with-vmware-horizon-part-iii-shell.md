@@ -5,7 +5,7 @@ draft: false
 image: /img/devdesk_part_iii_cover.jpg
 thumbnail: /img/devdesk_part_iii_thumbnail.jpg
 tags:
-- January2020
+- February2020
 - Linux
 - Horizon
 - VDI
