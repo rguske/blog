@@ -204,7 +204,7 @@ brew tap cjbassi/ytop && brew install ytop
 ```shell
 brew install figlet lolcat
 
-figlet DevDesk | lolcat
+figlet cliFun | lolcat
 ```
 
 ```shell
@@ -222,7 +222,7 @@ You should have a look at this post regarding cowsay :smile:: <a href="https://m
 ```shell
 brew install cowsay
 
-cowsay -f vader DevDesk
+cowsay -f vader I am your...LOL!
 
  __________________
 < I am your...LOL! >

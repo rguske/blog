@@ -18,7 +18,7 @@ tags:
 
 # Applications
 
-In this section I´m going to list a couple of applications which I´m using for my DevDesk and how you can easily install them from your shell. Of course, it´s not a must and it´s up to you which of them you´d like to install.
+In this section I´m going to list a couple of applications which I´m using for my desktop and how you can easily install them from your shell. Of course, it´s not a must and it´s up to you which of them you´d like to install.
 
 ## Google Chrome - https://www.google.com/chrome/
 
@@ -42,7 +42,7 @@ sudo yum install ~/Downloads/google-chrome-stable_current_x86_64.rpm
 
 ## Visual Studio Code (VSCode) - https://code.visualstudio.com/
 
-One of my absolute favorite tools so far and indispensable for our DevDesk.
+One of my absolute favorite tools so far and indispensable for our desktop.
 
 <span style="color:#018914">**Ubuntu:**</span>
 
@@ -172,7 +172,7 @@ Download: https://www.vmware.com/go/download-vmrc
 
 Download: https://code.vmware.com/web/tool/4.3.0/ovf
 
-These two binaries were downloaded locally (to my Notebook) first, then got packed into a zip archive and copied via `scp` to my DevDesk(s).
+These two binaries were downloaded locally (to my Notebook) first, then got packed into a zip archive and copied via `scp` to my desktop(s).
 
 ```shell
 scp ~/Downloads/tools.zip jarvis@devdesk-centos:/home/jarvis/Downloads
@@ -248,7 +248,7 @@ cd ~
 
 ---
 
-**Continue with Part III:** <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-iii-shell/">A Linux Development Desktop with VMware Horizon - Part III: High Way to Shell</a>
+**Continue with Part III:** <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-iii-shell/">A Linux Development Desktop with VMware Horizon - Part III: Shell</a>
 
 ---
 

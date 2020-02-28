@@ -11,11 +11,11 @@ tags:
 - VDI
 ---
 
-I often thought about writing down my experiences on the topics of *Jumphosts*, *Shell-modifications* and *useful tools* in a blog post, but I hadn´t found the right moment, until I saw the following Tweet, where Alex asked his followers how they get access to a Linux system if they aren´t running Linux on their workstation (locally).
+I often thought about writing down my experiences on the topics of *Jumphosts*, *Shell-modifications* and *useful tools* in a series of blog posts, but I hadn´t found the right moment, until I saw the following Tweet, where Alex asked his followers how they get access to a Linux system if they aren´t running Linux on their workstation (locally).
 
 <center> {{< tweet 1210952121488728066 >}} </center>
 
-Similar to Mark´s answer, I´m also using a VDI (Virtual-Desktop-Infrastructure) desktop for my purposes and I began writing this post...back in January...time passed by and due to other projects I worked on and which demanded a lot of my attention (<a href="https://twitter.com/search?q=vCenter%20Event%20Broker%20Appliance&src=typed_query" target="_blank">#VEBA</a> :grin:), it took a little bit longer to publish this one.
+Similar to Mark´s answer, I´m also using a VDI (Virtual-Desktop-Infrastructure) desktop for my purposes and I began writing this series...back in January...time passed by and due to other projects I worked on and which demanded a lot of my attention (<a href="https://twitter.com/search?q=vCenter%20Event%20Broker%20Appliance&src=typed_query" target="_blank">#VEBA</a> :grin:), it took a little bit longer to publish them.
 
 **But NOW!**
 
@@ -30,7 +30,7 @@ Having a suitable *Jumphost*, *Remotehost*, *Development-workstation* or however
 
 And another very important aspect of having a "Developer-friendly" environment quickly available comes into play! Let´s consider the rise of Kubernetes for example. Organizations today will perhaps reach a point, where it will be necessary to employ external developers and engineers (e.g. <a href="https://en.wikipedia.org/wiki/Site_Reliability_Engineering" target="_blank">SRE´s</a>, <a href="https://en.wikipedia.org/wiki/Reliability_engineering" target="_blank">PRE´s</a>) and provide a environment to them, that is on the one hand organization compliant and on the other hand offers sufficient flexibility and appropriate tools to these developers and engineers.
 
-With this post, I´d like to demonstrate how you can build such an environment for the described use-cases on your own and what´s necessary to offer this as a VDI desktop to your team or external employers. This will include the setup of a *VMware Horizon Connection Server (broker for client connections)*, a Linux-Desktop (<span style="color:#018914">Ubuntu</span> and <span style="color:#6003B6">CentOS</span>) as well as some useful and cool modifications for e.g. your Shell.
+With this series of posts, I´d like to demonstrate how you can build such an environment for the described use-cases on your own and what´s necessary to offer it as a VDI desktop to your team or external employers. This will include the setup of a *VMware Horizon Connection Server (broker for client connections)*, the installation, configuration and preperation of the Linux distributions <span style="color:#018914">Ubuntu</span> and <span style="color:#6003B6">CentOS</span> and how you can turn them into **a universal workbench for development and operations.**
 
 **Please give 3 minutes of your precious time** for the following recording to get an idea of what you can expect at the end of these three articles.
 
@@ -42,7 +42,7 @@ With this post, I´d like to demonstrate how you can build such an environment f
 
 ## My Mindnode for building a Development Desktop
 
-<a href="https://github.com/rguske/blog/tree/master/static/img/posts/201912_development_desktop/rg_022020_mindnode_post_devdesk.png" target="_blank">**Download**</a>
+<a href="https://github.com/rguske/rguske.github.io/blob/master/img/posts/201912_development_desktop/rg_022020_mindnode_post_devdesk.png" target="_blank">**Download**</a>
 
 <center><a href="/img/posts/201912_development_desktop/rg_022020_mindnode_post_devdesk.png"><img src="/img/posts/201912_development_desktop/rg_022020_mindnode_post_devdesk.png"></img></a></center>
 
@@ -60,7 +60,7 @@ The VMware Horizon Connection Server is the broker for your client connections w
 
 *Source:* <a href="https://techzone.vmware.com/resource/workspace-one-and-horizon-reference-architecture#component-design-horizon-architecture" target="_blank">Digital Workspace Tech Zone - VMware Workspace ONE and VMware Horizon Reference Architecture</a>
 
-If all <a href="https://docs.vmware.com/en/VMware-Horizon-7/7.11/horizon-installation/GUID-68621B8E-F018-4BC4-811A-5CF76B55DB2C.html#GUID-68621B8E-F018-4BC4-811A-5CF76B55DB2C" target="_blank">PREREQUISITES</a> are given (*Figure I: Mindnode DevDesk*), the installation itself is really quick and simple.
+If all <a href="https://docs.vmware.com/en/VMware-Horizon-7/7.11/horizon-installation/GUID-68621B8E-F018-4BC4-811A-5CF76B55DB2C.html#GUID-68621B8E-F018-4BC4-811A-5CF76B55DB2C" target="_blank">PREREQUISITES</a> are given (*Figure I: Mindnode Development Desktop*), the installation itself is really quick and simple.
 
 **Short overview**
 
@@ -141,7 +141,7 @@ systemctl status sshd.service
 
 ## Packages and module dependencies
 
-We´re planning to join our system into a Active Directory Domain and also want to install the VMware Horizon View Agent, which is necessary for adding our DevDesk to a Desktop-Pool later on. Before we can continue, it´s necessary to eliminate some dependencies by installing some packages upfront.
+We´re planning to join our system into a Active Directory Domain and also want to install the VMware Horizon View Agent, which is necessary for adding our machine to a Desktop-Pool later on. Before we can continue, it´s necessary to eliminate some dependencies by installing some packages upfront.
 
 **ATTENTION (CentOS): Do not run `yum update`!**
 
@@ -253,7 +253,7 @@ Edit the **/etc/pamd.d/common-session** file and **replace** the line **`session
 
 *Source: <a href="https://docs.vmware.com/en/VMware-Horizon-7/7.11/linux-desktops-setup/GUID-93F4CA16-5F47-47BE-B28C-E8A7901E0391.html" target="_blank"> VMware Horizon 7: Use the Realmd Join Solution for RHEL/CentOS 8.0</a>*
 
-To have the ability to connect with an AD user to our DevDesk, we have to join an Active Directory domain. `realmd` will be the tool of our choice to join an Active Directory domain. It´s installed on CentOS by default.
+To have the ability to connect with an AD user to our desktop, we have to join an Active Directory domain. `realmd` will be the tool of our choice to join an Active Directory domain. It´s installed on CentOS by default.
 
 <span style="color:#6003B6">**CentOS:**</span>
 
@@ -358,11 +358,11 @@ Now set the correct *SSO Desktop Type* for the View Agent (see page 18 and 107).
 - <span style="color:#018914">**Ubuntu 18.04**</span> = *SSODesktopType=UseGnomeClassic*
 - <span style="color:#6003B6">**CentOS**</span> = *SSODesktopType=UseGnomeClassic*
 
-On the way down through the *viewagent-custom.conf* you came by a point where you can define a subnet for the View-Agent. If you like to install Docker on your DevDesk, as I would assume, you have to uncomment the example and replace the CIDR with yours.
+On the way down through the *viewagent-custom.conf* you came by a point where you can define a subnet for the View-Agent. If you like to install Docker on your desktop, as I would assume, you have to uncomment the example and replace the CIDR with yours.
 
 **In my case:** *Subnet=10.10.13.0/26*
 
-Otherwise you won´t be able to connect to your DevDesk anymore after installing Docker. Save and exit the file with `:wq!`.
+Otherwise you won´t be able to connect to your desktop anymore after installing Docker. Save and exit the file with `:wq!`.
 
 # Create a Manual Desktop Pool
 
