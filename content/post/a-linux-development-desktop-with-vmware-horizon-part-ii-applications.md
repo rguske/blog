@@ -82,7 +82,7 @@ Link: https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-syn
 
 VSCode has a REALLY rich extensibility model which gives you everything you need to work even more efficiently and faster. It´ll not be possible to avoid that more and more extensions and other niceties are added to your installation and as of today it´s not possible to have everything consistent across different systems or platforms through an Online-Account like you have e.g. for Google Chrome.
 
-Thus I´d like to recommend using the *VSCode Settings sync* extension for it. It uses your GitHub account (required) token and Gist, to give you the ability to upload as well as download your Settings, Snippets, Themes and so forth.
+Thus I´d like to recommend using the *VSCode Settings sync* extension for it. It uses your GitHub account (required) token and Gist, to give you the ability to upload as well as download your settings, snippets, themes and so forth.
 
 Just search for the extension at the marketplace, install it, select LOGIN WITH GITHUB (get redirected) and follow the instructions. Since you´ve created your Gist-ID you´re ready to go to upload as well as to download your settings.
 

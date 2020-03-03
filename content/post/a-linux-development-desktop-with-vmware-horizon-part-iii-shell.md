@@ -20,7 +20,7 @@ tags:
 
 # High :zap: Way to Shell
 
-The operationalization of platforms such as Kubernetes, or the use of tools for building services or applications such as Docker, requires in both cases the use of the command-line. There are dozens of great plugins, themes and extensions out there to pimp your shell so that it´ll help you to increase velocity as well as useability. 
+The operationalization of platforms such as e.g. Kubernetes, or the use of tools for building services or applications such as Docker, requires in both cases the use of the command-line. There are dozens of great plugins, themes and extensions out there to pimp your shell so that it´ll help you to increase velocity as well as useability. 
 
 **Part III** of my series is focused on the Shell and which *"Highway"* you can take to have the described tool available at the end.
 
@@ -119,7 +119,7 @@ A logout or reboot of the system is necessary for the changes to take effect.
 
 <center>*Figure II: ZSH with Powerlevel-9k Theme | l: Ubuntu r: CentOS*</center>
 
-**I love it!** And it doesn´t only looks good, it also comes in very handy if you work e.g. with `Git` as you can see on *Figure IX* for example. The right screenshot shows you that I am in a git branch called *featurebranch* and the color indicates me, that my workingtree is either clean and theres nothing to commit (green) or that new files were added and needs to be commited (orange).
+**I love it!** And it doesn´t only looks good, it also comes in very handy if you work e.g. with `Git` as you can see on *Figure II* for example. The right screenshot shows you that I am in a git branch called *featurebranch* and the color indicates me, that my workingtree is either clean and theres nothing to commit (green) or that new files were added and needs to be commited (orange).
 
 ---
 **More! More! More!**
