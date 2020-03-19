@@ -40,11 +40,63 @@ sudo yum install ~/Downloads/google-chrome-stable_current_x86_64.rpm
 
 ---
 
+## Snap (package manager) for application installation - https://snapcraft.io/docs
+
+This package manager is pre-installed and ready for use on <span style="color:#018914">**Ubuntu**</span> but not on <span style="color:#6003B6">**CentOS**</span>. Nevertheless, we can install it subsequently via the <a href="https://fedoraproject.org/wiki/EPEL" target="_blank">Extra Packages for Enterprise Linux</a>.
+
+**Add the EPEL repository:**
+
+```shell
+sudo dnf install epel-release
+```
+
+**Install and enable snapd:**
+
+```shell
+sudo yum install snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+```
+
+**The command line interface `snap` is ready for use:**
+
+```shell
+snap --help
+
+The snap command lets you install, configure, refresh and remove snaps.
+Snaps are packages that work across many different Linux distributions,
+enabling secure delivery and operation of the latest apps and utilities.
+
+Commands can be classified as follows:
+
+ Basics: find, info, install, list, remove
+...more: refresh, revert, switch, disable, enable
+History: changes, tasks, abort, watch
+Daemons: services, start, stop, restart, logs
+Commands: alias, aliases, unalias, prefer
+Configuration: get, set, unset, wait
+Account: login, logout, whoami
+Permissions: connections, interface, connect, disconnect
+Snapshots: saved, save, check-snapshot, restore, forget
+Other: version, warnings, okay, ack, known, model, create-cohort
+Development: run, pack, try, download, prepare-image
+```
+
+---
+
 ## Visual Studio Code (VSCode) - https://code.visualstudio.com/
 
-One of my absolute favorite tools so far and indispensable for our desktop.
+VSCode is a powerful open source cross-platform editor and definetely one of my absolute favorite tools so far and indispensable for our desktop.
 
-<span style="color:#018914">**Ubuntu:**</span>
+**Option 1:** Installation via `snap`
+
+ ```shell
+sudo snap install code --classic
+```
+
+**Option 2:** Step by Step
+
+<span style="color:#018914">**Ubuntu**</span>
 
 **Repository and key:**
 
@@ -60,7 +112,7 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microso
 sudo apt-get install apt-transport-https && sudo apt-get update && sudo apt-get install code
 ```
 
-<span style="color:#6003B6">**CentOS:**</span>
+<span style="color:#6003B6">**CentOS**</span>
 
 **Repository and key:**
 
@@ -76,9 +128,7 @@ sudo dnf check-update
 sudo dnf install code
 ```
 
-## [Extension] VSCode Settings sync
-
-Link: https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
+## [Extension] VSCode Settings sync - https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
 
 VSCode has a REALLY rich extensibility model which gives you everything you need to work even more efficiently and faster. It´ll not be possible to avoid that more and more extensions and other niceties are added to your installation and as of today it´s not possible to have everything consistent across different systems or platforms through an Online-Account like you have e.g. for Google Chrome.
 
@@ -101,9 +151,194 @@ Open your terminal and execut: `git config --global core.editor “code --wait�
 
 ---
 
+## Remmina - https://remmina.org/
+
+Remmina is a Remote Desktop Client which supports multiple network protocols like e.g. RDP, VNC, SPICE, NX, XDMCP and SSH.
+
+```shell
+sudo snap install remmina
+```
+
+<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200318_023735.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200318_023735.jpg"></img></a></center>
+
+<center>*Figure I: Remmina - Remote Desktop Client*</center>
+
+---
+
+## Content sharing
+
+I was looking for a workspace where I can share content, mainly files like scripts or specification-files (.yml, .json) across platforms. It´s possible by default to activate ***Online Accounts (Figure II)*** like e.g. Google or Nextcloud in both distributions through the System Settings.
+
+<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200318_113300.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200318_113300.jpg"></img></a></center>
+
+<center>*Figure II: Activate Online Accounts*</center>
+
+## Alternative:
+
+**Dropbox for Linux** - https://www.dropbox.com/en/install-linux
+
+I decided to try Dropbox due to the availability of an already existing account.
+
+<span style="color:#018914">**Ubuntu**</span>
+
+## Dropbox Headless:
+
+```shell
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+```
+
+## Installing the Dropbox CLI:
+
+```shell
+sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
+sudo chmod +x /usr/local/bin/dropbox
+```
+
+
+
+```shell
+dropbox --help
+
+Dropbox command-line interface
+
+commands:
+
+autostart    automatically start Dropbox at login
+exclude      ignores/excludes a directory from syncing
+filestatus   get current sync status of one or more files
+help         provide help
+lansync      enables or disables LAN sync
+ls           list directory contents with current sync status
+proxy        set proxy settings for Dropbox
+puburl       get public url of a file in your Dropbox's public folder
+running      return whether Dropbox is running
+sharelink    get a shared link for a file in your Dropbox
+start        start dropboxd
+status       get current status of the dropboxd
+stop         stop dropboxd
+throttle     set bandwidth limits for Dropbox
+update       download latest version of Dropbox
+version      print version information for Dropbox
+```
+
+**Enable Dropbox to start automatically after every reboot:**
+
+```shell
+sudo vim /etc/systemd/system/dropbox.service
+
+[Unit]
+Description=Dropbox Service
+After=network.target
+
+[Service]
+ExecStart=/bin/sh -c '/usr/local/bin/dropbox start'
+ExecStop=/bin/sh -c '/usr/local/bin/dropbox stop'
+PIDFile=${HOME}/.dropbox/dropbox.pid
+User=jarvis
+Group=jarvis
+Type=forking
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Reload system daemon:**
+
+```shell
+sudo systemctl daemon-reload
+```
+
+**Enable the new Dropbox service:**
+
+```shell
+sudo systemctl enable dropbox
+```
+
+**Start the service:**
+
+```shell
+sudo systemctl start dropbox
+```
+
+<span style="color:#6003B6">**CentOS**</span>
+
+## Dropbox Headless:
+
+```shell
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+sudo mkdir -p /opt/dropbox
+sudo cp -r .dropbox-dist/* /opt/dropbox
+```
+
+By executing `/opt/dropbox/dropboxd` you should be forwarded to the Dropbox homepage where you have to login to authenticate the connection request. After this, quite the running Dropbox on your terminal with `ctrl + c`.
+
+**Creating the init.d file:**
+
+```shell
+sudo curl -o /etc/init.d/dropbox https://gist.githubusercontent.com/thisismitch/6293d3f7f5fa37ca6eab/raw/2b326bf77368cbe5d01af21c623cd4dd75528c3d/dropbox
+```
+
+**Creating the systemd unit file:**
+
+```shell
+sudo curl -o /etc/systemd/system/dropbox.service https://gist.githubusercontent.com/thisismitch/6293d3f7f5fa37ca6eab/raw/99947e2ef986492fecbe1b7bfbaa303fefc42a62/dropbox.service
+```
+
+**Set the appropriate permissions for the newly created files:**
+
+```shell
+sudo chmod +x /etc/systemd/system/dropbox.service /etc/init.d/dropbox
+```
+
+**Add users to be able to run Dropbox:**
+
+```shell
+sudo vim /etc/sysconfig/dropbox
+DROPBOX_USERS="rguske"
+```
+
+**Reload system daemon:**
+
+```shell
+sudo systemctl daemon-reload
+```
+
+**Enable the new Dropbox service:**
+
+```shell
+**sudo systemctl enable dropbox:**
+```
+
+**Start the service:**
+
+```shell
+sudo systemctl start dropbox
+```
+
+## Installing the Dropbox CLI
+
+```shell
+sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
+sudo chmod +x /usr/local/bin/dropbox
+```
+
+---
+
 ## Docker Engine - Community
 
 Another must!
+
+**Option 1:** Installation via `snap`
+
+ ```shell
+sudo snap install docker
+```
+
+**Option 2:** Step by Step
 
 <span style="color:#018914">**Ubuntu:**</span>
 
@@ -230,24 +465,6 @@ cd ~
 
 ---
 
-**KinD** - https://github.com/kubernetes-sigs/kind
-
-> kind is a tool for running local Kubernetes clusters using Docker container "nodes".
-
-<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200227_015150.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200227_015150.jpg"></img></a></center>
-
-<center>*Figure I: kind create cluster*</center>
-
-**Octant** - https://github.com/vmware-tanzu/octant
-
-> Octant is a tool for developers to understand how applications run on a Kubernetes cluster.
-
-![Octant demo](/img/posts/201912_development_desktop/octant-demo.gif)
-
-<center>*Source: https://github.com/vmware-tanzu/octant*</center>
-
----
-
 **Continue with Part III:** <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-iii-shell/">A Linux Development Desktop with VMware Horizon - Part III: Shell</a>
 
 ---
@@ -257,5 +474,9 @@ cd ~
 <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-i-horizon/">A Linux Development Desktop with VMware Horizon - Part I: Horizon</a>
 
 ---
+
+**Change Log:**
+
+- [2020-03-18]: Added Snap (package manager); Remmina (Remote Desktop Client); Section "Content sharing"; Dropbox client
 
 ## <center>**Thanks for reading.**</center>

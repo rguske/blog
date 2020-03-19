@@ -68,6 +68,26 @@ echo $SHELL
 cat /etc/passwd | grep "username"
 ```
 
+## ZSH Syntax Highlighting - https://github.com/zsh-users/zsh-syntax-highlighting
+
+This plugin enables highlighting of commands whilst they are typed and it´ll help you to avoid syntax erros before you run a command.
+
+<span style="color:#6003B6">**CentOS**</span> & <span style="color:#018914">**Ubuntu:**</span>
+
+Let´s clone the repository into our *oh-my-zsh* plugins directory:
+
+```shell
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+Enable the plugin in your zsh config file (`~/.zshrc`) in the "plugins section".
+
+```shell
+plugins=(git pks zsh-syntax-highlighting)
+```
+
+Restart your terminal.
+
 ## 3. Install Powerline Fonts - https://github.com/powerline/fonts
 
 Needed fonts for the Powerlevel9k theme (step 4.).
@@ -88,7 +108,7 @@ cd ..
 rm -rf fonts
 ```
 
-## 4. Powerlevel-9k - https://github.com/Powerlevel9k/powerlevel9k
+## 4. Powerlevel9k - https://github.com/Powerlevel9k/powerlevel9k
 
 This theme will give your shell a new shine.
 
@@ -99,13 +119,26 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 vim ~/.zshrc
 ```
 
-Replace the default ZSH_THEME with the new Powerlevel-9k theme:
+Replace the default ZSH_THEME with the new Powerlevel9k theme:
 
 ```shell
 ZSH_THEME="powerlevel9k/powerlevel9k"
 ```
 
-And you should also paste the following variable to the top of your *.zshrc* file, otherwise we will get an error when we use `tmux` later.
+The Powerlevel9k theme gives you some pretty neat customiztion options which makes your terminal even more powerful.
+
+Here´s my setup:
+
+```shell
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_DELIMITER=””
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_SHORTEN_STRATEGY=”truncate_from_right”
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext time date)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs)
+```
+
+And you should also paste the following variable to the top of your *.zshrc* file, otherwise you will get an error when using `tmux` later.
 
 ```shell
 export TERM="xterm-256color"
@@ -115,7 +148,7 @@ A logout or reboot of the system is necessary for the changes to take effect.
 
 **The result:**
 
-<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200226_112728.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200226_112728.jpg"></img></a></center>
+<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200310_120723.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200310_120723.jpg"></img></a></center>
 
 <center>*Figure II: ZSH with Powerlevel-9k Theme | l: Ubuntu r: CentOS*</center>
 
@@ -126,7 +159,7 @@ A logout or reboot of the system is necessary for the changes to take effect.
 
 ## Homebrew on Linux :beer: - https://docs.brew.sh/Homebrew-on-Linux
 
-Homebrew is a package manager which simplifies the installation of software on your OS and should not be missing if you ask me.
+Homebrew is a package manager (like Snappy) which simplifies the installation of software on your OS and should not be missing if you ask me.
 
 <span style="color:#6003B6">**CentOS**</span> & <span style="color:#018914">**Ubuntu:**</span>
 
@@ -162,13 +195,45 @@ source <(kubectl completion zsh)
 echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc
 ```
 
+**Powershell** - https://snapcraft.io/powershell
+
+> PowerShell is an cross-platform (Windows, Linux, and macOS) command-line shell for automation and configuration management.
+
+Installation via `snap`:
+
+```shell
+sudo snap install powershell --classic
+```
+
+**KinD - Kubernetes in Docker** - https://github.com/kubernetes-sigs/kind
+
+> kind is a tool for running local Kubernetes clusters using Docker container "nodes".
+
+<center><a href="/img/posts/201912_development_desktop/CapturFiles-20200227_015150.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200227_015150.jpg"></img></a></center>
+
+<center>*Figure III: kind create cluster*</center>
+
+**Octant** - https://github.com/vmware-tanzu/octant
+
+> Octant is a tool for developers to understand how applications run on a Kubernetes cluster.
+
+![Octant demo](/img/posts/201912_development_desktop/octant-demo.gif)
+
+<center>*Source: https://github.com/vmware-tanzu/octant*</center>
+
 **tmux** - https://github.com/tmux/tmux
 
 > `tmux` is a terminal multiplexer.
 
+**Enable Mouse-scrolling**: Scrolling the terminal pages by using the mouse-wheel is natural for me and because it´s not enabled by default when using `tmux` I need to enable it. Settings like this for example can be applied while running `tmux`. Press *ctrl + b* and then type `:set -g mouse on`.
+
 **bat** - https://github.com/sharkdp/bat
 
 > `bat` is a cat clone with syntax highlighting and Git integration.
+
+**glances** - https://github.com/nicolargo/glances
+
+> `glances` is a cross-platform monitoring tool.
 
 **htop** - https://github.com/hishamhm/htop
 
@@ -184,12 +249,12 @@ echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~
 
 And all of them can be easily installed via `brew`:
 ```shell
-brew install tmux bat htop ctop prettyping
+brew install kind octant tmux bat glances htop ctop prettyping
 ```
 
 Addtionally to `htop`, `ytop` (former gotop) is a pretty neat process and system monitor.
 
-`ytop` - https://github.com/cjbassi/ytop
+**`ytop`** - https://github.com/cjbassi/ytop
 
 ```shell
 brew tap cjbassi/ytop && brew install ytop
@@ -278,5 +343,11 @@ alias cat=bat
 <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-ii-applications/">A Linux Development Desktop with VMware Horizon - Part II: Applications</a>
 
 ---
+
+**Change Log:**
+
+- [2020-03-10]: Added Enable Mouse-scrolling for `tmux`; ZSH Syntax Highlighting; Powerlevel9k configuration
+- [2020-03-10]: Updated Figure II
+- [2020-03-18]: Added Glances & Powershell
 
 ## <center>**Thanks for reading.**</center>

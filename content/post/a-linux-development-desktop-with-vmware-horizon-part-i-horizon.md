@@ -17,7 +17,9 @@ I often thought about writing down my experiences on the topics of *Jumphosts*, 
 
 Similar to Mark´s answer, I´m also using a VDI (Virtual-Desktop-Infrastructure) desktop for my purposes and I began writing this series...back in January...time passed by and due to other projects I worked on and which demanded a lot of my attention (<a href="https://twitter.com/search?q=vCenter%20Event%20Broker%20Appliance&src=typed_query" target="_blank">#VEBA</a> :grin:), it took a little bit longer to publish them.
 
-**But NOW!**
+---
+
+**BIG THANKS** to <a href="https://de.linkedin.com/in/gerrit-lehr-b00a34a9" target="_blank">Gerrit Lehr</a>, <a href="https://twitter.com/HilkoLantinga" target="_blank">Hilko Lantinga</a> and <a href="https://twitter.com/ivirtualex" target="_blank">Alex Lopez</a> for your valuable input and feedback.
 
 ---
 
@@ -95,7 +97,7 @@ In this post, I´ll concentrate just on <span style="color:#018914">Ubuntu 18.04
 
 ## Create a new Virtual Machine
 
-Now that your iso is ready to be mounted let´s create a new Virtual Machine. Choose your distro from the list and configure your vHardware. I followed the official recommendation for *"Improved video playback in a 2D desktop (page 23)*.
+Now that your iso is ready to be mounted let´s create a new Virtual Machine. Choose your distro from the list and configure your vHardware. I followed the official recommendation for *"Improved video playback in a 2D desktop (<a href="https://docs.vmware.com/en/VMware-Horizon-7/7.11/linux-desktops-setup.pdf" target="_blank">page 23</a>)*.
 
 <center><a href="/img/posts/201912_development_desktop/CapturFiles-20200219_123512.jpg"><img src="/img/posts/201912_development_desktop/CapturFiles-20200219_123512.jpg"></img></a></center>
 
@@ -143,9 +145,13 @@ systemctl status sshd.service
 
 We´re planning to join our system into a Active Directory Domain and also want to install the VMware Horizon View Agent, which is necessary for adding our machine to a Desktop-Pool later on. Before we can continue, it´s necessary to eliminate some dependencies by installing some packages upfront.
 
-**ATTENTION (CentOS): Do not run `yum update`!**
+---
 
-Normally, the first step I do after setting up a fresh Linux system, is the update of every currently installed package of it (`apt update` / `yum update`). You can run the update and upgrade "safely" for Ubuntu but **NOT** for CentOS 8.0. The *VMware Horizon View Agent* does not support ***gnome-shell version 3.3x***. If you run the `sudo yum update` command, the gnome-shell will be updated and this leads to the following error:
+:exclamation: **The following only applies to CentOS 8.0 with Horizon Agent version 7.11**
+
+> **Do not** run `yum update`!
+
+Normally, the first step I do after setting up a fresh Linux system, is the update of every currently installed package of it (`apt update` / `yum update`). You can run the update and upgrade "safely" for Ubuntu but **NOT** for CentOS 8.0. The *VMware Horizon View Agent v.7.11* does not support ***gnome-shell version 3.3x***. If you run the `sudo yum update` command, the gnome-shell will be updated and this leads to the following error:
 
 ```shell
 The version of gnome shell 3.32.2 isn't matched,\n
@@ -165,12 +171,24 @@ exclude=gnome* mutter*
 
 ...but this will cause the system to boot with a black-screen. I got the internal feedback, that we´ll support CentOS 8.1 (gnome-shell 3.3x) with Horizon v.7.12.
 
-**Big Thanks** to <a href="https://twitter.com/HilkoLantinga" target="_blank">Hilko Lantinga</a> for your support here.
+**UPDATE**
 
-As already mentioned, normally I update my freshly installed system immediately after the first boot! Let´s do this, but only for Ubuntu:
+**[2020-03-17] VMware Horizon 7.12 with CentOS 8.1 support released:** <a href="https://docs.vmware.com/en/VMware-Horizon-7/7.12/rn/horizon-712-view-release-notes.html" target="_blank">Release Notes</a>
+
+---
+
+As already mentioned earlier, normally I update my freshly installed system immediately after the first boot. Let´s do this now!
+
+<span style="color:#018914">**Ubuntu:**</span>
 
 ```shell
 sudo apt -y update && sudo apt -y upgrade && sudo reboot
+```
+
+<span style="color:#6003B6">**CentOS:**</span>
+
+```shell
+sudo yum update
 ```
 
 **Now** that our system has a current state, we will install the needed packages which are necessary to proceed further.
@@ -243,7 +261,7 @@ sudo /opt/pbis/bin/config LoginShellTemplate /bin/bash
 sudo /opt/pbis/bin/config HomeDirTemplate %H/%U
 ```
 
-Edit the **/etc/pamd.d/common-session** file and **replace** the line **`session optional pam_lsass.so`** with **`session [success=ok default=ignore] pam_lsass.so`**, save and quite (`wq!`) and reboot the system.
+Edit the **/etc/pam.d/common-session** file and **replace** the line **`session optional pam_lsass.so`** with **`session [success=ok default=ignore] pam_lsass.so`**, save and quite (`wq!`) and reboot the system.
 
 **Note:** Updating the Horizon Agent will require that this setting must be performed again.
 
@@ -327,6 +345,8 @@ sudo mv *.desktop backup/
 sudo mv backup/gnome-classic.desktop ./
 ```
 
+**Note:** Updating the Horizon Agent will require that this setting must be performed again.
+
 **Reboot** the system.
 
 ---
@@ -353,9 +373,9 @@ cd VMware-horizonagent-linux-x86_64-7.11.0-15238356/
 
 - *Regarding the used command options and arguments* - https://docs.vmware.com/en/VMware-Horizon-7/7.11/linux-desktops-setup/GUID-09A3F97C-47FE-4ABF-B68C-E42AE26632CC.html#GUID-09A3F97C-47FE-4ABF-B68C-E42AE26632CC
 
-Now set the correct *SSO Desktop Type* for the View Agent (see page 18 and 107). Run `sudo vim /etc/vmware/viewagent-custom.conf` and uncomment the necessary line for your desktop environment.
+Now set the correct *SSO Desktop Type* for the View Agent (see <a href="https://docs.vmware.com/en/VMware-Horizon-7/7.11/linux-desktops-setup.pdf" target="_blank">page 18 and 107</a>). Run `sudo vim /etc/vmware/viewagent-custom.conf` and uncomment the necessary line for your desktop environment.
 
-- <span style="color:#018914">**Ubuntu 18.04**</span> = *SSODesktopType=UseGnomeClassic*
+- <span style="color:#018914">**Ubuntu 18.04**</span> = *SSODesktopType=UseGnomeUbuntu*
 - <span style="color:#6003B6">**CentOS**</span> = *SSODesktopType=UseGnomeClassic*
 
 On the way down through the *viewagent-custom.conf* you came by a point where you can define a subnet for the View-Agent. If you like to install Docker on your desktop, as I would assume, you have to uncomment the example and replace the CIDR with yours.
@@ -410,5 +430,10 @@ You should now be able to connect to your Desktop-Pool via the <a href="https://
 **Continue with Part II:** <a href="https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-ii-applications/"> A Linux Development Desktop with VMware Horizon - Part II: Applications</a>
 
 ---
+
+**Change Log:**
+
+- [2020-03-18]: Added VMware Horizon 7.12 announcement (CentOS 8.1 support)
+- [2020-03-18]: Updated CentOS 8.0 & Horizon Agent 7.11 section; Updated Mindmap
 
 ## <center>**Thanks for reading.**</center>

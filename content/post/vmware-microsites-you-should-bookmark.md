@@ -35,6 +35,7 @@ I will keep this site up-to-date as good as I can.
 
 |   **Site**                        |   **URL**                                   |  **Link**                                                                    |
 |:----------	                    |:-------:   	                                 |-------:                                                                      |
+| VMware Tanzu                      |   `https://tanzu.vmware.com/`                  |   <a href="https://tanzu.vmware.com/" target="_blank">Click</a>              |
 | Product Walkthrough               |   `https://featurewalkthrough.vmware.com/`     |   <a href="https://featurewalkthrough.vmware.com/" target="_blank">Click</a> |
 | vSphere Central                   |   `https://vspherecentral.vmware.com/	   `     |   <a href="https://vspherecentral.vmware.com/" target="_blank">Click</a>     |
 | VMware Configuration Maximums     |   `https://configmax.vmware.com/`              |  <a href="https://configmax.vmware.com/" target="_blank">Click</a>           |
@@ -66,6 +67,7 @@ I will keep this site up-to-date as good as I can.
 
 |   **Name**                        |   **Adress**                                   |  **Link**                                                                    |
 |:----------	                    |:-------:   	                                 |-------:                                                                      |
+|  App Modernization in a Multi-Cloud World     |   `https://www.vmware.com/uk/app-modernization.html`                |   <a href="https://www.vmware.com/uk/app-modernization.html" target="_blank">Click</a>            |
 |  Kubernetes Academy by VMware     |   `https://kubernetes.academy/`                |   <a href="https://kubernetes.academy/" target="_blank">Click</a>            |
 |  VMworld On-Demand Video Library	|   `https://videos.vmworld.com/ 	       `     |   <a href="https://videos.vmworld.com/" target="_blank">Click</a>            |
 | VMware Open Source                |   `https://github.com/vmware`                  |  <a href="https://github.com/vmware" target="_blank">Click</a>               |
@@ -74,3 +76,10 @@ I will keep this site up-to-date as good as I can.
 
 ---
 If you have any other site(s) to add, please DM me on Twitter. Thanks a lot in advance.
+
+---
+
+**Change Log:**
+
+- [2020-03-13]: added *App Modernization in a Multi-Cloud World*
+- [2020-03-13]: added VMware Tanzu site
