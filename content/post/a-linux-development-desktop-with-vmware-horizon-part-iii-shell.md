@@ -125,15 +125,17 @@ Replace the default ZSH_THEME with the new Powerlevel9k theme:
 ZSH_THEME="powerlevel9k/powerlevel9k"
 ```
 
-The Powerlevel9k theme gives you some pretty neat customiztion options which makes your terminal even more powerful.
+The Powerlevel9k theme gives you some pretty neat customization options which makes your terminal even more powerful.
 
-Here´s my setup:
+Here´s my configuration:
 
 ```shell
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_DELIMITER=””
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_SHORTEN_STRATEGY=”truncate_from_right”
+POWERLEVEL9K_TIME_BACKGROUND=blue
+POWERLEVEL9K_DATE_BACKGROUND=cyan
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext time date)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs)
 ```
