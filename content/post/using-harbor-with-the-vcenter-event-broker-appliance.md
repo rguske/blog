@@ -17,9 +17,9 @@ Version 0.3 was recently with big updates announced which can be viewed via the 
 
 Just to name a few updates:
 
-- *"VMware Event Router implementation"*
-- *"AWS EventBridge support"*
-- *"New event playload structure - cloudevents.io"*
+- *VMware Event Router implementation*
+- *AWS EventBridge support*
+- *New event playload structure - cloudevents.io*
 
 ---
 
