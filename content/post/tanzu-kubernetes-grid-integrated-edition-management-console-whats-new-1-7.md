@@ -1,6 +1,6 @@
 ---
 title: "VMware Enterprise PKS got rebranded VMware Tanzu Kubernetes Grid Integrated Edition"
-date: 2020-05-01T15:00:24+02:00
+date: 2020-05-01T14:00:24+02:00
 draft: flase
 image: /img/tkgimc17_cover.jpg
 thumbnail: /img/tkgimc17_thumbnail.jpg
