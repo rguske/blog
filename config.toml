@@ -44,14 +44,14 @@ enableEmoji = true
         url = "/tags/"
         title = ""
         weight = 2
-      [[languages.en.menu.main]]
-        identifier = "categories"
-        pre = ""
-        post = ""
-        name = "Categories"
-        url = "/categories/"
-        title = ""
-        weight = 3
+#      [[languages.en.menu.main]]
+#        identifier = "categories"
+#        pre = ""
+#        post = ""
+#        name = "Categories"
+#        url = "/categories/"
+#        title = ""
+#        weight = 3
       [[languages.en.menu.main]]
         identifier = "VMware Microsites"
         pre = ""
@@ -66,7 +66,7 @@ enableEmoji = true
         post = ""
         name = "About"
         url = "/about/"
-        title = ""
+        title = "The Author"
         weight = 5
       [[languages.en.menu.main]]
         identifier = "Disclaimer"
@@ -107,7 +107,7 @@ enableEmoji = true
       [languages.en.params.search]
         enable = true
         # type of search engine ("lunr", "algolia")
-        type = "algolia"
+        type = "lunr"
         # max index length of the chunked content
         contentLength = 4000
         # placeholder of the search bar
@@ -134,7 +134,7 @@ enableEmoji = true
           # Gravatar Email for preferred avatar in home page
           gravatarEmail = ""
           # URL of avatar shown in home page
-          avatarURL = "/img/avatar.png"
+          avatarURL = ""
           # title shown in home page
           title = 'Sometimes you gotta run before you can walk!'
           # subtitle shown in home page
@@ -176,7 +176,7 @@ enableEmoji = true
         # Odnoklassniki = ""
         # VK = ""
         # Flickr = ""
-        # Xing = ""
+        Xing = "https://www.xing.com/profile/Robert_Guske/"
         # Snapchat = ""
         # Soundcloud = ""
         # Spotify = ""
@@ -240,7 +240,7 @@ enableEmoji = true
     # Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = ""
+      logo = "/img/avatar.png"
       # title name
       name = "Robert Guske"
       # you can add extra information before the name (HTML format is supported), such as icons
@@ -258,7 +258,6 @@ enableEmoji = true
     # whether to show Hugo and theme info
     hugo = false
     # whether to show copyright info
-    # 是否显示版权信息
     copyright = true
     # whether to show the author
     author = true
@@ -384,16 +383,16 @@ enableEmoji = true
       enable = true
       # Disqus comment config (https://disqus.com/)
       [params.page.comment.disqus]
-        enable = true
+        enable = false
         # Disqus shortname to use Disqus in posts
-        shortname = ""
+        shortname = "Robert Guske"
       # Gitalk comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
         enable = false
-        owner = ""
+        owner = "Robert Guske"
         repo = ""
-        clientId = ""
-        clientSecret = ""
+        clientId = "43a5ae4c0831dac4ddfb"
+        clientSecret = "778a5bb21f5db5fff71d98913905d9214014dbe6"
       # Valine comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
@@ -596,7 +595,7 @@ enableEmoji = true
 # Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
 [Permalinks]
   # posts = ":year/:month/:filename"
-  posts = ":filename"
+  posts = "/post/:filename"
 
 # Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]
