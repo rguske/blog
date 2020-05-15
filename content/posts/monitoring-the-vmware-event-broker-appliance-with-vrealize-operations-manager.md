@@ -15,23 +15,23 @@ tags:
 ---
 Since the [VMware Event Broker Appliance (VEBA)](https://vmweventbroker.io) is reaching more and more folks out there and the interest is growing steadily, it is important to validate the integration with other solutions (preferably VMware). At least that's what I thought :wink:.
 
-Monitoring in terms of utilization and performance captured my interest. So, how can I monitor not only the appliance (virtual machine) but also the Kubernetes components like the Control Plane (Master), the Node(s) as well as the Pods? Furthermore! Not only the workload is of interest, but also the dependencies of the individual components to each other are interesting. Beyond that and because I'm just getting started, I would also like to have the ability to generate alarms if a desired state is no longer fulfilled.
+Monitoring in terms of utilization and performance captured my interest. So, how can I monitor not only the appliance (virtual machine) but also the Kubernetes components like the Control Plane (Master), the Node(s) as well as the Pods? Furthermore, not only the workload is of interest but also the dependencies of the individual components to each other are interesting. Beyond that and because I'm just getting started, I would also like to have the ability to generate alarms if a desired state is no longer fulfilled.
 
-[VMware's vRealize Operations Manager (vROps)](https://www.vmware.com/products/vrealize-operations.html) and it's Management Pack for Container Monitoring helped me quickly with my needs. Let me demonstrate to you how we can prepare VEBA to send the desired data (metrics) to vROPs and how we import a custom dashboard that provides you with plenty of interesting and useful information.
+[VMware's vRealize Operations Manager (vROps)](https://www.vmware.com/products/vrealize-operations.html) and it's Management Pack for Container Monitoring helped me quickly with my needs. Let me demonstrate you how we can prepare VEBA to send the desired data (metrics) to vROPs and how we import a custom dashboard that provides you with plenty of interesting and useful information.
 
 ## Leveraging Google cAdvisor
 
 <i class='fab fa-github fa-fw'></i> Repository: https://github.com/google/cadvisor
 
-cAdvisor (Container Advisor) will be the component which we will make use of to get resource usage and performance data provided for vROps. It is super easy to deploy and you will see first results quickly. Let me demonstrate you what I mean.
+cAdvisor (Container Advisor) will be the component which we will make use of to get resource usage and performance data provided for vROps. It is super easy to deploy and you will see first results quickly. Let me show you how.
 
-I'm going to start a [nginx](https://hub.docker.com/r/vmwarecna/nginx/) container from which we will grap the data from after deploying cAdvisor.
+I'm going to start an [nginx](https://hub.docker.com/r/vmwarecna/nginx/) container from which we will grab the data from after deploying cAdvisor.
 
 ```shell
 docker run --name vmware-nginx -p 8181:80 vmwarecna/nginx
 ```
 
-The nginx webserver container is running and listining on port 8181 for HTTP requests. Now let's deploy cAdvisor in it's [latest version](https://github.com/google/cadvisor/releases) also as a docker container (for now).
+The nginx webserver container is running and listening on port 8181 for HTTP requests. Now let's deploy cAdvisor in it's [latest version](https://github.com/google/cadvisor/releases) also as a docker container (for now).
 
 Export the desired version as an environment variable. We will use this variable (`$VERSION`) for the container deployment.
 
@@ -39,7 +39,7 @@ Export the desired version as an environment variable. We will use this variable
 VERSION=v0.35.0
 ```
 
-The following shows how the container deployment looks like and important for this demonstration is the usage of the `docker` option `--publish=8080:8080` which will expose the port were we can reach the cAdvisor page.
+The following shows how the container deployment looks like and important for this example is the usage of the `docker` option `--publish=8080:8080` which will expose the port through which we can reach the cAdvisor website.
 
 ```shell
 sudo docker run \
@@ -54,7 +54,7 @@ sudo docker run \
   gcr.io/google-containers/cadvisor:$VERSION
 ```
 
-`docker ps` will tell us if both containers are up and running as well as if they are listening on the specified ports:
+`docker ps` will show us if both containers are up and running as well as if they are listening on the specified ports:
 
 ```shell
 CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS                      PORTS                           NAMES
@@ -68,17 +68,17 @@ Both are up and we will reach the cAdvisor page via `localhost:8080`. Navigate t
 
 This is the kind of data that vROps can put into a good looking shape. Now let's move on to deploy cAdvisor on VEBA.
 
-### Enabling SSH on VEBA
+### Start the `sshd` daemon on VEBA
 
-`SSH` is disabled by deafult on VEBA. To enable `ssh`, open a virtual machine console session (Web or VMware Remote Console) through the vSphere Client and login with your configured root credentials. Start the `sshd` daemon by executing `systemctl start sshd` and validate if it's running properly with `systemctl status sshd`.
+To deploy cAdvisor on VEBA, we have to establish a `ssh` connection to it because we will run the deployment steps directly from within the appliance. The `sshd` daemon is stopped by default. To start it, open a virtual machine console session (Web or VMware Remote Console) through the vSphere Client and login with your configured root credentials. Start the `sshd` daemon by executing `systemctl start sshd` and validate if it's running properly with `systemctl status sshd`.
 
 {{< image src="/img/posts/202005_vropsveba/CapturFiles-20200511_114121.jpg" caption="Figure II: PhotonOS - start sshd daemon" src-s="/img/posts/202005_vropsveba/CapturFiles-20200511_114121.jpg" class="center" width="700" >}}
 
-### Deploy the cAdvisor as a Kubernetes DeamonSet
+### Deploy the cAdvisor as a Kubernetes DaemonSet
 
 #### Environment with internet access
 
-Now it's on the time to deploy the cAdvisor as a Kubernetes `DaemonSet` onto VEBA. I've used the yaml specifications from the cAdvisor <i class='fab fa-github fa-fw'></i> repository which are located in `/deploy/kubernetes/base` and modified them a bit for my needs. We will have three files at the end, because we are using [kustomize](https://github.com/kubernetes-sigs/kustomize) in order to create and deploy the namespace and the daemonset for cAdvisor.
+Now it's time to deploy the cAdvisor as a Kubernetes `DaemonSet` onto VEBA. I've used the yaml specifications from the cAdvisor <i class='fab fa-github fa-fw'></i> repository which are located in `/deploy/kubernetes/base` and modified them a bit for my needs. We will have three files at the end, because we are using [kustomize](https://github.com/kubernetes-sigs/kustomize) in order to create and deploy the namespace and the daemonset for cAdvisor.
 
 Establish a `ssh` connection to your VEBA appliance and change into the `/tmp` directory. I have set up a repository on Github where I've stored the necessary files for the deployment. From here (`/tmp`) we will clone the repository and deploy the daemonset to the Kubernetes Master subsequently. Run `git clone https://github.com/rguske/monitoring-veba.git && kubectl apply -k monitoring-veba/`.
 
@@ -205,7 +205,7 @@ cadvisor-ccgcx   1/1     Running   0          4m
 
 ## A Dashboard to monitor the VMware Event Broker Appliance
 
-Before we continue with the configuration steps in vRealize Operations Manager, I wanted to give you a little sneak peak what you can expect by the end.
+Before we continue with the configuration steps in vRealize Operations Manager, I wanted to give you a little sneak peek what you can expect by the end.
 
 {{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" caption="Figure III: vROps Dashboard to monitor VEBA" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" class="center" >}}
 
@@ -214,14 +214,19 @@ Before we continue with the configuration steps in vRealize Operations Manager, 
 To enable the capability to monitor Kubernetes Clusters in vRealize Operations Manager, it's necessary to import a Management Pack for it, which is available for free at the [VMware Marketplace](https://marketplace.vmware.com).
 
 1. Download the [Mangement Pack for Container Monitoring](https://marketplace.vmware.com/vsx/solutions/vrealize-operations-management-pack-for-container-monitoring)
+
+{{< admonition note "Note:" true >}}
+vRealize Operations Management Pack for Container Monitoring 1.4.2 and above will only be interoperable with vRealize Operations Enterprise edition. The older versions of Management Pack continue to work with vRealize Operations Advanced and Enterprise editions.
+{{< /admonition >}}
+
 2. Import the Management Pack in vROps as follows:
 - Go to `Administration` -> `Repository` and select `ADD/UPGRADE`
 - Browse to the folder which contains the `vmware-MPforContainerMonitoring-1.4.3-15987816.pak` file for the Management Pack and upload it up to vROps
   - It will appear after the installation
 - Configure the Kubernetes Adapter to establish a connection to your VEBA node(s)
 
-{{< admonition note "Note" true >}}
-If you are running more then one VEBA node, than you have to repeat the next steps for each instance separately.
+{{< admonition info "Info:" true >}}
+If you are running more than one VEBA appliance, then you have to repeat the next steps for each instance separately.
 {{< /admonition >}}
 
 - Go to `Other Accounts` and select the `Kubernetes Adapter`
@@ -250,16 +255,17 @@ The last configuration at this point is to provide the FQDN of your vCenter Serv
 
 {{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_081807.jpg" caption="Figure VI: Account Information for VEBA" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_081807.jpg" class="center" >}}
 
-{{< admonition warning "Attention" true >}}
-**Please do not** forget to disable `ssh` again after finishing the above steps.
+{{< admonition warning "Attention:" true >}}
+**Please do not** forget to stop `ssh` again after finishing the above steps. `systemctl stop sshd`
 {{< /admonition >}}
 
 ### Step 2. Preparations for the dashboard
 
-#### VEBA Node Utilization Metric Configuration
-Before we can import the dashboard and the corresponding views to see some results finally, we need to configure two easy steps first.
+Before we can import the dashboard and the corresponding views, we need to configure two simple steps first. The creation of a `Custom Metric Configuration` and a `Dynamic Custom Group`.
 
-Go to `Administration` -> `Configuration` -> `Metric Configurations` -> `ReskndMetric` and select `ADD`. Forgive the name `veba_node_utilization` and paste the following content into the right opened field:
+#### VEBA Node Utilization Metric Configuration
+
+Go to `Administration` -> `Configuration` -> `Metric Configurations` -> `ReskndMetric` and select `ADD`. Enter the name `veba_node_utilization` and paste the following configuration into the right opened field:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -277,14 +283,14 @@ Go to `Administration` -> `Configuration` -> `Metric Configurations` -> `ReskndM
 
 #### VEBA openfaas-fn namespace Custom Group
 
-The dashboard includes a widget which will display all deployed functions and it's utilization in terms of CPU and MEM.
+The dashboard includes a widget which will display all deployed functions and it's utilization in terms of CPU and Memory (limit, current, average and maximum).
 
 {{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_105442.jpg" caption="Figure VII: vROps Widget to show function utilization" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_105442.jpg" class="center" >}}
 
 
 I configured a `Dynamic Custom Group` in vROps to realize this. Like the above step for the `VEBA Node Utilization Metric Configuration`, this Dynamic Custom Group has to be configured before we import the dashboard. Otherwise, the widget(s) will be empty.
 
-Navigate to `Administration` -> `Configuration` -> and create a new `Group Type` called VEBA. The `Custom Group` can be configured under `Environment` -> `Groups and Applications` -> `Custom Group`. Select the before created Group Type VEBA and click `ADD`. Configure the Custom Group as shown in *Figure VIII*:
+Navigate to `Administration` -> `Configuration` -> and create a new `Group Type` called `VEBA`. The `Custom Group` can be configured under `Environment` -> `Groups and Applications` -> `Custom Group`. Select the before created Group Type VEBA and click `ADD`. Configure the Custom Group as shown in *Figure VIII*:
 
 {{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_091451.jpg" caption="Figure VIII: Dynamic Custom Group for ƒ(x) in namespace openfaas-fn" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_091451.jpg" class="center" >}}
 
@@ -292,13 +298,13 @@ Navigate to `Administration` -> `Configuration` -> and create a new `Group Type`
 
 #### The Dashboard is available for download on [VMware {code}](https://code.vmware.com/samples?id=7241)
 
-Unpack the content and import the views first. `Dashboards` -> select any of the views, click on `ACTIONS` and select `Manage Views`. The `Import` button will appear after selecting the three points next to the `ADD` button. Go to the folder where you've unpacked the `dashboard.zip` and select the `views.zip`. This will import the Views.
+Unpack the zip file and import the views first. `Dashboards` -> select any of the views, click on `ACTIONS` and select `Manage Views`. The `Import` button will appear after clicking on the three points next to the `ADD` button. Go to the folder where you've unpacked the `dashboard.zip` and select the `views.zip`. This will import the Views.
 
 Similar procedure applies for the dashboard itself. `Dashboards` -> `ACTIONS` -> `Manage Dashboards` -> three points -> `Import` and this time, select the `dashboard.zip`.
 
 Here we go!
 
-{{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" caption="Figure IX: vROps Dashboard (again) to monitor VEBA" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" class="center" >}}
+{{< image src="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" caption="Figure IX: vROps Dashboard to monitor VEBA" src-s="/img/posts/202005_vropsveba/CapturFiles-20200512_041624.jpg" class="center" >}}
 
 ---
 
