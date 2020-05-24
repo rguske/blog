@@ -6,6 +6,7 @@ title: "Youtube Hugo-Shortcode workaround - when {{< youtube >}} won´t work"
 date: 2018-12-09T17:23:27+01:00
 draft: false
 featuredImage: /img/youtubefix_cover.jpg
+categories: ["Other"]
 tags:
 - December2018
 - Hugo

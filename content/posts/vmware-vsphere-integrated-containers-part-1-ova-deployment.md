@@ -6,6 +6,7 @@ title: "vSphere Integrated Containers Part I: OVA Deployment"
 date: 2018-07-13T13:10:38+02:00
 draft: false
 featuredImage: /img/vic_part_1_cover.jpg
+categories: ["vSphere", "Docker"]
 tags:
 - July2018
 - VIC

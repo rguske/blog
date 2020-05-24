@@ -6,6 +6,7 @@ title: "VMware Enterprise PKS Management Console (EPMC) - Day 2"
 date: 2019-11-27T14:40:23+01:00
 draft: false
 featuredImage: /img/epmc_day2_cover.jpg
+categories: ["Tanzu", "Kubernetes"]
 tags:
 - November2019
 - Kubernetes

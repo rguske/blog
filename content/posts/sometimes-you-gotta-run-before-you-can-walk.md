@@ -6,6 +6,7 @@ title: "Sometimes you gotta run before you can walk"
 date: 2018-07-09T09:39:49+02:00
 draft: false
 featuredImage: /img/blog_intro_cover.jpg
+categories: ["Other"]
 tags:
 - July2018
 ---

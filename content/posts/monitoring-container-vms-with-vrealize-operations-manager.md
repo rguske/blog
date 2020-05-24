@@ -6,6 +6,7 @@ title: "Monitoring Container VMs with vRealize Operations Manager"
 date: 2019-01-21T23:00:09+01:00
 draft: false
 featuredImage: /img/vic_monitoring_cover.jpg
+categories: ["vRealize Operations Manager", "vSphere", "Docker"]
 tags:
 - January2019
 - VIC

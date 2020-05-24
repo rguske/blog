@@ -6,6 +6,7 @@ title: "Event-driven interactions with vSphere using Functions as a Service"
 date: 2019-02-14T17:40:38+01:00
 draft: false
 featuredImage: /img/vspheretagfn_cover.jpg
+categories: ["FaaS", "Kubernetes"]
 tags:
 - February2019
 - vSphere

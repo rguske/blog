@@ -6,6 +6,7 @@ title: "vSphere Integrated Containers Part IV: docker run a Container-VM"
 date: 2018-07-13T13:31:42+02:00
 draft: false
 featuredImage: /img/vic_part_4_cover.jpg
+categories: ["vSphere", "Docker"]
 tags:
 - July2018
 - VIC

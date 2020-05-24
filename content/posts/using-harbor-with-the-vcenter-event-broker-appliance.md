@@ -6,6 +6,7 @@ title: "Using Harbor with the vCenter Event Broker Appliance"
 date: 2020-03-23T22:00:36+01:00
 draft: false
 featuredImage: /img/veba_harbor_cover.jpg
+categories: ["VEBA", "FaaS", "Cloud Native Registry"]
 tags:
 - March2020
 - VEBA

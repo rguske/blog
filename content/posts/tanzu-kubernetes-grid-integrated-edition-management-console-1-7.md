@@ -6,7 +6,7 @@ title: "VMware Enterprise PKS got rebranded VMware Tanzu Kubernetes Grid Integra
 date: 2020-05-01T14:00:24+02:00
 draft: false
 featuredImage: /img/tkgimc17_cover.jpg
-categories:
+categories: ["Tanzu", "Kubernetes"]
 tags:
 - April2020
 - Kubernetes

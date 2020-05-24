@@ -1,8 +1,12 @@
 ---
+author: "Robert Guske"
+authorLink: "/about/"
+lightgallery: true
 title: "VMware Enterprise PKS Management Console (EPMC) - Day 1"
 date: 2019-11-27T14:53:23+01:00
 draft: false
 featuredImage: /img/epmc_day1_cover.jpg
+categories: ["Tanzu", "Kubernetes"]
 tags:
 - November2019
 - Kubernetes

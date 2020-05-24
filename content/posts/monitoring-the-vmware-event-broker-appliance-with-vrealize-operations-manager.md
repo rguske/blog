@@ -6,6 +6,7 @@ title: "Monitoring the VMware Event Broker Appliance with vRealize Operations Ma
 date: 2020-05-12T23:59:50+02:00
 draft: false
 featuredImage: /img/vrops_veba_cover.jpg
+categories: ["vRealize Operations Manager", "VEBA", "FaaS"]
 tags:
 - May2020
 - VEBA

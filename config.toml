@@ -34,7 +34,7 @@ enableEmoji = true
         name = "Posts"
         url = "/posts/"
         # title will be shown when you hover on this menu link.
-        title = "Read me"
+        title = "Take either the red pill or the blue pill"
         weight = 1
       [[languages.en.menu.main]]
         identifier = "tags"
@@ -44,14 +44,14 @@ enableEmoji = true
         url = "/tags/"
         title = ""
         weight = 2
-#      [[languages.en.menu.main]]
-#        identifier = "categories"
-#        pre = ""
-#        post = ""
-#        name = "Categories"
-#        url = "/categories/"
-#        title = ""
-#        weight = 3
+      [[languages.en.menu.main]]
+        identifier = "categories"
+        pre = ""
+        post = ""
+        name = "Categories"
+        url = "/categories/"
+        title = ""
+        weight = 3
       [[languages.en.menu.main]]
         identifier = "VMware Microsites"
         pre = ""
@@ -242,13 +242,13 @@ enableEmoji = true
       # URL of the LOGO
       logo = "/img/avatar.png"
       # title name
-      name = "Robert Guske"
+      name = "   rguske.github.io"
       # you can add extra information before the name (HTML format is supported), such as icons
 #      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
       # whether to use typeit animation for title name
-      typeit = false
+      typeit = true
 
   # Footer config
   [params.footer]

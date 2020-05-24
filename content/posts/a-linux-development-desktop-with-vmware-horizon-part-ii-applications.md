@@ -6,6 +6,7 @@ title: "A Linux Development Desktop with VMware Horizon - Part II: Applications 
 date: 2020-02-27T16:33:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_ii_cover.jpg
+categories: ["Linux", "Horizon"]
 tags:
 - February2020
 - Linux
