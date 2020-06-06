@@ -223,7 +223,7 @@ enableEmoji = true
   # LoveIt theme version
   version = "0.2.X"
   # site default theme ("light", "dark", "auto")
-  defaultTheme = "auto"
+  defaultTheme = "light"
   # public git repo url only then enableGitInfo is true
   gitRepo = "https://github.com/rguske"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
@@ -388,11 +388,11 @@ enableEmoji = true
         shortname = "Robert Guske"
       # Gitalk comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        enable = false
-        owner = "Robert Guske"
-        repo = ""
-        clientId = "43a5ae4c0831dac4ddfb"
-        clientSecret = "778a5bb21f5db5fff71d98913905d9214014dbe6"
+        enable = true
+        owner = "rguske"
+        repo = "https://github.com/rguske/my-gitalk"
+        clientId = "dac5316ea2f4d94cc34a"
+        clientSecret = "295c1cbf7f708263cbe7e63de8856790bc549f37"
       # Valine comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
@@ -459,7 +459,7 @@ enableEmoji = true
     # character used for the cursor (HTML format is supported)
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
-    duration = -1
+    duration = 0
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -481,70 +481,29 @@ enableEmoji = true
       cookie = false
     # Fathom Analytics
 
+  # Cookie consent config
+  [params.cookieconsent]
+    enable = true
+    # text strings used for Cookie consent banner
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
   # CSS and JS Files CDN
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
-    # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-    normalizeCSS = ""
-    # fontawesome-free@5.13.0 https://fontawesome.com/
-    fontawesomeFreeCSS = ""
-    # simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
-    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
-    simpleIconsPrefix = ""
-    # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ""
-    # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
-    smoothScrollJS = ""
-    # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
-    autocompleteJS = ""
-    # lunr.js@2.3.8 https://lunrjs.com/
-    lunrJS = ""
-    # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-    algoliasearchJS = ""
-    # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
-    lazysizesJS = ""
-    # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
-    objectFitImagesJS = ""
-    # twemoji@12.1.5 https://github.com/twitter/twemoji
-    twemojiJS = ""
-    # lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
-    # lg-thumbnail.js@1.1.0 https://github.com/sachinchoolur/lg-thumbnail.js
-    # lg-zoom.js@1.0.1 https://github.com/sachinchoolur/lg-zoom.js
-    lightgalleryCSS = ""
-    lightgalleryJS = ""
-    lightgalleryThumbnailJS = ""
-    lightgalleryZoomJS = ""
-    # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
-    clipboardJS = ""
-    # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ""
-    # typeit@7.0.4 https://github.com/alexmacarthur/typeit
-    typeitJS = ""
-    # katex@0.11.1 https://katex.org/
-    katexCSS = ""
-    katexJS = ""
-    katexAutoRenderJS = ""
-    katexCopyTexCSS = ""
-    katexCopyTexJS = ""
-    katexMhchemJS = ""
-    # mermaid@8.5.0 https://github.com/knsv/mermaid
-    mermaidJS = ""
-    # echarts@4.7.0 https://echarts.apache.org/
-    echartsJS = ""
-    echartsMacaronsJS = ""
-    # mapbox-gl@1.10.0 https://docs.mapbox.com/mapbox-gl-js
-    mapboxGLCSS = ""
-    mapboxGLJS = ""
-    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ""
-    aplayerJS = ""
-    # meting@2.0.1 https://github.com/metowolf/MetingJS
-    metingJS = ""
-    # gitalk@1.6.2 https://github.com/gitalk/gitalk
-    gitalkCSS = ""
-    gitalkJS = ""
-    # valine@1.4.14 https://valine.js.org/
-    valineJS = ""
+    # CDN data file name, disabled by default
+    # ("jsdelivr.yml")
+    # located in "themes/LoveIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project:
+    # "assets/data/cdn/"
+    # CDN 数据文件名称, 默认不启用
+    # ("jsdelivr.yml")
+    # 位于 "themes/LoveIt/assets/data/cdn/" 目录
+    # 可以在你的项目下相同路径存放你自己的数据文件:
+    # "assets/data/cdn/"
+    data = "jsdelivr.yml"
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
