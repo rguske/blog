@@ -390,6 +390,7 @@ enableEmoji = true
       [params.page.comment.gitalk]
         enable = true
         owner = "rguske"
+        admin = ['rguske']
         repo = "https://github.com/rguske/my-gitalk"
         clientId = "dac5316ea2f4d94cc34a"
         clientSecret = "295c1cbf7f708263cbe7e63de8856790bc549f37"
@@ -400,7 +401,7 @@ enableEmoji = true
         appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
         placeholder = ""
         avatar = "mp"
-        meta= ""
+        meta = ""
         pageSize = 10
         lang = ""
         visitor = true
