@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Using Harbor with the vCenter Event Broker Appliance"
+title: "Using Harbor with the VMware Event Broker Appliance"
 date: 2020-03-23T22:00:36+01:00
 draft: false
 featuredImage: /img/veba_harbor_cover.jpg
@@ -151,7 +151,7 @@ Following the official Docker documentation, this behavior is expected: <a href=
 
 To solve this issue, I´ve created a little script which downloads the root certificate from Harbor, creates the relevant directories, puts the certificate into them and restarts the docker service.
 
-You can download the script <a href="https://github.com/rguske/using_harbor_with_veba" target="_blank">HERE</a> and copy it via `scp` into your VEBA appliance.
+You can download the script [HERE](https://github.com/rguske/download-harbor-cert-script) and copy it via `scp` into your VEBA appliance.
 
 ```shell
 $ scp ~/Downloads/docker_harbor_cert.sh root@veba030:/
@@ -167,7 +167,7 @@ Make it executable with `chmod +x docker_harbor_cert.sh` and run it. The other o
 set -euo pipefail
 
 # Ask for the Harbor FQDN
-echo "Enter the FQDN (harbor.domain.com) of your Harbor registry:"
+echo "Enter the FQDN (e.g. harbor.domain.com) of your Harbor registry:"
 
 read REGISTRY
 
@@ -175,7 +175,7 @@ read REGISTRY
 mkdir -p /etc/docker/certs.d/$REGISTRY
 
 # Download Registry Root Certificate
-wget -O /etc/docker/certs.d/$REGISTRY/ca.crt https://$REGISTRY/api/systeminfo/getcert --no-check-certificate
+wget -O /etc/docker/certs.d/$REGISTRY/ca.crt https://$REGISTRY/api/v2.0/systeminfo/getcert --no-check-certificate
 
 # Restart Docker service
 systemctl restart docker
