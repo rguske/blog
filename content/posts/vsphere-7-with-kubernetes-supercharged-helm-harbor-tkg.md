@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Deploying Harbor on a VMware Tanzu Kubernetes Grid Cluster "
+title: "vSphere 7 with Kubernetes supercharged - Helm, Harbor and Tanzu Kubernetes Grid"
 date: 2020-07-21T15:30:38+02:00
 draft: false
 featuredImage: /img/harborontkg_cover.jpg
@@ -17,22 +17,22 @@ tags:
 - vSphere
 ---
 
-I recently had to prepare my homelab for a customer workshop to demo our new Tanzu Runtime & Hybrid Infrastructure Services as shown in *Figure I*.
+I recently had to prepare my homelab for a customer workshop to demo our new Tanzu Runtime & Hybrid Infrastructure Services. This includes e.g. the deployment of a Tanzu Kubernetes Grid Cluster on vSphere (TKG Service), the enterprise cloud native registry Harbor as well as the instantiation of a native Pod on vSphere (vSphere Pod Service).
 
 {{< image src="/img/posts/202007_harborontkg/CapturFiles-20200715_083742.jpg" caption="Figure I: Tanzu Runtime & Hybrid Infrastructure Services" src-s="/img/posts/202007_harborontkg/CapturFiles-20200715_083742.jpg" class="center" >}}
 
-My demo was all about the deployment of an application running natively ([Native Pod](https://blogs.vmware.com/vsphere/2020/05/vsphere-7-vsphere-pods-explained.html)) on vSphere, whose container image I pushed beforehand into my [Harbor](https://goharbor.io) registry and which in turn was then obtained from there during the application deployment. It also covered the deep integration into vSAN and NSX by providing Persistent Volume Claims ([Storage Service](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-kubernetes/GUID-1B136277-E46C-41FC-9C8C-3E78E9B97F5C.html)) as well as LoadBalancing services ([Network Service](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-kubernetes/GUID-B156CDA6-B056-4D1C-BBC5-07D1A701E402.html)) for my application.
+My demo was basically all about the deployment of an application running natively ([Native Pod](https://blogs.vmware.com/vsphere/2020/05/vsphere-7-vsphere-pods-explained.html)) on vSphere, whose container image I pushed beforehand into my [Harbor](https://goharbor.io) registry and which in turn was then obtained from there during the application deployment. It also covered the deep integration into vSAN and NSX by providing Persistent Volume Claims ([Storage Service](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-kubernetes/GUID-1B136277-E46C-41FC-9C8C-3E78E9B97F5C.html)) as well as LoadBalancing services ([Network Service](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-kubernetes/GUID-B156CDA6-B056-4D1C-BBC5-07D1A701E402.html)) for my application.
 
 {{< mermaid >}}
 graph LR;
-    A( User ) -->| kubectl apply -f app.yml | B(Supervisor Cluster)
-    B -->| pull image | C(Harbor)
+    A( User ) -->| 1. kubectl apply -f app.yml | B(Supervisor Cluster)
+    B -->| 2. pull image | C(Harbor)
     C --> B
-    B -->| App Deployment| D(Native Pod)
-    B ---| Persistent Volume Claim| E(vSAN)
+    B -->| 3. App Deployment| D(Native Pod)
+    B ---| 3a. Persistent Volume Claim| E(vSAN)
     E --> D
     F --> D
-    B ---| Create LoadBalancer| F(NSX)
+    B ---| 3b. Create LoadBalancer| F(NSX)
 {{< /mermaid >}}
 
 *<center>Figure II: Application Deployment Flowchart</center>*
@@ -163,7 +163,7 @@ Resource Quotas
 No resource limits.
 ```
 
-### Deploying a Tanzu Kubernetes Grid Cluster
+---
 
 Enough summarized :wink: ! `kubectl apply -f tkg-cluster.yml` and let vSphere do it's magic. An increased count of **1** will show up on the Tanzu Kubernetes tile at the vSphere Namespace page (*Figure IV*).
 
@@ -450,7 +450,7 @@ NAME                   READY   STATUS    RESTARTS   AGE
 blog-b68cddc4c-tckvp   1/1     Running   0          3h26m
 ```
 
-Our demo application Ghost should now be reachable via it's external IP address which was automatically assigned by NSX (*Figure VIII*)...
+Our demo application Ghost will be reachable via it’s external IP address which is automatically provided by the NSX Load Balancer Virtual Server (*Figure VIII*).
 
 {{< admonition quote "Quote" true >}}
 The creation of a Load Balancer type service causes NCP to orchestrate the creation of NSX Virtual Servers associated with the Load Balancer created in the initial Supervisor Cluster deployment. The virtual server is assigned an IP and port that is used to access the service.
@@ -460,7 +460,7 @@ Source: [vSphere 7 with Kubernetes Network Service Part 1: The Supervisor Cluste
 
 {{< image src="/img/posts/202007_harborontkg/CapturFiles-20200721_025454.jpg" caption="Figure VIII: Automatically created NSX Virtual Server" src-s="/img/posts/202007_harborontkg/CapturFiles-20200721_025454.jpg" class="center" >}}
 
-...and the data will be written to it's Persistent Volume on vSAN (*Figure IX*)
+The data will be written to it's Persistent Volume on vSAN (*Figure IX*)
 
 {{< image src="/img/posts/202007_harborontkg/CapturFiles-20200721_025614.jpg" caption="Figure IX: vSAN Persistent Volume" src-s="/img/posts/202007_harborontkg/CapturFiles-20200721_025614.jpg" class="center" >}}
 
