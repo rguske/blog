@@ -391,7 +391,7 @@ enableEmoji = true
         enable = true
         owner = "rguske"
         admin = ['rguske']
-        repo = "https://github.com/rguske/my-gitalk"
+        repo = "my-gitalk"
         clientId = "dac5316ea2f4d94cc34a"
         clientSecret = "295c1cbf7f708263cbe7e63de8856790bc549f37"
       # Valine comment config (https://github.com/xCss/Valine)
