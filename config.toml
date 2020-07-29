@@ -475,7 +475,11 @@ enableEmoji = true
     enable = false
     # Google Analytics
     [params.analytics.google]
+<<<<<<< HEAD
       id = ""
+=======
+      id = "[UA-122353302-1]"
+>>>>>>> 289ffb9b07e228928cb451b2be1187432115ecf5
       # whether to anonymize IP
       anonymizeIP = true
       # whether to use cookie
