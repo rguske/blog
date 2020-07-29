@@ -492,7 +492,6 @@ enableEmoji = true
       link = ""
 
   # CSS and JS Files CDN
-  # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # CDN data file name, disabled by default
     # ("jsdelivr.yml")
