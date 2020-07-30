@@ -464,7 +464,7 @@ enableEmoji = true
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
-    google = ""
+    google = "WA7hqFngJR6BpdME_dqsDyCzWf8YVaWVM6FUUyycIoI"
     bing = ""
     yandex = ""
     pinterest = ""
@@ -475,11 +475,7 @@ enableEmoji = true
     enable = false
     # Google Analytics
     [params.analytics.google]
-<<<<<<< HEAD
       id = ""
-=======
-      id = "[UA-122353302-1]"
->>>>>>> 289ffb9b07e228928cb451b2be1187432115ecf5
       # whether to anonymize IP
       anonymizeIP = true
       # whether to use cookie
