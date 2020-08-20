@@ -42,7 +42,7 @@ I will keep this site up-to-date as good as I can.
 ## List of Microsites [<span style="color:#0037ff">Update: March 2020</span>]
 
 |   **Site**                        |   **URL**                                      |  **Link**                                                                    |
-|:----------	                    |:-------:   	                                 |-------:                                                                      |
+|:----------                     |:-------:                                     |-------:                                                                      |
 | VMware Tanzu                      |   `https://tanzu.vmware.com/`                  |   <a href="https://tanzu.vmware.com/" target="_blank">Click</a>              |
 | VMware Tanzu Mission Control      |   `https://k8s.vmware.com/tanzu-mission-control/`|   <a href="https://k8s.vmware.com/tanzu-mission-control/" target="_blank">Click</a>     |
 | Product Walkthrough               |   `https://featurewalkthrough.vmware.com/`     |   <a href="https://featurewalkthrough.vmware.com/" target="_blank">Click</a> |
