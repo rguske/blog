@@ -9,7 +9,7 @@ draft: false
 
 ## Contact
 
-- <a href="mailto:robert.guske@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a> Mail
+- <i class="far fa-envelope fa-fw"></i> [Mail](mailto:robert.guske@gmail.com)
 - <i class="fab fa-linkedin fa-fw"></i><a href="https://www.linkedin.com/in/robert-guske-830853111/" target="_blank"> Robert Guske</a>
 - <i class="fab fa-twitter fa-fw"></i><a href="https://twitter.com/vmw_rguske" target="_blank"> @vmw_rguske</a>
 - <i class='fab fa-github fa-fw'></i><a href="https://github.com/rguske" target="_blank"> rguske</a>
@@ -83,7 +83,7 @@ I am very delighted that I've already been elected into the program several time
 
 | **Event** | **My Part** | **Homepage** |
 |:---: | :---: | :---:|
-| **VMware TAM Customer Roundtable 2018, Hamburg** | **HOST & SPEAKER** - An "exclusive" initiative for VMware TAM customers I've organized. I hosted the event as well as have presented on it. | https://www.vmware.com/professional-services/optimization-advocacy.html |
+| **VMware TAM Customer Roundtable 2018, Hamburg** | **HOST & SPEAKER** - An exclusive event for VMware TAM customers. I organized and hosted the event as well as presented on it. | https://www.vmware.com/professional-services/optimization-advocacy.html |
 
 <center> {{< tweet 1004045827025883146 >}} </center>
 
