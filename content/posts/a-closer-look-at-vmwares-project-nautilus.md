@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "A closer look at Project Nautilus"
+title: "A closer look at VMware's Project Nautilus"
 date: 2020-08-20T11:45:57+02:00
 draft: true
 featuredImage: /img/projectnautilus_cover.jpg
@@ -14,23 +14,12 @@ tags:
 - Kubernetes
 ---
 ## General Availability Fusion 12 & Workstation 16
-VMware's Desktop Hypervisor solutions [Fusion](https://www.vmware.com/products/fusion/faq.html) for Mac users and [Workstation](https://www.vmware.com/products/workstation-pro/faq.html) for the Windows and Linux userbase were launched on September the 15th, and were shipped with a lot of new features and enhancements around Kubernetes, Operating Systems, GPU support and many more. The made enhancements will enrich Developers tool kit as well as will provide great new capabilities for IT Admins and everyone else who is keen on spinning up and down Virtual Machines, Containers and **NOW** also Kubernetes clusters.
-
-### Resources
-#### #Fusion
-- [Release Notes](https://docs.vmware.com/en/VMware-Fusion/12/rn/VMware-Fusion-12-Release-Notes.html#What's%20New)
-- [Download](https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0)
-- [FAQ](https://www.vmware.com/products/fusion/faq.html)
-
-#### #Workstation
-- [Release Notes](https://docs.vmware.com/en/VMware-Workstation-Pro/16/rn/VMware-Workstation-16-Pro-Release-Notes.html)
-- [Download](https://my.vmware.com/de/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_workstation_player/16_0)
-- [FAQ](https://www.vmware.com/products/workstation-pro/faq.html)
+VMware's Desktop Hypervisor solutions [Fusion](https://www.vmware.com/products/fusion/faq.html) for Mac users and [Workstation](https://www.vmware.com/products/workstation-pro/faq.html) for the Windows and Linux userbase were launched in it's newest versions on September 15th. Lots of new features, enhancements and support around VM Guest Operating Systems, VM Scaling, GPU, Containers and Kubernetes has made it into these releases. The made enhancements will enrich Developers tool kit as well as will provide great new capabilities for IT Admins and everyone else who is keen on spinning up and down Virtual Machines, Containers and **NOW** also Kubernetes.
 
 ## A short recap on Project Nautilus
-With Fusion Pro Tech Preview 20H1, VMware introduced [Project Nautilus](https://blogs.vmware.com/teamfusion/2020/01/fusion-tp20h1-introducing-nautilus.html) earlier this year. The main goal of the project is, to provide a single development platform on the desktop by enabling users to run [OCI](https://opencontainers.org/) compliant **Containers** as well as **Kubernetes Clusters** besides **Virtual Machines** on the desktop. A couple of months later, Fusion version 11.5 went GA and with this, the possibility was given to manage containers as well as VMware's [containerd](https://containerd.io/) based runtime. Checkout the corresponding blog post to get to know more about it: :arrow_right: [Fusion 11.5.5 Available Now](https://blogs.vmware.com/teamfusion/2020/05/fusion-11-5-now-supports-containers.html).
+With Fusion Pro Tech Preview 20H1, VMware introduced [Project Nautilus](https://blogs.vmware.com/teamfusion/2020/01/fusion-tp20h1-introducing-nautilus.html) earlier this year (January). The main goal of the project is to provide a single development platform on the desktop by enabling users to run [OCI](https://opencontainers.org/) compliant **Containers** as well as **Kubernetes** besides **Virtual Machines** on the desktop. A couple of months later (May), Fusion version 11.5 went GA and with this, the possibility was given to manage containers (build & run) as well as VMware's [containerd](https://containerd.io/) based runtime. Checkout the corresponding blog post to get to know more about it: :arrow_right: [Fusion 11.5.5 Available Now](https://blogs.vmware.com/teamfusion/2020/05/fusion-11-5-now-supports-containers.html).
 
-In order to make use of the intruduced "Container" feature, a new command-line utility named `vctl` is automatically added when installing Fusion version 11.5 and higher or Workstaion 16. Users who are familiar with Docker will propably get a confidential feeling very quickly. Let me show you what I mean by executing `vctl`in my terminal:
+In order to make use of the intruduced "Container feature", a new command-line utility named `vctl` is automatically installed when installing Fusion version 11.5 and higher or Workstation 16 (depending on your OS). Users who are familiar with Docker will propably get a confidential feeling very quickly when using it. Let me show you what I mean by executing `vctl`in my terminal:
 
 ```
 vctl
@@ -71,22 +60,22 @@ OPTIONS:
   -h, --help   Help for vctl
 ```
 
-What you see are pretty basic capabilities to **build**, **run** and **manage** containers locally with `vctl`. Sounds [familiar](https://www.vmware.com/cloud-solutions/app-modernization.html)? :wink:
+What you see are pretty basic capabilities to **build**, **run** and **manage** containers locally with `vctl`.
 
-To get started with this new feature, I'd like to directly point you to the official `vctl` [Getting Started Guide](https://github.com/VMwareFusion/vctl-docs/blob/master/docs/getting-started.md) on <i class='fab fa-github fa-fw'></i> Github.
+To get started with `vctl`, I'd like to point you directly to the official `vctl` [Getting Started Guide](https://github.com/VMwareFusion/vctl-docs/blob/master/docs/getting-started.md) on <i class='fab fa-github fa-fw'></i> Github.
 
 ## New versions bring a KinD way to deploy Kubernetes Clusters
-As mentioned in the previous section of this post, it has been planned from the very beginning of Project Nautilus to provide both, the ability to run containers AND to instantiate Kubernetes clusters on the desktop. This has now been made possible by making use of the open source project [KinD](https://kind.sigs.k8s.io/), which is using Docker container "nodes" to run local Kubernetes clusters. KinD has reached a decent popularity in the community and it can be easily installed on various platforms by e.g. using Brew for Mac, Chocolatey for Windows and `curl` in general. See also the [KinD Quick Start guide](https://kind.sigs.k8s.io/docs/user/quick-start).
+As mentioned in the previous section of this post, it has been planned from the very beginning of Project Nautilus to provide both, the ability to run containers AND to instantiate Kubernetes clusters on the desktop. This has now been made possible by making use of the open source project [KinD](https://kind.sigs.k8s.io/) (Kubernetes in Docker), which is using Docker container "nodes" to run local Kubernetes clusters. KinD has reached a decent popularity in the community and it can be easily installed on various platforms by e.g. using Brew for Mac, Chocolatey for Windows and `curl` in general. See also the [KinD Quick Start guide](https://kind.sigs.k8s.io/docs/user/quick-start).
 
-So, what's in for you when using Fusion or Workstaion instead of the "known, step-by-step, manual way"?
+So, what's in for you when using Fusion or Workstation instead of the "known, step-by-step, manual way"?
 
-Advantages which I see, is e.g. not having the binaries of `docker`, `kind` and `kubectl` installed in advance on your platform as well as not to carry about the installation process/ method(s) itself. But let me show you some of the implementation details now, to hopefully enlighten you more. `vctl` is available after the installation of Fusion or Workstation.
+Advantages I see are e.g. not having the binaries of `docker`, `kind` and `kubectl` installed in advance on your platform as well as not to carry about the installation process/ method(s) itself. But let me show you some of the implementation details now, to hopefully enlighten you more. `vctl` is available after the installation of Fusion or Workstation.
 
 **One thing before I go on!** I will not cover both solutions! I'm a Mac user, so from here on I'm going to concentrate just on Fusion 12.
 
 ### Let's dive in
 
-First! The `~/.vctl` directory doesn't exist before you have executed `vctl system start` for the first time! See:
+First! The `~/.vctl` directory doesn't exist before you have executed `vctl system start` for the first time!
 
 ```
 cd ~/.vctl
@@ -120,7 +109,9 @@ tree -L 2
     └── containerd
 ```
 
-The directory has been created succesfully in `$HOME` (users home directory). Let's check the available cli utilities for `docker`, `kind` as well as `kubectl`:
+The directory has been created succesfully in `$HOME` (users home directory).
+
+As you can see via the following output, the binaries for `docker`, `kind` as well as `kubectl` aren't installed on my local system:
 
 ```
 which docker
@@ -133,7 +124,7 @@ which kubectl
 kubectl not found
 ```
 
-None of them are available and therefore we need to check the new `vctl` option `kind`:
+Asking how `vctl` `kind` will `--help` us here.
 
 ```
 vctl kind --help
@@ -151,9 +142,10 @@ OPTIONS:
   -h, --help   Help for kind
 ```
 
-> *"Using vctl as the provider for KIND instead of Docker, set up system environment to be ready for vctl-based KIND"*
-
-In order to find out what this actually means, we are going to execute `vctl kind` as the next step:
+There is some really important information in here!
+1. If `kind` wasn't already installed before, `vctl` will download and install it for you.
+2. In the current terminal session only, all `docker` commands will be aliased to `vctl`.
+3. All made configurations apply only to the running terminal session.
 
 ```
 vctl kind
@@ -170,13 +162,15 @@ vctl-based KIND is ready now. KIND will run local Kubernetes clusters by using v
 sessions should be nested with care, unset $TMUX to force
 ```
 
-As you can see on my previous terminal output, the command will download the necessary binaries for `kind` and `kubectl` as well as a `crx.vmdk` which will be used by the CRX VM.
+As you can see on the previous terminal output, the command will download the necessary binaries for `kind` and `kubectl` as well as a `crx.vmdk` which will be used by the CRX VM.
 
 {{< admonition type=quote title="VMware Documentation" open=true >}}
 So in the Terminal window, the three binaries under user home `~/.vctl/bin` folder will take precedence over other existing versions of `kubectl/kind/docker` binaries that were installed before.
 {{< /admonition >}}
 
-Aha! This means that in case I already had e.g. `kubectl` installed on my system, the execution of `vctl kind` will affect my current running terminal by changing the `$PATH` for the according binaries. Let me validate this by leveraging `which` (the which utility takes a list of command names and searches the `$PATH` for each executable file) again:
+Aha! This means that in case I already had e.g. `kubectl` installed on my system, the execution of `vctl kind` will affect my current running terminal by adjusting the `$PATH` for the according binaries. Let me validate this by leveraging `which`(*) again:
+
+**The which utility takes a list of command names and searches the `$PATH` for each executable file.*
 
 ```
 which kubectl
@@ -189,7 +183,7 @@ which kind
 /Users/rguske/.vctl/bin/kind
 ```
 
-That looks good to me! Also, the `~/.vctl` directory has been filled up too.
+That looks good to me! Also the `~/.vctl` directory has been filled up too.
 
 ```
 tree -L 2
@@ -213,16 +207,16 @@ tree -L 2
 ```
 
 ### KinD create Cluster
-It's on the time now to create a Kubernetes node. **Note!** `vctl system start` has to be executed first before leveraging `kind` for a deployment! Otherwise you will get the following error message:
+It's time now to create a Kubernetes node. **Note!** `vctl system start` has to be executed first before leveraging `kind` for a deployment! Otherwise you will get the following error message:
 
 {{< admonition type=failure title="Error" open=true >}}
 Failed to list clusters: command "docker ps -a --filter label=io.x-k8s.kind.cluster=kind-1.19.1 --format '{{.Names}}'" failed with error: exit status 1
 Command Output: level=fatal msg="Container engine is not running. Run 'vctl system start' to launch it.
 {{< /admonition >}}
 
-`vctl` assigns 2 GB of memory and 2 CPU cores by default for the CRX VM that hosts the node container. You can adjust the default configuration with the options `--k8s-cpus` and `--k8s-mem`. To create the Kubernetes node, basically `kind create cluster` is all you need to get started. If you like to give the "cluster" a name or if you like to use a specific version which should run on your node, checkout the official [Docker repository](https://hub.docker.com/r/kindest/node/tags), pick your version and run e.g. `kind create cluster --image kindest/node:v1.19.1 --name kind-1.19.1`.
+`vctl` assigns 2 GB of memory and 2 CPU cores by default for the CRX VM that hosts the node container. You can adjust the default configuration with the options `--k8s-cpus` and `--k8s-mem`. To create the Kubernetes node, basically `kind create cluster` is all you need to get started. If you like to give the node(s) a name or if you like to use a specific Kubernetes version which should run on your node, checkout the official [Docker repository](https://hub.docker.com/r/kindest/node/tags), pick your version and run e.g. `kind create cluster --image kindest/node:v1.19.1 --name kind-1.19.1`.
 
-After a minute or two, you will have a Kubernetes node running on your desktop.
+After a minute or two, you will have a Kubernetes node running on your desktop locally.
 
 ```
 kubectl get all -A
@@ -254,7 +248,7 @@ kube-system          replicaset.apps/coredns-f9fd979d6                   2      
 local-path-storage   replicaset.apps/local-path-provisioner-78776bfc44   1         1         1       116m
 ```
 
-When closing the terminal, the following applies:
+Again! When closing the terminal, the following applies:
 
 {{< admonition type=info title="Info" open=true >}}
 The vctl-based KIND context will be lost if you close the Terminal window.
@@ -285,12 +279,19 @@ COMMANDS:
 
 This is also documented in the [Documentation](https://docs.vmware.com/en/VMware-Fusion/12/com.vmware.fusion.using.doc/GUID-7A2B7599-AF68-4209-8ABA-99619D9B8777.html).
 
-I enjoyed digging deeper into the implementation details of Project Nautilus which is now part of Fusion 12 and Workstation 16. This is a great addition to VMware's Desktop Hypervisor solutions and provides a great experience not even for those who wants to get started with containers and Kubernetes but also for the more experienced users amongs us.
+I enjoyed digging deeper into the implementation details of Project Nautilus which is now fully integrated in Fusion 12 and Workstation 16. This is a great addition to VMware's Desktop Hypervisor solutions and provides a great experience not even for those who want to get started with containers and Kubernetes but also for the more experienced users among us.
 
-## Support, Feedback and Community
-
-- File a bug on Github: [LINK](https://github.com/VMwareFusion/vctl-docs/issues/new)
+## Resources
 - Propose an Idea: [LINK](https://communities.vmware.com/community/vmtn/fusion/content?filterID=contentstatus[published]~objecttype~objecttype[idea])
 - Join the Slack channel [**#fusion-workstation**](https://vmwarecode.slack.com/)
 
-**<center>Thanks and take care.</center>**
+### #Fusion
+- [Release Notes](https://docs.vmware.com/en/VMware-Fusion/12/rn/VMware-Fusion-12-Release-Notes.html#What's%20New)
+- [Download](https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0)
+- [FAQ](https://www.vmware.com/products/fusion/faq.html)
+- File a bug on Github: [LINK](https://github.com/VMwareFusion/vctl-docs/issues/new)
+
+### #Workstation
+- [Release Notes](https://docs.vmware.com/en/VMware-Workstation-Pro/16/rn/VMware-Workstation-16-Pro-Release-Notes.html)
+- [Download](https://my.vmware.com/de/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_workstation_player/16_0)
+- [FAQ](https://www.vmware.com/products/workstation-pro/faq.html)
