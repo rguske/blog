@@ -3,8 +3,8 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "A closer look at VMware's Project Nautilus"
-date: 2020-08-20T11:45:57+02:00
-draft: true
+date: 2020-09-20T11:45:57+02:00
+draft: false
 featuredImage: /img/projectnautilus_cover.jpg
 categories: ["Fusion", "Workstation", "Desktop", "Kubernetes"]
 tags:
