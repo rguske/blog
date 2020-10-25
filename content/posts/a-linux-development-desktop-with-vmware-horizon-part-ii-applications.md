@@ -20,7 +20,8 @@ tags:
 In this section I´m going to list a couple of applications which I´m using for my desktop and how you can easily install them from your shell. Of course, it´s not a must and it´s up to you which of them you´d like to install.
 
 ### Google Chrome
-https://www.google.com/chrome/
+
+<https://www.google.com/chrome/>
 
 Firefox is pre-installed on Ubuntu as well as on CentOS but I´m for years now with Chrome and I´m still satisfied.
 
@@ -38,10 +39,9 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm 
 sudo yum install ~/Downloads/google-chrome-stable_current_x86_64.rpm
 ```
 
----
-
 ### Snap (package manager)
-https://snapcraft.io/docs
+
+<https://snapcraft.io/docs>
 
 This package manager is pre-installed and ready for use on <span style="color:#018914">**Ubuntu**</span> but not on <span style="color:#6003B6">**CentOS**</span>. Nevertheless, we can install it subsequently via the <a href="https://fedoraproject.org/wiki/EPEL" target="_blank">Extra Packages for Enterprise Linux</a>.
 
@@ -83,10 +83,9 @@ Other: version, warnings, okay, ack, known, model, create-cohort
 Development: run, pack, try, download, prepare-image
 ```
 
----
-
 ### Visual Studio Code (VSCode)
-https://code.visualstudio.com/
+
+<https://code.visualstudio.com/>
 
 VSCode is a powerful open source cross-platform editor and definetely one of my absolute favorite tools so far and indispensable for our desktop.
 
@@ -102,7 +101,7 @@ sudo snap install code --classic
 
 **Repository and key:**
 
-```shell
+```code
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -118,7 +117,7 @@ sudo apt-get install apt-transport-https && sudo apt-get update && sudo apt-get 
 
 **Repository and key:**
 
-```shell
+```code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 ```
@@ -131,7 +130,8 @@ sudo dnf install code
 ```
 
 ### [Extension] VSCode Settings sync
-https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
+
+<https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync>
 
 VSCode has a REALLY rich extensibility model which gives you everything you need to work even more efficiently and faster. It´ll not be possible to avoid that more and more extensions and other niceties are added to your installation and as of today it´s not possible to have everything consistent across different systems or platforms through an Online-Account like you have e.g. for Google Chrome.
 
@@ -150,12 +150,11 @@ Just search for the extension at the marketplace, install it, select LOGIN WITH 
 
 Open your terminal and execut: `git config --global core.editor “code --wait”`
 
-*Source: https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration*
-
----
+*Source: <https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration>*
 
 ### Remmina
-https://remmina.org/
+
+<https://remmina.org/>
 
 Remmina is a Remote Desktop Client which supports multiple network protocols like e.g. RDP, VNC, SPICE, NX, XDMCP and SSH.
 
@@ -165,8 +164,6 @@ sudo snap install remmina
 
 {{< image src="/img/posts/201912_development_desktop/CapturFiles-20200318_023735.jpg" caption="Figure I: Remmina - Remote Desktop Client" src-s="/img/posts/201912_development_desktop/CapturFiles-20200318_023735.jpg" class="center" >}}
 
----
-
 ## Content sharing
 
 I was looking for a workspace where I can share content, mainly files like scripts or specification-files (.yml, .json) across platforms. It´s possible by default to activate ***Online Accounts (Figure II)*** like e.g. Google or Nextcloud in both distributions through the System Settings.
@@ -174,7 +171,8 @@ I was looking for a workspace where I can share content, mainly files like scrip
 {{< image src="/img/posts/201912_development_desktop/CapturFiles-20200318_113300.jpg" caption="Figure II: Activate Online Accounts" src-s="/img/posts/201912_development_desktop/CapturFiles-20200318_113300.jpg" class="center" >}}
 
 ### Dropbox for Linux
-https://www.dropbox.com/en/install-linux
+
+<https://www.dropbox.com/en/install-linux>
 
 I decided to try Dropbox due to the availability of an already existing account.
 
@@ -182,18 +180,18 @@ I decided to try Dropbox due to the availability of an already existing account.
 
 **Dropbox Headless:**
 
-```shell
+```code
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ```
 
 **Installing the Dropbox CLI:**
 
-```shell
+```code
 sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
 sudo chmod +x /usr/local/bin/dropbox
 ```
 
-```shell
+```code
 dropbox --help
 
 Dropbox command-line interface
@@ -220,7 +218,7 @@ version      print version information for Dropbox
 
 **Enable Dropbox to start automatically after every reboot:**
 
-```shell
+```code
 sudo vim /etc/systemd/system/dropbox.service
 
 [Unit]
@@ -323,8 +321,6 @@ sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=package
 sudo chmod +x /usr/local/bin/dropbox
 ```
 
----
-
 ### Docker Engine - Community
 
 Another must!
@@ -339,7 +335,7 @@ sudo snap install docker
 
 **<span style="color:#018914">Ubuntu:</span>**
 
-```shell
+```code
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -385,7 +381,8 @@ sudo usermod -aG docker $USER
 After adding your user to the docker group, you have to logout and login first, so that your group membership is re-evaluated.
 
 ### Docker Compose
-https://docs.docker.com/compose/
+
+<https://docs.docker.com/compose/>
 
 A tool for deploying multi-container applications which services are specified in a YAML file.
 
@@ -395,15 +392,13 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
----
-
 ### VMware Remote Console
 
-Download: https://www.vmware.com/go/download-vmrc
+Download: <https://www.vmware.com/go/download-vmrc>
 
 ### VMware OVF Tool
 
-Download: https://code.vmware.com/web/tool/4.3.0/ovf
+Download: <https://code.vmware.com/web/tool/4.3.0/ovf>
 
 These two binaries were downloaded locally (to my Notebook) first, then got packed into a zip archive and copied via `scp` to my desktop(s).
 
@@ -437,11 +432,9 @@ chmod +x VMware-Remote-Console-11.0.0-15201582.x86_64.bundle
 sudo ./VMware-Remote-Console-11.0.0-15201582.x86_64.bundle --console --required --eulas-agreed
 ```
 
-
----
-
 ### Enpass
-https://www.enpass.io/
+
+<https://www.enpass.io/>
 
 A secure vault which is available for all mobile and desktop platforms.
 
