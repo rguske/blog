@@ -3,8 +3,8 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "vSphere with Tanzu - Troubleshooting HAProxy deployment"
-date: 2020-11-16T22:59:14+01:00
-draft: true
+date: 2020-11-23T10:00:14+01:00
+draft: false
 featuredImage: /img/haproxytroubleshooting_cover.jpg
 categories: ["vSphere", "Tanzu", "Troubleshooting", "Kubernetes"]
 tags:
@@ -16,9 +16,9 @@ tags:
 ---
 ## Introduction
 
-You may have already heard and read about our latest changes regarding our Kubernetes offering(s) [vSphere with Tanzu](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-C163490C-BE03-4DFE-8A03-5316D3245765.html) also former known as *vSphere with Kubernetes*. Personally, I was totally excited and full of anticipation to make my first hands-on experience with this new deployment option --> [vSphere Networking](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-C3048E95-6E9D-4AC3-BE96-44446D288A7D.html) as an alternative to [NSX-T](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-B1388E77-2EEC-41E2-8681-5AE549D50C77.html) and how HAProxy is doing it's job within this construct. I don't know how you are dealing with installations of the "NEW" but I always read the documentation first... ... NOT ... :speak_no_evil: ... but I should! :see_no_evil:
+You may have already heard and read about our latest changes regarding our Kubernetes offering(s) [vSphere with Tanzu](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-C163490C-BE03-4DFE-8A03-5316D3245765.html) also former known as *vSphere with Kubernetes*. Personally, I was totally excited and full of anticipation to make my first hands-on experience with this new deployment option --> [vSphere Networking](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-C3048E95-6E9D-4AC3-BE96-44446D288A7D.html) as an alternative to [NSX-T](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-B1388E77-2EEC-41E2-8681-5AE549D50C77.html) and how HAProxy is doing it's job within this construct. I don't know how you are dealing with installations of the "NEW" but I always read the documentation first... ... not ... :speak_no_evil: ... but I should!
 
-Honestly! Doesn't matter of which kind of implementation we are talking, is it a Homelab, Proof of Concept or Production, our final goal is a working solution and this is why we should be prepared best. Through this article, I will even more stress this point because I did a mistake which did cost me time in troubleshooting the failure I've received. On the other hand and "*as always*", it enlightened me and enriched my wealth of experience.
+Honestly! Doesn't matter of which kind of implementation we are talking, is it a Homelab (test environment), a Proof of Concept implementation or in production, our final goal is a working solution and this is why we should be prepared best. Through this article, I will even more stress this point because I did a mistake which did cost me time in troubleshooting the failure I've received. On the other hand and "*as always*", it enlightened me and enriched my wealth of experience.
 
 ## Preperations
 
@@ -73,7 +73,8 @@ graph LR;
     end
     A --- B & C & D
     D --- E
-    B & C --- F & G
+    B & C --- F
+    C --- G
     E -.-> F & G
     H -.- A
     A -.- E
@@ -83,11 +84,11 @@ graph LR;
 
 OVA deployment step 2.7 requests the static IP address for the Frontend interface and ***this IP must be outside of the Load Balancer IP Range*** which you have to define in the next step 3.1. Furthermore, ***this IP range should not overlap with the assigned IP address of the Frontend network*** interface as well as with any other VMs in this range!
 
-I've misinterpreted the description for *Loadbalancer `IP ranges`* in step 3.1 which I should have painfully realised after the complete deployment. See the following *Figure III*:
+I've misinterpreted the description for *Loadbalancer `IP ranges`* in step 3.1 (see *Figure III*) which I should have "painfully" realised after the complete deployment.
 
 {{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201117_104643.jpg" caption="Figure III: Wrong configuration" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201117_104643.jpg" >}}
 
-In case you haven't noticed my mistake yet, I'd like to make a little excursion in networking 101. I entered `10.10.18.18/28` as an IP range which isn't a valid [Subnetwork](https://en.wikipedia.org/wiki/Subnetwork). A valid subnetwork configuration for my evaluation deployment should have looked like:
+At this point, I'd like to make a little excursion in networking 101 to make sure you also see my mistake which I've made through this misinterpretation. I entered `10.10.18.18/28` as an IP range which isn't a valid [Subnetwork](https://en.wikipedia.org/wiki/Subnetwork). A valid subnetwork configuration for my evaluation deployment should have looked like:
 
 | Description | Address |
 | :---: | :---: |
@@ -113,7 +114,7 @@ The following table gives you a quick overview of available Host IPs for a speci
 
 #### Don't be confused
 
-The following hasn't to do with the actual problem but the hint could avoid an uncertainty. *Figure V* shows the configuration summary of Step 5 and `Ingress CIDR/ IP Ranges: 10.10.18.19/11` (in my example) could be confusing.
+The following has nothing to do with the actual problem but the hint could avoid an uncertainty. *Figure V* shows the configuration summary of Step 5 and `Ingress CIDR/ IP Ranges: 10.10.18.19/11` (in my example) could be confusing because of the CIDR notation.
 
 {{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201117_112122.jpg" caption="Figure V: Load Balancer Configuration Workload Management Wizard" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201117_112122.jpg" >}}
 
@@ -123,13 +124,13 @@ What it shows, is the first IP - `.19` - and the maximum number of remaining IPs
 
 ## Connect: No route to host.
 
-At first sight, the installation seems to be successful and the Cluster Config Status in the vSphere client doesn't indicate the opposite (*Figure V*).
+At first sight, the installation seems to be successful and the Cluster Config Status in the vSphere client doesn't indicate the opposite (*Figure VI*).
 
-{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201117_092255.jpg" caption="Figure V: Workload Management Status" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201117_092255.jpg" >}}
+{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201117_092255.jpg" caption="Figure VI: Workload Management Status" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201117_092255.jpg" >}}
 
-But appearances are deceptive! I created a vSphere Namespace to deploy a [Tanzu Kubernetes Cluster](https://rguske.github.io/post/vsphere-7-with-kubernetes-supercharged-helm-harbor-tkg/) (Guest Cluster) and clicked on the **OPEN** button/ link to the CLI tools (*Figure VI*) to check the reachability of my Supervisor Cluster and got an `ERR_ADDRESS_UNREACHABLE` back.
+But appearances are deceptive! I created a vSphere Namespace to deploy a [Tanzu Kubernetes Cluster](https://rguske.github.io/post/vsphere-7-with-kubernetes-supercharged-helm-harbor-tkg/) (Guest Cluster) and clicked on the **OPEN** button/ link to the CLI tools (*Figure VII*) to check the reachability of my Supervisor Cluster and got an `ERR_ADDRESS_UNREACHABLE` back.
 
-{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201120_040144.jpg" caption="Figure VI: Link to CLI Tools" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201120_040144.jpg" >}}
+{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201120_040144.jpg" caption="Figure VII: Link to CLI Tools" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201120_040144.jpg" >}}
 
 Of course that made me suspicious and I tried to login via `kubectl vsphere login`:
 
@@ -207,8 +208,8 @@ root@haproxy [ /etc/vmware ]# cat anyip-routes.cfg
 10.10.18.18/28
 ```
 
-Verifying the file and thus my made configuration finally brought me enlightenment. I changed it consequently from `10.10.18.18/28` to a valid Subnetwork range, which is the already mentioned `10.10.18.16/28` and restarted the service `systemctl restart anyip-routes.service`.
+Verifying the file and thus my made configuration finally brought me enlightenment. I changed it consequently from `10.10.18.18/28` to a valid Subnetwork range, which is the already mentioned `10.10.18.16/28` and rebooted the HAProxy appliance (`reboot`). Just restarting the service with `systemctl restart anyip-routes.service` does not apply all necessary changes.
 
-{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201122_090840.jpg" caption="Figure VII: Adjusted anyip-routes.cfg file | restart service | ping Supervisor VIP" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201122_090840.jpg" >}}
+{{< image src="/img/posts/202011_haproxytrouble/CapturFiles-20201122_090840.jpg" caption="Figure VIII: Adjusted anyip-routes.cfg file | restart service | ping Supervisor VIP" src-s="/img/posts/202011_haproxytrouble/CapturFiles-20201122_090840.jpg" >}}
 
 DONE!
