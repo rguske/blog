@@ -6,11 +6,10 @@ title: "VMware Microsites You should bookmark"
 date: 2019-09-24T10:00:00+02:00
 draft: false
 featuredImage: /img/vmwaremicrosites_cover.jpg
-categories: ["Other"]
+categories: ["VMware"]
 tags:
 - September2019
 - VMware
-- YouShouldBookmark
 ---
 The idea behind this post or collection was born as follows:
 

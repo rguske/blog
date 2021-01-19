@@ -6,15 +6,14 @@ title: "Monitoring Container VMs with vRealize Operations Manager"
 date: 2019-01-21T23:00:09+01:00
 draft: false
 featuredImage: /img/vic_monitoring_cover.jpg
-categories: ["vRealize Operations Manager", "vSphere", "Docker"]
+categories: ["Monitoring", "VMware", "Container"]
 tags:
 - January2019
 - VIC
-- Container
+- Docker
 - vSphere
 - Monitoring
 - vRealize Operations Manager
-- Dashboard
 ---
 Based on talks with customers who already made their experiences running containerized applications in test as well as in production and who are using vSphere Integrated Containers for their way to go, I decided to build a dashboard to monitor those workloads (Container-VMs) with VMware´s Cloud Management Solution, <a href="https://www.vmware.com/products/vrealize-operations.html" target="_blank">vRealize Operations Manager (vR Ops)</a>.
 

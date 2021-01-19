@@ -6,14 +6,14 @@ title: "vSphere Integrated Containers Part III: Deployment of a Virtual Containe
 date: 2018-07-13T13:21:33+02:00
 draft: false
 featuredImage: /img/vic_part_3_cover.jpg
-categories: ["vSphere", "Docker"]
+categories: ["VMware", "Container", "Cloud Native"]
 tags:
 - July2018
 - VIC
 - Container
 - VMware
 - vSphere
-- docker
+- Docker
 ---
 In this part I´d like to guide you through the Deployment of a **Virtual Container Host** aka **VCH**. I definitely don ́t want to make it a habit to use already written descriptions, but this one described it very well, thus I had like to quote this:
 

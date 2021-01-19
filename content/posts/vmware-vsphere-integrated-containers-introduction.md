@@ -6,7 +6,7 @@ title: "VMware vSphere Integrated Containers: Introduction"
 date: 2018-07-13T13:03:26+02:00
 draft: false
 featuredImage: /img/vic_intro_cover.jpg
-categories: ["vSphere", "Docker"]
+categories: ["VMware", "Container", "Cloud Native"]
 tags:
 - July2018
 - VIC

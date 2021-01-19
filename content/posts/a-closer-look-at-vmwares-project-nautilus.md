@@ -6,12 +6,13 @@ title: "A closer look at VMware's Project Nautilus"
 date: 2020-09-20T11:45:57+02:00
 draft: false
 featuredImage: /img/projectnautilus_cover.jpg
-categories: ["Fusion", "Workstation", "Desktop", "Kubernetes"]
+categories: ["Desktop", "VMware", "Kubernetes"]
 tags:
 - September2020
 - Fusion
 - Workstation
 - Kubernetes
+- Desktop
 ---
 ## General Availability Fusion 12 & Workstation 16
 

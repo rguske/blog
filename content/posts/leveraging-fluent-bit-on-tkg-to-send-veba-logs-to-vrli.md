@@ -6,14 +6,15 @@ title: "Leveraging Fluent Bit on Tanzu Kubernetes Grid to send VEBA logs to vRea
 date: 2021-01-13T11:50:23+01:00
 draft: false
 featuredImage: /img/veba_fluentbit_vrli_cover.jpg
-categories: ["VEBA", "Tanzu", "vRealize Log Insight", "Kubernetes", "Logging"]
+categories: ["VEBA", "VMware", "Kubernetes", "Logging", "Open Source", "Cloud Native"]
 tags:
 - FluentBit
 - vRLI
 - Kubernetes
 - VEBA
 - Tanzu
-- TKGs
+- TKG
+- OSS
 ---
 ## Introduction
 

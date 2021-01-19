@@ -6,7 +6,7 @@ title: "A practitioner's guide - Spin up a local VEBA environment with KinD and 
 date: 2020-10-16T12:00:57+02:00
 draft: false
 featuredImage: /img/vebakindvcsim_cover.jpg
-categories: ["VEBA", "FaaS", "Fusion", "Workstation", "Desktop", "Kubernetes"]
+categories: ["VEBA", "FaaS", "Desktop", "Kubernetes", "Cloud Native", "VMware"]
 tags:
 - October2020
 - VEBA

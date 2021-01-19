@@ -6,13 +6,14 @@ title: "docker run vic-machine"
 date: 2019-07-04T22:52:18+02:00
 draft: false
 featuredImage: /img/dockerrunvicmachine_cover.jpg
-categories: ["Docker", "vSphere"]
+categories: ["Container", "VMware", "Automation"]
 tags:
 - July2019
 - VIC
 - Docker
 - Hack
 - Harbor
+- vSphere
 ---
 ## Introduction
 

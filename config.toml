@@ -138,13 +138,13 @@ enableEmoji = true
           # title shown in home page
           title = 'Sometimes you gotta run before you can walk!'
           # subtitle shown in home page
-          subtitle = '"Anthony Edward "Tony" Stark, also known as IRON MAN"'
+          subtitle = '"Anthony Edward "Tony" Stark, also known as IRON MAN."'
           # whether to use typeit animation for subtitle
           typeit = false
           # whether to show social links
           social = true
           # disclaimer (HTML format is supported)
-          disclaimer = "© All rights reserved - 2018"
+          # disclaimer = "© All rights reserved 2018 - 2021 rguske | CC BY-NC 4.0"
         # Home page posts
         [languages.en.params.home.posts]
           enable = true
@@ -266,8 +266,8 @@ enableEmoji = true
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
-    #license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-    license= ''
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    #license= ''
 
   # Section (all posts) page config
   [params.section]

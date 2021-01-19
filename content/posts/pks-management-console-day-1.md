@@ -6,13 +6,14 @@ title: "VMware Enterprise PKS Management Console (EPMC) - Day 1"
 date: 2019-11-27T14:53:23+01:00
 draft: false
 featuredImage: /img/epmc_day1_cover.jpg
-categories: ["Tanzu", "Kubernetes"]
+categories: ["VMware", "Kubernetes", "Cloud Native"]
 tags:
 - November2019
 - Kubernetes
 - PKS
 - EPMC
 - vSphere
+- TKG
 ---
 {{< admonition info "Info" true >}}
 VMware Enterprise PKS got rebranded VMware Tanzu Kubernetes Grid Integrated Edition

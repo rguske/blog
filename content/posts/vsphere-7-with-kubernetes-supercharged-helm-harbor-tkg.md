@@ -6,7 +6,7 @@ title: "vSphere 7 with Kubernetes supercharged - Helm, Harbor and Tanzu Kubernet
 date: 2020-07-21T15:30:38+02:00
 draft: false
 featuredImage: /img/harborontkg_cover.jpg
-categories: ["Kubernetes", "Cloud Native Registry", "Tanzu", "vSphere"]
+categories: ["Kubernetes", "Cloud Native", "VMware"]
 tags:
 - July2020
 - Harbor

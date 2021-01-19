@@ -6,7 +6,7 @@ title: "A Linux Development Desktop with VMware Horizon - Part I: Horizon"
 date: 2020-02-27T16:34:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_i_cover.png
-categories: ["Linux", "Horizon"]
+categories: ["Linux", "VDI", "Desktop", "VMware"]
 tags:
 - February2020
 - Linux

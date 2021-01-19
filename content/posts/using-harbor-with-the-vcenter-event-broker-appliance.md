@@ -6,7 +6,7 @@ title: "Using Harbor with the VMware Event Broker Appliance"
 date: 2020-03-23T22:00:36+01:00
 draft: false
 featuredImage: /img/veba_harbor_cover.jpg
-categories: ["VEBA", "FaaS", "Cloud Native Registry"]
+categories: ["VEBA", "FaaS", "VMware", "Cloud Native"]
 tags:
 - March2020
 - VEBA

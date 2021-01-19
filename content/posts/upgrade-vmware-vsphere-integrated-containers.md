@@ -6,7 +6,7 @@ title: "Upgrade vSphere Integrated Containers"
 date: 2018-10-19T00:11:11+02:00
 draft: false
 featuredImage: /img/vic_upgrade_post_cover.jpg
-categories: ["vSphere", "Docker"]
+categories: ["VMware", "Container"]
 tags:
 - October2018
 - VIC

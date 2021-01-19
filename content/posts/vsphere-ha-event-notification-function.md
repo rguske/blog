@@ -6,7 +6,7 @@ title: "VMware Event Broker Appliance - vSphere HA Event Notification Function"
 date: 2020-06-29T15:19:05+02:00
 draft: false
 featuredImage: /img/harestartfunction_cover.jpg
-categories: ["VEBA", "FaaS"]
+categories: ["VEBA", "FaaS", "Automation", "VMware", "Open Source"]
 tags:
 - June2020
 - VEBA

@@ -6,13 +6,12 @@ title: "Monitoring the VMware Event Broker Appliance with vRealize Operations Ma
 date: 2020-05-12T23:59:50+02:00
 draft: false
 featuredImage: /img/vrops_veba_cover.jpg
-categories: ["vRealize Operations Manager", "VEBA", "FaaS"]
+categories: ["Monitoring", "VEBA", "FaaS", "Open Source", "Cloud Native", "VMware"]
 tags:
 - May2020
 - VEBA
 - Monitoring
 - vRealize Operations Manager
-- Dashboard
 ---
 Since the [VMware Event Broker Appliance (VEBA)](https://vmweventbroker.io) is reaching more and more folks out there and the interest is growing steadily, it is important to validate the integration with other solutions (preferably VMware). At least that's what I thought :wink:.
 

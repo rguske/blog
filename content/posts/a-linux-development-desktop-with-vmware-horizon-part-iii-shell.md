@@ -6,14 +6,14 @@ title: "A Linux Development Desktop with VMware Horizon - Part III: Shell"
 date: 2020-02-27T16:32:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_iii_cover.jpg
-categories: ["Linux", "Horizon"]
+categories: ["Linux", "VDI", "Desktop", "VMware", "Terminal"]
 tags:
 - February2020
 - Linux
 - Horizon
 - VDI
 - Tools
-- Shell
+- Terminal
 ---
 ## High :zap: Way to Shell
 
