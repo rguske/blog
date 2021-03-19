@@ -2,52 +2,50 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Unable to Install Ovftool on Ubuntu 20"
+title: "Unable to Install Ovftool on Ubuntu 20.04 LTS"
 date: 2021-03-09T14:33:34+01:00
 draft: true
-featuredImage: /img/projectnautilus_cover.jpg
-categories: ["cat1", "cat2"]
+featuredImage: /img/ovftool_cover.jpg
+categories: ["Workaround", "Linux", "Desktop", "VMware"]
 tags:
-- tag2
-- tag2
+- March2021
+- Linux
+- Desktop
+- Workaround
+- VMware
 ---
+
 ## Introduction
 
+The VMware OVF Tool [^1] is a powerful cli utility with which you can import and export Open Virtualization Format (OVF) packages to and from various VMware products. It's e.g. used for the creation of several great VMware Fling projects like the Demo Appliance for Tanzu Kubernetes Grid [^2], the VMware Appliance for Folding@Home [^3], the VMware Event Broker Appliance [^4] as well as for non-fling open source projects like e.g. the Netshoot Virtual Appliance [^5]. The Fling projects listed have one thing in particular in common and that is the main contributor - William Lam. If you weren't aware of what the tool is capable of yet, then check out William's work with it on his blog [^6].
 
-[OVFTOOL 4.4.1](https://my.vmware.com/group/vmware/downloads/get-download?downloadGroup=OVFTOOL441)
+I recently wanted to use the `ovftool` for validating a customer use-case and needed to install it on my "*Universal Workbench*" [^7], my Ubuntu 20.04 vDesk, which I am using for all my homelab work. As of writing this article, the latest available version for the ovftool is version 4.4.1 [^8].
 
+## Installation Options
 
-uname -a 
-Linux vdesk-ubuntu 5.8.0-43-generic #49~20.04.1-Ubuntu SMP Fri Feb 5 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+So, I downloaded the appropriate 64 bit binary for my Linux system, which is the `VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle` file and made it executable:
 
+```shell
+$ chmod +755 VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle
+```
 
-Ubu  rguske  ~/Downloads                                                                                                                                  kubernetes-admin@kubernetes/default ⎈  64% hdd  1.81G RAM 
-╰─ tree -L 1
-.
-├── avi
-├── terraform-hacknite-lab1
-├── vCenter_Event_Broker_Appliance_v0.6.0.ova
-├── VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle
+Various options are available for the installation itself (see: `ovftool --help`). The following listed are an abstract of the ones which are relevant for this post and which I've used for my installation tries.
 
-
-
-chmod +755 VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle 
-
-
+```shell
 Options:
     --gtk               Use the Gtk+ UI (Default)
     --console           Use the console UI
     --required          Displays only questions absolutely required
     --eulas-agreed      Agree to the EULA
-
     --ignore-errors
-
     --extract=DIR       Extract the contents of the bundle into DIR
-
-
-sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --console --required --eulas-agreed
-
 ```
+
+## Installation was unsuccessful
+
+Basically, you can decide if you'd like to use `--console` UI or the `--gtk` UI. My first attempt, and I used this option several installations before, was with the `--console` option. In a Terminal window I executed `sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --console --required --eulas-agreed` and got the following output as a failed result:
+
+```shell
 Extracting VMware Installer...done.
 Traceback (most recent call last):
   File "/tmp/tmpt0pd6m09.vmis.env", line 132, in <module>
@@ -65,10 +63,13 @@ Check the log /var/log/vmware-installer for details.
 Installation was unsuccessful.
 ```
 
+<mark>Installation was unsuccessful</mark>
 
-sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --gtk --required --eulas-agreed
+I couldn't really figure out the output and went straight for the `--gtk` option as my 2nd attempt:
 
-```
+```shell
+$ sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --gtk --required --eulas-agreed
+
 Extracting VMware Installer...done.
 
 (vmware-installer.py:233744): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
@@ -91,23 +92,127 @@ Check the log /var/log/vmware-installer for details.
 Installation was unsuccessful.
 ```
 
+<mark>Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita"</mark>
 
+<mark>Gtk-Message: Failed to load module "canberra-gtk-module"</mark>
 
-sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --extract vmware-ovftool
+Some research on "`Unable to locate theme engine in module_path: "adwaita"`" pointed me to presumable missing packages for my vDesk and therefore I followed some of the solution results which were for example:
 
 ```
-Extracting VMware Installer...done.
+$ sudo apt install gnome-themes-standard
 
-(vmware-installer.py:234242): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  gnome-themes-standard
+0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
+Need to get 2.164 B of archives.
+After this operation, 14,3 kB of additional disk space will be used.
+Get:1 http://de.archive.ubuntu.com/ubuntu focal/universe amd64 gnome-themes-standard all 3.28-1ubuntu1 [2.164 B]
+Fetched 2.164 B in 0s (10,8 kB/s)
+Selecting previously unselected package gnome-themes-standard.
+(Reading database ... 183276 files and directories currently installed.)
+Preparing to unpack .../gnome-themes-standard_3.28-1ubuntu1_all.deb ...
+Unpacking gnome-themes-standard (3.28-1ubuntu1) ...
+Setting up gnome-themes-standard (3.28-1ubuntu1) ...
+```
 
-(vmware-installer.py:234242): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-Gtk-Message: Failed to load module "canberra-gtk-module"
+or
+
+```shell
+$ sudo apt search canberra-gtk-module
+
+Sorting... Done
+Full Text Search... Done
+libcanberra-gtk-module/focal 0.30-7ubuntu1 amd64
+  translates GTK+ widgets signals to event sounds
+```
+
+as well as `sudo apt-get install libcanberra-gtk-module` but nothing solved the problem nor changed the failure message. Also the `/var/log/vmware-installer` log couldn't help.
+
+### Output /var/log/vmware-installer
+
+```shell
+$ less /var/log/vmware-installer
+
+
+[2021-02-25 11:28:13,465] code for hash sha256 was not found.
+Traceback (most recent call last):
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
+    globals()[__func_name] = __get_hash(__func_name)
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
+    raise ValueError('unsupported hash type ' + name)
+ValueError: unsupported hash type sha256
+[2021-02-25 11:28:13,465] code for hash sha384 was not found.
+Traceback (most recent call last):
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
+    globals()[__func_name] = __get_hash(__func_name)
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
+    raise ValueError('unsupported hash type ' + name)
+ValueError: unsupported hash type sha384
+[2021-02-25 11:28:13,465] code for hash sha512 was not found.
+Traceback (most recent call last):
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
+    globals()[__func_name] = __get_hash(__func_name)
+  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
+    raise ValueError('unsupported hash type ' + name)
+ValueError: unsupported hash type sha512
+[2021-02-25 11:28:13,494]
+[2021-02-25 11:28:13,494]
+[2021-02-25 11:28:13,494] Installer running.
+[2021-02-25 11:28:13,494] Command Line Arguments:
+[2021-02-25 11:28:13,494] ['/tmp/vmis.Lu1nSs/install/vmware-installer/vmware-installer.py', '--set-setting', 'vmware-installer', 'libconf', '', '--install-component', '/tmp/vmis.Lu1nSs/install/vmware-installer', '--install-bundle', '/home/rguske/Downloads/./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle', '']
+[2021-02-25 11:28:13,740] Successfully loaded GTK libraries.
+[2021-02-25 11:28:13,789] Using UI type gtk
+[2021-02-25 11:28:13,795] System installer version is: 3.0.0.17287072
+[2021-02-25 11:28:13,795] Running installer version is: 2.1.0.14928104
+[2021-02-25 11:28:13,795] Running newer system installer.
+[2021-02-25 11:28:14,151]
+[2021-02-25 11:28:14,151]
+[2021-02-25 11:28:14,151] Installer running.
+[2021-02-25 11:28:14,151] Command Line Arguments:
+[2021-02-25 11:28:14,151] ['/usr/lib/vmware-installer/3.0.0/vmware-installer.py', '--set-setting', 'vmware-installer', 'libconf', '', '--install-component', '/tmp/vmis.Lu1nSs/install/vmware-installer', '--install-bundle', '/home/rguske/Downloads/./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle', '']
+[2021-02-25 11:28:14,151] Failed to load GTK libraries, falling back to console.
+[2021-02-25 11:28:14,157] Using UI type console
+[2021-02-25 11:28:14,158] System installer version is: 3.0.0.17287072
+[2021-02-25 11:28:14,158] Running installer version is: 3.0.0.17287072
+[2021-02-25 11:28:14,158] Opening database file /etc/vmware-installer/database
+[2021-02-25 11:28:14,236] Could not locate installer App Control.
+[2021-02-25 11:28:14,247] Error: Cannot load installer for component: vmware-installer.
+[2021-02-25 11:28:14,248] Top level exception handler
+Traceback (most recent call last):
+  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 470, in RunThreadedTransaction
+    txn.Execute(actions)
+  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 252, in Execute
+    i.Load(self.temp)
+  File "/usr/lib/vmware-installer/3.0.0/vmis/core/install.py", line 325, in Load
+    self._module, self._installer = LoadInstaller(self.component,
+  File "/usr/lib/vmware-installer/3.0.0/vmis/core/env.py", line 406, in LoadInstaller
+    raise ComponentError('Component did not register an installer', component)
+vmis.core.errors.ComponentError: Component did not register an installer
 ```
 
 
+## Workaround: Extract ovftool
 
-~/Downloads/vmware-ovftool                                                                                                                   kubernetes-admin@kubernetes/default ⎈  64% hdd  1.79G RAM 
-╰─ tree -L 2
+
+
+`sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --extract ovftool && cd ovftool`
+
+```shell
+ls -rtl
+
+total 16K
+drwxr-xr-x 4 root   root         4,0K Mär  9 14:07 .
+drwxr-xr-x 5 rguske domain^users 4,0K Mär  9 14:07 ..
+drwxr-xr-x 9 root   root         4,0K Mär  9 14:07 vmware-installer
+drwxr-xr-x 6 root   root         4,0K Mär  9 14:07 vmware-ovftool
+```
+
+
+```shell
+$ tree -L 2
 .
 ├── vmware-installer
 │   ├── artwork
@@ -153,326 +258,35 @@ Gtk-Message: Failed to load module "canberra-gtk-module"
     └── vmware-eula.rtf
 
 11 directories, 31 files
+```
 
+```shell
+sudo mv vmware-ovftool /usr/bin/ovftool
+```
 
-
-
-ls -rtl
-
-total 16K
-drwxr-xr-x 4 root   root         4,0K Mär  9 14:07 .
-drwxr-xr-x 5 rguske domain^users 4,0K Mär  9 14:07 ..
-drwxr-xr-x 9 root   root         4,0K Mär  9 14:07 vmware-installer
-drwxr-xr-x 6 root   root         4,0K Mär  9 14:07 vmware-ovftool
-
-
-cd vmware-ovftool
-
-
-sudo chmod +755 ovftool ovftool.bin
-
+```shell
+sudo chmod +x /usr/bin/ovftool/ovftool ovftool.bin
+```
 
 WORKS!!
 
 
-sudo mv vmware-ovftool /usr/bin
 
+`sudo ln -s vmware-ovftool/ovftool ovftool`
 
+```shell
+$ which ovftool
 
-sudo ln -s vmware-ovftool/ovftool ovftool
-
-
-which ovftool
 /usr/bin/ovftool
-
-
-
-
-
-
-sudo ./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle --console --required --eulas-agreed
-
-Extracting VMware Installer...done.
-Traceback (most recent call last):
-  File "/tmp/tmpf4xg4kbw.vmis.env", line 132, in <module>
-    exec(fileObj.read(), mod.__dict__)
-  File "<string>", line 243
-    except OSError, e:
-                  ^
-SyntaxError: invalid syntax
-Exception info : [Component did not register an installer].
-Check the log /var/log/vmware-installer for details.
-
-
-
-[######################################################################] 100%
-Installation was unsuccessful.
-
-
-
-
-less /var/log/vmware-installer
-
-[2021-02-25 11:25:18,340] Installer running.
-[2021-02-25 11:25:18,340] Command Line Arguments:
-[2021-02-25 11:25:18,340] ['/usr/lib/vmware-installer/3.0.0/vmware-installer.py', '--set-setting', 'vmware-installer', 'libconf', '', '--install-component', '/tmp/vmis.Xh1rd2/install/vmware-installer', '--install-bundle', '/home/rguske/Downloads/./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle', '', '--console', '--required', '--eulas-agreed']
-[2021-02-25 11:25:18,345] Using UI type console
-[2021-02-25 11:25:18,347] System installer version is: 3.0.0.17287072
-[2021-02-25 11:25:18,347] Running installer version is: 3.0.0.17287072
-[2021-02-25 11:25:18,347] Opening database file /etc/vmware-installer/database
-[2021-02-25 11:25:18,436] Could not locate installer App Control.
-[2021-02-25 11:25:18,453] Error: Cannot load installer for component: vmware-installer.
-[2021-02-25 11:25:18,454] Top level exception handler
-Traceback (most recent call last):
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 470, in RunThreadedTransaction
-    txn.Execute(actions)
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 252, in Execute
-    i.Load(self.temp)
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/install.py", line 325, in Load
-    self._module, self._installer = LoadInstaller(self.component,
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/env.py", line 406, in LoadInstaller
-    raise ComponentError('Component did not register an installer', component)
-vmis.core.errors.ComponentError: Component did not register an installer
-
-
-
-sudo ./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle                                    
-Extracting VMware Installer...done.
-
-(vmware-installer.py:96561): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-
-(vmware-installer.py:96561): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-Gtk-Message: Failed to load module "canberra-gtk-module"
-Traceback (most recent call last):
-  File "/tmp/tmpijzp_ddd.vmis.env", line 132, in <module>
-    exec(fileObj.read(), mod.__dict__)
-  File "<string>", line 243
-    except OSError, e:
-                  ^
-SyntaxError: invalid syntax
-Exception info : [Component did not register an installer].
-Check the log /var/log/vmware-installer for details.
-
-
-
-[######################################################################] 100%
-Installation was unsuccessful.
-
-
-[2021-02-25 11:28:13,465] code for hash sha256 was not found.                                                                                                                                               
-Traceback (most recent call last):
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
-    globals()[__func_name] = __get_hash(__func_name)
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
-    raise ValueError('unsupported hash type ' + name)
-ValueError: unsupported hash type sha256
-[2021-02-25 11:28:13,465] code for hash sha384 was not found.
-Traceback (most recent call last):
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
-    globals()[__func_name] = __get_hash(__func_name)
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
-    raise ValueError('unsupported hash type ' + name)
-ValueError: unsupported hash type sha384
-[2021-02-25 11:28:13,465] code for hash sha512 was not found.
-Traceback (most recent call last):
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 147, in <module>
-    globals()[__func_name] = __get_hash(__func_name)
-  File "/tmp/vmis.Lu1nSs/install/vmware-installer/python/lib/hashlib.py", line 97, in __get_builtin_constructor
-    raise ValueError('unsupported hash type ' + name)
-ValueError: unsupported hash type sha512
-[2021-02-25 11:28:13,494] 
-[2021-02-25 11:28:13,494] 
-[2021-02-25 11:28:13,494] Installer running.
-[2021-02-25 11:28:13,494] Command Line Arguments:
-[2021-02-25 11:28:13,494] ['/tmp/vmis.Lu1nSs/install/vmware-installer/vmware-installer.py', '--set-setting', 'vmware-installer', 'libconf', '', '--install-component', '/tmp/vmis.Lu1nSs/install/vmware-installer', '--install-bundle', '/home/rguske/Downloads/./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle', '']
-[2021-02-25 11:28:13,740] Successfully loaded GTK libraries.
-[2021-02-25 11:28:13,789] Using UI type gtk
-[2021-02-25 11:28:13,795] System installer version is: 3.0.0.17287072
-[2021-02-25 11:28:13,795] Running installer version is: 2.1.0.14928104
-[2021-02-25 11:28:13,795] Running newer system installer.
-[2021-02-25 11:28:14,151] 
-[2021-02-25 11:28:14,151] 
-[2021-02-25 11:28:14,151] Installer running.
-[2021-02-25 11:28:14,151] Command Line Arguments:
-[2021-02-25 11:28:14,151] ['/usr/lib/vmware-installer/3.0.0/vmware-installer.py', '--set-setting', 'vmware-installer', 'libconf', '', '--install-component', '/tmp/vmis.Lu1nSs/install/vmware-installer', '--install-bundle', '/home/rguske/Downloads/./VMware-ovftool-4.4.0-16360108-lin.x86_64.bundle', '']
-[2021-02-25 11:28:14,151] Failed to load GTK libraries, falling back to console.
-[2021-02-25 11:28:14,157] Using UI type console
-[2021-02-25 11:28:14,158] System installer version is: 3.0.0.17287072
-[2021-02-25 11:28:14,158] Running installer version is: 3.0.0.17287072
-[2021-02-25 11:28:14,158] Opening database file /etc/vmware-installer/database
-[2021-02-25 11:28:14,236] Could not locate installer App Control.
-[2021-02-25 11:28:14,247] Error: Cannot load installer for component: vmware-installer.
-[2021-02-25 11:28:14,248] Top level exception handler
-Traceback (most recent call last):
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 470, in RunThreadedTransaction 
-    txn.Execute(actions)
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/transaction.py", line 252, in Execute
-    i.Load(self.temp)
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/install.py", line 325, in Load
-    self._module, self._installer = LoadInstaller(self.component,
-  File "/usr/lib/vmware-installer/3.0.0/vmis/core/env.py", line 406, in LoadInstaller
-    raise ComponentError('Component did not register an installer', component)
-vmis.core.errors.ComponentError: Component did not register an installer
-
-sudo apt search canberra-gtk-module 
-Sorting... Done
-Full Text Search... Done
-libcanberra-gtk-module/focal 0.30-7ubuntu1 amd64
-  translates GTK+ widgets signals to event sounds
-
-
-sudo apt-get install libcanberra-gtk-module
-
-sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --console --required --eulas-agreed
-
-Extracting VMware Installer...done.
-Traceback (most recent call last):
-  File "/tmp/tmpcg3dtkug.vmis.env", line 132, in <module>
-    exec(fileObj.read(), mod.__dict__)
-  File "<string>", line 243
-    except OSError, e:
-                  ^
-SyntaxError: invalid syntax
-Exception info : [Component did not register an installer].
-Check the log /var/log/vmware-installer for details.
-
-sudo apt-get install murrine-themes
-
-[######################################################################] 100%
-Installation was unsuccessful.
-
-
-
-https://communities.vmware.com/t5/Open-Virtualization-Format-Tool/Error-Installing-OVFTool-on-Ubuntu-14-WorkStation-Guest/td-p/2232061
-
-> I'd been having this problem on multiple versions of Ubuntu for quite some time too, but found the answer in an post regarding a similar issue with a different VMware product - it has to do with how the VMware installer tries to use the Curses library.  Try something like this to see if it fixes your issue:
-
-TERM=dumb /bin/sh ./VMware-ovftool-4.2.0-4586971-lin.x86_64.bundle
-
-
-sudo ./VMware-ovftool-4.4.0-16530037-lin.x86_64.bundle --extract ./vmware-ovftool
-
-
-
-sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --gtk --required --eulas-agreed
-Extracting VMware Installer...done.
-
-(vmware-installer.py:147284): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-
-(vmware-installer.py:147284): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-Gtk-Message: Failed to load module "canberra-gtk-module"
-Traceback (most recent call last):
-  File "/tmp/tmpihijvlfg.vmis.env", line 132, in <module>
-    exec(fileObj.read(), mod.__dict__)
-  File "<string>", line 243
-    except OSError, e:
-                  ^
-SyntaxError: invalid syntax
-Exception info : [Component did not register an installer].
-Check the log /var/log/vmware-installer for details.
-
-
-
-[######################################################################] 100%
-Installation was unsuccessful.
-
-
-
-
-
-
-echo $GTK_PATH
-
-
-pwd    
-/usr/lib/x86_64-linux-gnu/gtk-2.0
-
-
-export GTK_PATH=/usr/lib/x86_64-linux-gnu/gtk-2.0
-
- sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --gtk --required --eulas-agreed
-Extracting VMware Installer...done.
-
-(vmware-installer.py:149037): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-
-(vmware-installer.py:149037): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
-Gtk-Message: Failed to load module "canberra-gtk-module"
-Traceback (most recent call last):
-  File "/tmp/tmpbbv6c1ad.vmis.env", line 132, in <module>
-    exec(fileObj.read(), mod.__dict__)
-  File "<string>", line 243
-    except OSError, e:
-                  ^
-SyntaxError: invalid syntax
-Exception info : [Component did not register an installer].
-Check the log /var/log/vmware-installer for details.
-
-
-
-[######################################################################] 100%
-Installation was unsuccessful.
-
-
-
-
-
-./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --extract ./vmware-ovftool
-Extracting VMware Installer...done.
-Gtk-Message: Failed to load module "atk-bridge"
-
-
-
-
-sudo apt-get install libatk-adaptor libgail-common                     
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-libgail-common is already the newest version (2.24.32-4ubuntu4).
-libgail-common set to manually installed.
-libatk-adaptor is already the newest version (2.34.2-0ubuntu2~20.04.1).
-libatk-adaptor set to manually installed.
-0 upgraded, 0 newly installed, 0 to remove and 26 not upgraded.
-
-
 ```
-ls -rtl
 
 
 
-
-
-{{< image src="/img/posts//" caption="Figure I: " src-s="/img/posts//" >}}
-
-
-{{< admonition info "" true >}}
-
-{{< /admonition >}}
-
-
-
-| | | |
-|:---: |:---: |:---: | :---: |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-
-
-{{< mermaid >}}
-graph LR;
-    subgraph HAProxy Appliance
-    A[ Management ]
-    B[ Workload ]
-    C[ Frontend / VIPs ]
-    end
-    subgraph Traffic from
-    G( Client / Service )
-    end
-    subgraph Load Balancer VIPs
-    E[ Supervisor Cluster VMs ]
-    F[ Guest Cluster VMs ]
-    end
-    A & B & C --- E
-    B & C --- F
-    G -.- C -.-> F & E
-{{< /mermaid >}}
+[^1]: [VMware ovftool {code} page](https://code.vmware.com/web/tool/4.4.0/ovf)
+[^2]: [Demo Appliance for Tanzu Kubernetes Grid](https://flings.vmware.com/demo-appliance-for-tanzu-kubernetes-grid)
+[^3]: [VMware Appliance for Folding@Home](https://flings.vmware.com/vmware-appliance-for-folding-home)
+[^4]: [VMware Event Broker Appliance](https://vmweventbroker.io/kb/contribute-appliance)
+[^5]: [Netshoot Virtual Appliance](https://github.com/josemzr/netshoot-virtual-appliance)
+[^6]: [virtuallyGhetto](https://www.virtuallyghetto.com/ovf)
+[^7]: [A Linux Development Desktop with VMware Horizon - Part I: Horizon](https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-i-horizon/)
+[^8]: [Download OVFTOOL 4.4.1](https://my.vmware.com/group/vmware/downloads/get-download?downloadGroup=OVFTOOL441)
