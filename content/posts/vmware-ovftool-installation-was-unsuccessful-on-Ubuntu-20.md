@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "VMware ovftool installation was unsuccessful on Ubuntu 20.04 LTS - a workaround"
+title: "VMware ovftool installation was unsuccessful on Ubuntu 20.04 - A workaround"
 date: 2021-03-21T21:00:34+01:00
 draft: false
 featuredImage: /img/ovftool_cover.jpg
