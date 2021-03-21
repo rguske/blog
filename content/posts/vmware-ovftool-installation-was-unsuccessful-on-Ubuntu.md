@@ -2,9 +2,9 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Unable to Install Ovftool on Ubuntu 20.04 LTS"
-date: 2021-03-09T14:33:34+01:00
-draft: true
+title: "VMware ovftool installation was unsuccessful on Ubuntu 20.04 LTS - a workaround"
+date: 2021-03-21T21:00:34+01:00
+draft: false
 featuredImage: /img/ovftool_cover.jpg
 categories: ["Workaround", "Linux", "Desktop", "VMware"]
 tags:
@@ -17,19 +17,19 @@ tags:
 
 ## Introduction
 
-The VMware OVF Tool [^1] is a powerful cli utility with which you can import and export Open Virtualization Format (OVF) packages to and from various VMware products. It's e.g. used for the creation of several great VMware Fling projects like the Demo Appliance for Tanzu Kubernetes Grid [^2], the VMware Appliance for Folding@Home [^3], the VMware Event Broker Appliance [^4] as well as for non-fling open source projects like e.g. the Netshoot Virtual Appliance [^5]. The Fling projects listed have one thing in particular in common and that is the main contributor - William Lam. If you weren't aware of what the tool is capable of yet, then check out William's work with it on his blog [^6].
+The VMware OVF Tool [^1] is a powerful cli utility with which you can import and export Open Virtualization Format (OVF) packages to and from various VMware products. It's e.g. used for the creation of several awesome VMware Fling projects like the Demo Appliance for Tanzu Kubernetes Grid [^2], the VMware Appliance for Folding@Home [^3] as well as for the VMware Event Broker Appliance [^4]. Also non-fling open source projects like e.g. the Netshoot Virtual Appliance [^5] using the `ovftool` in their appliance build process. William Lam blogged about it several times in the past and you could use this as a great reference for the tool [^6].
 
-I recently wanted to use the `ovftool` for validating a customer use-case and needed to install it on my "*Universal Workbench*" [^7], my Ubuntu 20.04 vDesk, which I am using for all my homelab work. As of writing this article, the latest available version for the ovftool is version 4.4.1 [^8].
+I recently wanted to make use of the `ovftool` for the validation of a customer use-case and needed to install it on my "*Universal Workbench*" [^7], my Ubuntu 20.04 vDesk (`20.04.1-Ubuntu x86_64`), which I am using for all my homelab work. As of writing this article, the latest available version for the `ovftool` is version 4.4.1 [^8].
 
-## Installation Options
+## Ovftool installation options
 
-So, I downloaded the appropriate 64 bit binary for my Linux system, which is the `VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle` file and made it executable:
+I downloaded the appropriate 64 bit binary for my Linux system, which is the `VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle` file and made it executable for the installation:
 
 ```shell
 $ chmod +755 VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle
 ```
 
-Various options are available for the installation itself (see: `ovftool --help`). The following listed are an abstract of the ones which are relevant for this post and which I've used for my installation tries.
+By executing `./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --help`, you will see that various options are available for the installation itself. The following listed are an abstract of the ones which are relevant for this post and which I've used for my installation attempts.
 
 ```shell
 Options:
@@ -37,13 +37,12 @@ Options:
     --console           Use the console UI
     --required          Displays only questions absolutely required
     --eulas-agreed      Agree to the EULA
-    --ignore-errors
     --extract=DIR       Extract the contents of the bundle into DIR
 ```
 
 ## Installation was unsuccessful
 
-Basically, you can decide if you'd like to use `--console` UI or the `--gtk` UI. My first attempt, and I used this option several installations before, was with the `--console` option. In a Terminal window I executed `sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --console --required --eulas-agreed` and got the following output as a failed result:
+On Linux, you can choose either to use the `--console` UI or the `--gtk` UI option. My first attempt, and I used this **several** times before, was with the `--console` option. In a Terminal window I executed `sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --console --required --eulas-agreed` and got the following output as a failed result:
 
 ```shell
 Extracting VMware Installer...done.
@@ -63,7 +62,7 @@ Check the log /var/log/vmware-installer for details.
 Installation was unsuccessful.
 ```
 
-<mark>Installation was unsuccessful</mark>
+- <mark>*Installation was unsuccessful*</mark>
 
 I couldn't really figure out the output and went straight for the `--gtk` option as my 2nd attempt:
 
@@ -92,44 +91,16 @@ Check the log /var/log/vmware-installer for details.
 Installation was unsuccessful.
 ```
 
-<mark>Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita"</mark>
+- <mark>*Gtk-WARNING: Unable to locate theme engine in module_path: adwaita*</mark>
 
-<mark>Gtk-Message: Failed to load module "canberra-gtk-module"</mark>
+- <mark>*Gtk-Message: Failed to load module canberra-gtk-module*</mark>
 
-Some research on "`Unable to locate theme engine in module_path: "adwaita"`" pointed me to presumable missing packages for my vDesk and therefore I followed some of the solution results which were for example:
+Some research on both failure indications pointed me to presumable missing packages related to the `GTK graphical user interface library` in Ubuntu and therefore I followed some of the described hints which were for example:
 
-```
-$ sudo apt install gnome-themes-standard
+- `sudo apt install gnome-themes-standard`[^9]
+- `sudo apt install canberra-gtk-module`[^10]
 
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-The following NEW packages will be installed:
-  gnome-themes-standard
-0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
-Need to get 2.164 B of archives.
-After this operation, 14,3 kB of additional disk space will be used.
-Get:1 http://de.archive.ubuntu.com/ubuntu focal/universe amd64 gnome-themes-standard all 3.28-1ubuntu1 [2.164 B]
-Fetched 2.164 B in 0s (10,8 kB/s)
-Selecting previously unselected package gnome-themes-standard.
-(Reading database ... 183276 files and directories currently installed.)
-Preparing to unpack .../gnome-themes-standard_3.28-1ubuntu1_all.deb ...
-Unpacking gnome-themes-standard (3.28-1ubuntu1) ...
-Setting up gnome-themes-standard (3.28-1ubuntu1) ...
-```
-
-or
-
-```shell
-$ sudo apt search canberra-gtk-module
-
-Sorting... Done
-Full Text Search... Done
-libcanberra-gtk-module/focal 0.30-7ubuntu1 amd64
-  translates GTK+ widgets signals to event sounds
-```
-
-as well as `sudo apt-get install libcanberra-gtk-module` but nothing solved the problem nor changed the failure message. Also the `/var/log/vmware-installer` log couldn't help.
+but non of those solved the problem nor changed the failure message. Also the `/var/log/vmware-installer` log couldn't really help (at least to me).
 
 ### Output /var/log/vmware-installer
 
@@ -193,10 +164,17 @@ Traceback (most recent call last):
 vmis.core.errors.ComponentError: Component did not register an installer
 ```
 
+## The workaround
 
-## Workaround: Extract ovftool
+If we cannot reach our goal via the conventional way, we have to find a detour, a workaround to get there. For this particular issue with the failed installation on Ubuntu 20.04, it is the extraction of the `ovftool` binaries from the installation `.bundle`, copying it to `/usr/bin/` and configure an `alias` for the `ovftool` binary.
 
+### Execute `ovftool` without installing it
 
+The `ovftool` installation file is a bundled package (`.bundle`) which contains the `ovftool` as well as the `vmware-installer`, plus the associated files for those. As aforementioned the installation can be executed with various options and by running `./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --help`, the `vmware-installer` will be temporarily extracted and provides these options.
+
+This is how it works step-by-step:
+
+1. Extract the files and change into directory ovftool (you can name the extracted directory as you want):
 
 `sudo ./VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle --extract ovftool && cd ovftool`
 
@@ -210,6 +188,7 @@ drwxr-xr-x 9 root   root         4,0K Mär  9 14:07 vmware-installer
 drwxr-xr-x 6 root   root         4,0K Mär  9 14:07 vmware-ovftool
 ```
 
+Here's what's in it:
 
 ```shell
 $ tree -L 2
@@ -260,26 +239,39 @@ $ tree -L 2
 11 directories, 31 files
 ```
 
+2. Move the `vmware-ovftool` directory to `/usr/bin/`:
+
 ```shell
-sudo mv vmware-ovftool /usr/bin/ovftool
+sudo mv vmware-ovftool /usr/bin/
 ```
 
+1. Make the two files `ovftool` as well as `ovftool.bin` executable:
+
+
 ```shell
-sudo chmod +x /usr/bin/ovftool/ovftool ovftool.bin
+sudo chmod +x /usr/bin/vmware-ovftool/ovftool ovftool.bin
 ```
 
-WORKS!!
+4. Configure an `alias` for your used `shell` to execute it as usual: `alias ovftool=/usr/bin/vmware-ovftool/ovftool`
 
+I am using `zsh` [^11] as the `shell`of my choice and I created a dedicated file for all my aliases - it's named `~/.zsh_aliases`.
 
-
-`sudo ln -s vmware-ovftool/ovftool ovftool`
-
-```shell
+```
 $ which ovftool
 
-/usr/bin/ovftool
+ovftool: aliased to /usr/bin/vmware-ovftool/ovftool
 ```
 
+This allows me to run the `ovftool` as usual again.
+
+## Conclusion
+
+- Ovftool installation was unsuccessful and issued the following errors: `Unable to locate theme engine in module_path: "adwaita"` and `Failed to load module "canberra-gtk-module`
+- Installation of Linux packages `gnome-themes-standard` and `canberra-gtk-module` didn't solve anything
+- Extracted the `ovftool` binaries from the installation `.bundle` package by using `vmware-installer` option `--extract`
+- Moved extracted folder `vmware-ovftool` to `/usr/bin/`
+- Made files `ovftool` and `ovftool.bin` executable
+- configured an `alias` for our shell to use it as usual
 
 
 [^1]: [VMware ovftool {code} page](https://code.vmware.com/web/tool/4.4.0/ovf)
@@ -287,6 +279,9 @@ $ which ovftool
 [^3]: [VMware Appliance for Folding@Home](https://flings.vmware.com/vmware-appliance-for-folding-home)
 [^4]: [VMware Event Broker Appliance](https://vmweventbroker.io/kb/contribute-appliance)
 [^5]: [Netshoot Virtual Appliance](https://github.com/josemzr/netshoot-virtual-appliance)
-[^6]: [virtuallyGhetto](https://www.virtuallyghetto.com/ovf)
+[^6]: [virtuallyGhetto - OVF / OVFTOOL](https://www.virtuallyghetto.com/ovf)
 [^7]: [A Linux Development Desktop with VMware Horizon - Part I: Horizon](https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-i-horizon/)
 [^8]: [Download OVFTOOL 4.4.1](https://my.vmware.com/group/vmware/downloads/get-download?downloadGroup=OVFTOOL441)
+[^9]: [Package gnome-themes-standard](https://packages.ubuntu.com/search?keywords=gnome-themes-standard)
+[^10]: [Package libcanberra-gtk-module](https://packages.ubuntu.com/focal/libcanberra-gtk-module)
+[^11]: [A Linux Development Desktop with VMware Horizon - Part III: Shell](https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-iii-shell/)
