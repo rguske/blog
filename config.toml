@@ -1,6 +1,6 @@
 baseURL = "https://rguske.github.io/"
 defaultContentLanguage = "en"
-theme = "LoveIt"
+theme = "CodeIt"
 #themesDir = "../.."
 title = "Robert Guske"
 # whether to use robots.txt
@@ -223,13 +223,15 @@ enableEmoji = true
   # LoveIt theme version
   version = "0.2.X"
   # site default theme ("light", "dark", "auto")
-  defaultTheme = "light"
+  defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = "https://github.com/rguske"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
-  fingerprint = ""
+  fingerprint = "sha256"
   # date format
   dateFormat = "2006-01-02"
+  # website images for Open Graph and Twitter Cards
+#  images = ["/img/avatar2.png"]
 
   # Header config
   [params.header]
@@ -256,7 +258,7 @@ enableEmoji = true
     # Custom content (HTML format is supported)
     custom = ''
     # whether to show Hugo and theme info
-    hugo = false
+    hugo = true
     # whether to show copyright info
     copyright = true
     # whether to show the author
@@ -311,6 +313,8 @@ enableEmoji = true
     [params.page.toc]
       # whether to enable the table of the contents
       enable = true
+      # whether to keep the static table of the contents in front of the post
+      keepStatic = false
       # whether to make the table of the contents automatically collapsed
       auto = false
     # Code config
