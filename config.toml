@@ -397,7 +397,7 @@ enableEmoji = true
         admin = ['rguske']
         repo = "my-gitalk"
         clientId = "dac5316ea2f4d94cc34a"
-        clientSecret = "295c1cbf7f708263cbe7e63de8856790bc549f37"
+        clientSecret = "cd6729fa4aded37fa18ff3122049abf5413f2eee"
       # Valine comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
