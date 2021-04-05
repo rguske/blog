@@ -392,7 +392,7 @@ enableEmoji = true
         shortname = "Robert Guske"
       # Gitalk comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        enable = true
+        enable = false
         owner = "rguske"
         admin = ['rguske']
         repo = "my-gitalk"
@@ -428,9 +428,9 @@ enableEmoji = true
         enable = false
       # Utterances comment config (https://utteranc.es/)
       [params.page.comment.utterances]
-        enable = false
+        enable = true
         # owner/repo
-        repo = ""
+        repo = "rguske/my-gitalk"
         issueTerm = "pathname"
         label = ""
         lightTheme = "github-light"
