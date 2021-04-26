@@ -6,6 +6,7 @@ title: "A Linux Development Desktop with VMware Horizon - Part I: Horizon"
 date: 2020-02-27T16:34:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_i_cover.png
+description: "Part I - A guide how to setup a VMware Horizon Connection Server, the installation, configuration and preperation of the Linux distributions Ubuntu and CentOS and how you can turn them into a universal workbench for development and operations."
 categories: ["Linux", "VDI", "Desktop", "VMware"]
 tags:
 - February2020
@@ -13,6 +14,9 @@ tags:
 - Horizon
 - VDI
 ---
+
+<!--more-->
+
 ## The Universal Workbench
 
 I often thought about writing down my experiences on the topics of *Jumphosts*, *Shell-modifications* and *useful tools* in a series of blog posts, but I hadn´t found the right moment, until I saw the following Tweet, where Alex asked his followers how they get access to a Linux system if they aren´t running Linux on their workstation (locally).

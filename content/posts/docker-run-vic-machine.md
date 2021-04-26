@@ -6,6 +6,7 @@ title: "docker run vic-machine"
 date: 2019-07-04T22:52:18+02:00
 draft: false
 featuredImage: /img/dockerrunvicmachine_cover.jpg
+description: "A guide through the various steps to consume vic-machine and every specific action of it in a simplified fashion AND have it running in a container pulled out of Harbor or from another repository of your choice."
 categories: ["Container", "VMware", "Automation"]
 tags:
 - July2019
@@ -15,6 +16,9 @@ tags:
 - Harbor
 - vSphere
 ---
+
+<!--more-->
+
 ## Introduction
 
 The deployment of a Virtual Container Host (VCH) can be done in various ways. One easy way is to use the vSphere-Client (H5) plugin which gives you the ability to configure all necessary parameters e.g. for network, storage or deployment target through a step-by-step deployment wizard.

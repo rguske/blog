@@ -6,6 +6,7 @@ title: "vSphere 7 with Kubernetes supercharged - Helm, Harbor and Tanzu Kubernet
 date: 2020-07-21T15:30:38+02:00
 draft: false
 featuredImage: /img/harborontkg_cover.jpg
+description: "In this post I will focus on the installation of Harbor using Helm and also on the preperations you have to do upfront before you are able to let the Supervisor Cluster pull images out of Harbor and to subsequently instantiate them as a native Pod on vSphere."
 categories: ["Kubernetes", "Cloud Native", "VMware"]
 tags:
 - July2020
@@ -16,6 +17,8 @@ tags:
 - TKG
 - vSphere
 ---
+
+<!--more-->
 
 I recently had to prepare my homelab for a customer workshop to demo our new Tanzu Runtime & Hybrid Infrastructure Services. This includes e.g. the deployment of a Tanzu Kubernetes Grid Cluster on vSphere (TKG Service), the enterprise cloud native registry Harbor as well as the instantiation of a native Pod on vSphere (vSphere Pod Service).
 

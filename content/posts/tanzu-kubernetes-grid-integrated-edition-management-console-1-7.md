@@ -6,6 +6,7 @@ title: "VMware Enterprise PKS got rebranded VMware Tanzu Kubernetes Grid Integra
 date: 2020-05-01T14:00:24+02:00
 draft: false
 featuredImage: /img/tkgimc17_cover.jpg
+description: ""
 categories: ["VMware", "Kubernetes", "Cloud Native"]
 tags:
 - April2020
@@ -15,6 +16,9 @@ tags:
 - TKG
 - TKGIMC
 ---
+
+<!--more-->
+
 ...and thus also the Enterprise PKS Management Console (EPMC), which is now inferring named as **Tanzu Kubernetes Grid Integrated Edition Management Console (TKGIMC)**.
 
 {{< admonition quote "" true >}}

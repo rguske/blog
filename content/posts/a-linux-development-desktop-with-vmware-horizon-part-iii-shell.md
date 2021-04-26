@@ -6,6 +6,7 @@ title: "A Linux Development Desktop with VMware Horizon - Part III: Shell"
 date: 2020-02-27T16:32:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_iii_cover.jpg
+description: "Part III - A guide on the \"Highway\" to Shell."
 categories: ["Linux", "VDI", "Desktop", "VMware", "Terminal"]
 tags:
 - February2020
@@ -15,6 +16,9 @@ tags:
 - Tools
 - Terminal
 ---
+
+<!--more-->
+
 ## High :zap: Way to Shell
 
 The operationalization of platforms such as e.g. Kubernetes, or the use of tools for building services or applications such as Docker, requires in both cases the use of the command-line. There are dozens of great plugins, themes and extensions out there to pimp your shell so that it´ll help you to increase velocity as well as useability.
