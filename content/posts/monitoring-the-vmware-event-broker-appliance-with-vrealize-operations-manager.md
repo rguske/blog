@@ -6,6 +6,7 @@ title: "Monitoring the VMware Event Broker Appliance with vRealize Operations Ma
 date: 2020-05-12T23:59:50+02:00
 draft: false
 featuredImage: /img/vrops_veba_cover.jpg
+description: "This post covers how to monitor the VMware Event Broker Appliance (VM), plus it's Kubernetes components like the Control Plane (Master), the Node(s) as well as the Pods by using vRealize Operations Manager."
 categories: ["Monitoring", "VEBA", "FaaS", "Open Source", "Cloud Native", "VMware"]
 tags:
 - May2020
@@ -13,6 +14,9 @@ tags:
 - Monitoring
 - vRealize Operations Manager
 ---
+
+<!--more-->
+
 Since the [VMware Event Broker Appliance (VEBA)](https://vmweventbroker.io) is reaching more and more folks out there and the interest is growing steadily, it is important to validate the integration with other solutions (preferably VMware). At least that's what I thought :wink:.
 
 Monitoring in terms of utilization and performance captured my interest. So, how can I monitor not only the appliance (virtual machine) but also the Kubernetes components like the Control Plane (Master), the Node(s) as well as the Pods? Furthermore, not only the workload is of interest but also the dependencies of the individual components to each other are interesting. Beyond that and because I'm just getting started, I would also like to have the ability to generate alarms if a desired state is no longer fulfilled.

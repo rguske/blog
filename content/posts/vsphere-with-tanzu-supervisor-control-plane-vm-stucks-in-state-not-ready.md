@@ -6,6 +6,7 @@ title: "vSphere with Tanzu - SupervisorControlPlaneVM stucks in state NotReady"
 date: 2021-04-25T16:00:39+02:00
 draft: false
 featuredImage: /img/v7k8s_svcp_not_ready_cover.png
+description: "The vSphere ESX Manager manages the life-cycle of agent VIBs and VMs. This post will give you an idea how it can help if one of your Supervisor Control Plane VMs stucks in state NotReady."
 categories: ["Kubernetes", "Cloud Native", "VMware"]
 tags:
 - April2021
@@ -14,6 +15,9 @@ tags:
 - TKGs
 - vSphere
 ---
+
+<!--more-->
+
 ## Introduction
 
 Power outage related circumstances recently brought my vSphere with Tanzu Workload Management[^1] enabled homelab cluster (Supervisor Cluster) into a not desired state which of course I had to fix.

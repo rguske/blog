@@ -6,6 +6,7 @@ title: "Using Harbor with the VMware Event Broker Appliance"
 date: 2020-03-23T22:00:36+01:00
 draft: false
 featuredImage: /img/veba_harbor_cover.jpg
+description: "Instead of pulling function images from Docker Hub, I'm going to explorer the use of the enterprise container image registry Harbor this time."
 categories: ["VEBA", "FaaS", "VMware", "Cloud Native"]
 tags:
 - March2020
@@ -13,6 +14,9 @@ tags:
 - Harbor
 - FaaS
 ---
+
+<!--more-->
+
 The <a href="https://github.com/vmware-samples/vcenter-event-broker-appliance" target="_blank">vCenter Event Broker Appliance (VEBA)</a> is still one of my favorite open source projects these days and it is evolving rapidly and continuously through the great work of the two main contributors <a href="https://twitter.com/embano1" target="_blank">Michael Gasch</a> and <a href="https://twitter.com/lamw" target="_blank">William Lam</a> as well as through the valuable ***feedback*** from the community. I´m very proud to be part of the "inner circle" of folks who meet on a regular basis to discuss everything <a href="https://twitter.com/search?q=%23vcenter-event-broker-appliance&src=typed_query" target="_blank">#VEBA</a> and the keyword here is also ***feedback***.
 
 Version 0.3 was recently with big updates announced which can be viewed via the following link: <a href="https://www.virtuallyghetto.com/2020/03/big-updates-to-the-vcenter-event-broker-appliance-veba-fling.html" target="_blank">Big updates to the vCenter Event Broker Appliance (VEBA) Fling</a>

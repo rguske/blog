@@ -6,6 +6,7 @@ title: "vSphere Integrated Containers Part IV: docker run a Container-VM"
 date: 2018-07-13T13:31:42+02:00
 draft: false
 featuredImage: /img/vic_part_4_cover.jpg
+description: "This post will show you how easy it is to instantiate a Nginx Web Server in form of a so called Container-VM directly on vSphere."
 categories: ["VMware", "Container", "Cloud Native"]
 tags:
 - July2018
@@ -16,6 +17,9 @@ tags:
 - vSphere
 - docker
 ---
+
+<!--more-->
+
 ## Instantiate a nginx cVM
 
 Now that we´ve become more familiar with the Virtual Container Host, it´s time to run our first Container-VM on it. The following example will show you how easy it is to instantiate an <a href="https://hub.docker.com/r/vmwarecna/nginx/" target="_blank">Nginx </a> Web Server container-image.

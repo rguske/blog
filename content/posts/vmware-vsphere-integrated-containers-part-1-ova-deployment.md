@@ -6,6 +6,7 @@ title: "vSphere Integrated Containers Part I: OVA Deployment"
 date: 2018-07-13T13:10:38+02:00
 draft: false
 featuredImage: /img/vic_part_1_cover.jpg
+description: "I am describing the deployment pre-requisites for vSphere Integrated Containers through this post."
 categories: ["VMware", "Container", "Cloud Native"]
 tags:
 - July2018
@@ -15,6 +16,9 @@ tags:
 - VMware
 - vSphere
 ---
+
+<!--more-->
+
 ## Environment Pre-Requisites
 
 - vSphere Enterprise Plus license or vSphere Remote Office Branch Office (ROBO) Advanced (!)

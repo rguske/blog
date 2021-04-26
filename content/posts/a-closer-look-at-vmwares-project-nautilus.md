@@ -6,6 +6,7 @@ title: "A closer look at VMware's Project Nautilus"
 date: 2020-09-20T11:45:57+02:00
 draft: false
 featuredImage: /img/projectnautilus_cover.jpg
+description: "How project Nautilus provides a single development platform on the desktop by enabling users to run OCI compliant Containers as well as Kubernetes besides Virtual Machines on the desktop."
 categories: ["Desktop", "VMware", "Kubernetes"]
 tags:
 - September2020
@@ -14,7 +15,8 @@ tags:
 - Kubernetes
 - Desktop
 ---
-## General Availability Fusion 12 & Workstation 16
+
+<!--more-->
 
 VMware's Desktop Hypervisor solutions [Fusion](https://www.vmware.com/products/fusion/faq.html) for Mac users and [Workstation](https://www.vmware.com/products/workstation-pro/faq.html) for the Windows and Linux userbase were launched in it's newest versions on September 15th. Lots of new features, enhancements and support around VM Guest Operating Systems, VM Scaling, GPU, Containers and Kubernetes has made it into these releases. The made enhancements will enrich Developers tool kit as well as will provide great new capabilities for IT Admins and everyone else who is keen on spinning up and down Virtual Machines, Containers and **NOW** also Kubernetes.
 
