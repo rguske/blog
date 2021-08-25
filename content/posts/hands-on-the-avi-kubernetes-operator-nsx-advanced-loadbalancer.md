@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Hands on the Avi Kubernetes Operator (AKO)"
+title: "Hands-on the Avi Kubernetes Operator (AKO)"
 date: 2021-07-30T11:00:59+02:00
 draft: false
 featuredImage: /img/handsonako_cover.jpg
