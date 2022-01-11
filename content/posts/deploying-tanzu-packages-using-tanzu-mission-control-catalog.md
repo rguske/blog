@@ -4,8 +4,9 @@ authorLink: "/about/"
 lightgallery: true
 title: "Deploying Tanzu Packages using Tanzu Mission Control Catalog"
 date: 2022-01-08T18:00:27+01:00
-draft: true
+draft: false
 featuredImage: /img/tmc_catalog_202201_cover.png
+description: "This post introduces the Tanzu Mission Control Catalog feature and provides a closer look on the provided simplicity to extend your Kubernetes Clusters with the automated installation of Tanzu Packages through the catalog."
 categories: ["VMware", "Tanzu", "Management", "Kubernetes"]
 tags:
 - January2022
@@ -28,7 +29,7 @@ By deeply incorporating open source projects like e.g. [Velero](https://velero.i
 
 <center> {{< tweet user="vmw_rguske" id="1466426330354962437" >}} </center>
 
-The Catalog is exactly providing this in my introduction mentioned simplicity to exetend your Kubernetes environments by providing an easy and opinionated way to install solutions for e.g. monitoring, logging, ingress, external-dns and others and which have official support by VMware. Furthermore, it's also possible to add your own repositories of solutions to Catalog to give you even more flexibility and extensibility.
+The Catalog is exactly providing this in my introduction mentioned simplicity to exetend your Kubernetes environments by providing an easy and opinionated way to install solutions for e.g. monitoring, logging, ingress, external-dns and others, with have official support by VMware. Furthermore, it's also possible to add your own repositories of solutions to Catalog to give you even more flexibility and extensibility.
 
 *Figure I* shows the currently available <span style="color:#6003B6">PACKAGES</span>.
 
@@ -191,7 +192,7 @@ Attaching the cluster of your choice can be done by executing the command like t
 
 Hint: There are many good reasons to use `labels` and therefore I added two of them (`-l owner=rguske -l networking=vsphere`) to my cluster.
 
-And just a couple of seconds later, the Kubernetes cluster is part of my Cluster Group, fully managebale and ready to get enhanced through Tanzu Mission Control.
+And just a couple of seconds later, the Kubernetes cluster is part of my Cluster Group, fully manageable and ready to get enhanced through Tanzu Mission Control.
 
 {{< image src="/img/posts/202201_tmc_catalog/tmc_catalog_202201_7.png" caption="Figure VII: K8s Cluster is showing up in TMC" src-s="/img/posts/202201_tmc_catalog/tmc_catalog_202201_7.png" >}}
 
@@ -246,7 +247,7 @@ Configuration types/values can be added in the following format, depending on th
 - integer (integer value)
   - e.g. `replicas: 2`
 
-I oriented myself on the official [Contour Configuration File example](https://projectcontour.io/docs/v1.17.1/configuration/#configuration-file) to create my config. Those are my specified `values`:
+I oriented myself on the official [Contour Configuration File example](https://projectcontour.io/docs/v1.17.1/configuration/#configuration-file) to create my config. These are my specified `values`:
 
 ```code
 spec:
@@ -287,7 +288,7 @@ vmware-system-csi              Active   45h
 vmware-system-tmc              Active   3h23m
 ```
 
-The first namespace is `contour-ingress-14ece452` and is where the needed **resources for the package installation** itself are installed to.
+The first namespace is `contour-ingress-14ece452` and is it where the needed **resources for the package installation** itself are installed to.
 
 ```code
  k -n contour-ingress-14ece452 get cm,sa
@@ -414,7 +415,7 @@ Fortunately, searching for the provided error message from the logs...
 #### :movie_camera: Recording KB85725
 
 {{< admonition info "Provide the right Namespace" true >}}
-Make sure that you provide the Namespace where the Harbor package resources where installed to, which is not the `tanzu-system-registry`! In my case it's named as `harbor-b77eba03`.
+Make sure that you provide the Namespace where the Harbor package resources were installed to, which is not the `tanzu-system-registry`! In my case it's named as `harbor-b77eba03`.
 {{< /admonition >}}
 
 <script id="asciicast-qwqnFfKAdi1152lAPobELY26K" src="https://asciinema.org/a/qwqnFfKAdi1152lAPobELY26K.js" async></script>
