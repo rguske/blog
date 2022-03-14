@@ -137,7 +137,7 @@ ignoreErrors = ["error-remote-getjson"]
           # Gravatar Email for preferred avatar in home page
           gravatarEmail = ""
           # URL of avatar shown in home page
-          avatarURL = ""
+          avatarURL = "/img/avatar2.png"
           # title shown in home page
           title = 'Sometimes you gotta run before you can walk!'
           # subtitle shown in home page
@@ -245,9 +245,9 @@ ignoreErrors = ["error-remote-getjson"]
     # Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/img/avatar2.png"
+      logo = ""
       # title name
-      name = "   rguske.github.io"
+      name = "Robert Guske"
       # you can add extra information before the name (HTML format is supported), such as icons
 #      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
