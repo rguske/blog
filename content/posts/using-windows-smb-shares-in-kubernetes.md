@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Using Windows SMB Shares in Kubernetes"
-date: 2022-04-01T10:04:43+02:00
+date: 2022-04-08T10:04:43+02:00
 draft: true
 featuredImage: /img/csi-smb-cover.png
 description: ""
