@@ -4,7 +4,7 @@ authorLink: "/about/"
 lightgallery: true
 title: "Demoing Knative Serving and Eventing using Demo-Magic-Scripts"
 date: 2022-05-15T20:00:11+01:00
-draft: true
+draft: false
 featuredImage: /img/knative_post_cover.png
 description: "Knative is the most popular platform to run Serverless workload on Kubernetes and to build event-driven architectures. This posts introduces two demo-scripts which will support you when presenting on Knative's power in the mentioned disciplines."
 categories: ["VMware", "Kubernetes", "Serverless", "Event-Driven"]
