@@ -3,13 +3,15 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Using Windows SMB Shares in Kubernetes"
-date: 2022-04-08T10:04:43+02:00
+date: 2022-06-16T11:00:43+02:00
 draft: true
 featuredImage: /img/csi-smb-cover.png
 description: ""
-categories: ["Kubernetes"]
+categories: ["Kubernetes", "Storage"]
 tags:
 - Kubernetes
+- Storage
+- CSI
 ---
 
 ## Using Windows SMB Shares in Kubernetes
@@ -351,7 +353,7 @@ spec:
 
 ## Installation
 
-Now that the preperations are done, `apply` all the created manifest files to Kubernetes. 
+Now that the preperations are done, `apply` all the created manifest files to Kubernetes.
 
 - kubectl apply -f rbac-csi-smb-controller.yaml
 - kubectl apply -f csi-smb-driver.yaml
@@ -360,7 +362,7 @@ Now that the preperations are done, `apply` all the created manifest files to Ku
 
 ## Testing
 
-The foloowing test will be done in Namespace `smb-test`.
+The following test will be done in Namespace `smb-test`.
 
 `kubectl create ns smb-test`.
 
