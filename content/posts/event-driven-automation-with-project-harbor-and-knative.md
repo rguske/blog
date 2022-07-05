@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Transforming Harbor Webhook Notification Event Schema in CloudEvents using the VMware Event Broker Appliance"
+title: "Event-Driven Automation with Project Harbor and Knative"
 date: 2022-07-04T12:00:54+02:00
 draft: false
 featuredImage: /img/harbor-webhook-function-cover.png
@@ -15,21 +15,19 @@ tags:
 - Kubernetes
 - Cloud Native
 - Harbor
+- CloudEvents
+- Functions
 ---
 
 <!--more-->
 
-## Web🪝s, Web🪝s, Web🪝s
+## Webhooks everywhere
 
-Many solutions today are supporting the configuration of a webhook endpoint, a remote webserver, to send information to it over `HTTP, HTTPS POST/PUT`. Information as such can vary but a popular use case for example is to send out notifications in case of the occurrence of a specific event. The information sent are often provided in a `JSON` structured format. The open source container registry [Harbor](https://goharbor.io/) for instance, which I already tackled a couple of times on my blog ([#harbor](https://rguske.github.io/tags/harbor/)), supports the configuration of a webhook endpoint in order to send specific notification events via `http` or `https` (`POST`) as well. Those events are related to a created [Harbor project](https://goharbor.io/docs/latest/working-with-projects/create-projects/) specifically.
+Webhooks are very popular today. In a nutshell, webhooks are nothing but HTTP servers accepting `HTTP` requests. These requests are typically events. An event is an immutable fact of something that has happened. Therefore, events are normally written in past tense. Most webhooks accept JSON-encoded events.
 
-{{< admonition info "Harbor project" true >}}
-A project in Harbor contains all repositories of an application. Images cannot be pushed to Harbor before a project is created. Role-Based Access Control (RBAC) is applied to projects, so that only users with the appropriate roles can perform certain operations.
+[Harbor](https://goharbor.io/) is a prominent open-source container registry. If you never heard of this project, check out my other posts ([#harbor](https://rguske.github.io/tags/harbor/)). Luckily, Harbor also supports the webhook standard.
 
-*Source: [Harbor Documentation](https://goharbor.io/docs/latest/working-with-projects/create-projects/)*
-{{< /admonition >}}
-
-When now a certain project related interaction happened, like e.g. the `push` of a new container image (`PUSH_ARTIFACT`) or an image got pulled (`PULL_ARTIFACT`) or deleted (`DELETE_ARTIFACT`) to/from the project, the following payload will be send to the configured webhook endpoint:
+Let's take the example of someone deleting an image from the registry. Harbor generates the following `DELETE_ARTIFACT` event:
 
 ```json
 // Harbor specific JSON payload
@@ -58,33 +56,43 @@ When now a certain project related interaction happened, like e.g. the `push` of
 
 *Source: [Harbor Documentation](https://goharbor.io/docs/latest/working-with-projects/project-configuration/configure-webhooks/)*
 
-The information sent are very useful and are serving the receiver with details like e.g. `which`, `where`, `who`, `when` and more. Now, since those information are very, again useful as well as relevant, we want to process such in the most effective way as possible. This is where I came up with the idea to use the [VMware Event Broker Appliance - VEBA](https://vmweventbroker.io) for it, in order to ensure effectiveness.
+Events like the above are related to a specific [Harbor project](https://goharbor.io/docs/latest/working-with-projects/create-projects/).
 
-## VEBA Generic Web🪝 Endpoint and Web🪝 Functions
+{{< admonition info "Harbor project" true >}}
+A project in Harbor contains all repositories of an application. Images cannot be pushed to Harbor before a project is created. Role-Based Access Control (RBAC) is applied to projects, so that only users with the appropriate roles can perform certain operations.
 
-VEBA supports a generic webhook endpoint since version [v0.7.0](https://vmweventbroker.io/evolution), which is configureable during the OVA deployment and reachable afterwards on `https://<veba-fqdn>/webhook`. This endpoint can be used to further expand the range of event producers who supports the creation of their own event payload.
+*Source: [Harbor Documentation](https://goharbor.io/docs/latest/working-with-projects/create-projects/)*
+{{< /admonition >}}
 
-[William Lam](https://twitter.com/lamw) introduced a webhook function in his article ["Custom webhook function to publish events into VMware Event Broker Appliance (VEBA)"](https://williamlam.com/2021/09/custom-webhook-function-to-publish-events-into-vmware-event-broker-appliance-veba.html) and covers the awesomeness and simplicity when leveraging VEBA functions in order to transform a non-CloudEvent conformant payload and to ultimately enable the integration of other (non-vSphere/Horizon) systems/event producers.
+Let's stick with the example provided. The events sent are very detailed and thus useful. They can be used for ChatOps for example. This is where I came up with the idea to forward the Harbor event to a notification function running on the [VMware Event Broker Appliance - VEBA](https://vmweventbroker.io).
 
-Now the challenge is, and William directly tackled it at the very beginning of his post, that not every solution supports the [CloudEvents](https://cloudevents.io/) specification/schema. The idea behind CloudEvents is simple and powerful at the same time. If there's no default description/definition for event data, event handling logics have to be developed again and again!
+## VEBA Generic Webhook Endpoint and Webhook Functions
 
-I hope this will change in the future soon ...
+VEBA supports a generic webhook endpoint since version [v0.7.0](https://vmweventbroker.io/evolution). The webhook endpoint can be enabled during the OVA deployment and is available on `https://<veba-fqdn>/webhook` afterwards. It accepts incoming CloudEvents as payload.
+
+The challenge is, and William tackled it in [THIS POST](https://williamlam.com/2021/09/custom-webhook-function-to-publish-events-into-vmware-event-broker-appliance-veba.html), that not every solution supports the [CloudEvents](https://cloudevents.io/) specification.
+
+Although the idea behind CloudEvents is simple and powerful. If there's no default description/definition for event data, event handling logics have to be developed again and again!
+
+I hope this will change ...
 
 <center> {{< tweet user="embano1" id="1527298365528190976" >}} </center>
 
 > Session from the tweet: **"Thinking Cloud Native, CloudEvents Future - Scott Nichols, Chainguard"** at KubeCon 2022 Europe :point_down: [Resources](#resources).
 
-In my specific use case with Harbor, I checked the open issue's on the project page on Github, to see if someone already raised the idea of making the webhook notification events CloudEvent conform and yes, <i class='fab fa-github fa-fw'></i> [#10146](https://github.com/goharbor/harbor/issues/10146) is bringing this idea up. Give it a :thumbs_up: :wink:
+For my specific use case with Harbor, I checked the open issue's on Github to see if someone had already raised the idea of adopting CloudEvents. Luckily, <i class='fab fa-github fa-fw'></i> issue [#10146](https://github.com/goharbor/harbor/issues/10146) brings the idea up. Give it a :thumbs_up: :wink:
 
-However, in order to react on the sent events from Harbor, I briefly brainstormed with [Michael](https://twitter.com/embano1), got him hooked on the overall idea, and he quickly wrote a complete new function which transforms the incoming Harbor events into CloudEvents :boom:.
+However, in a brainstorming session with [Michael](https://twitter.com/embano1), I got him hooked and he wrote a complete new function which transforms the incoming Harbor events into CloudEvents :boom:.
 
 <center> {{< tweet user="embano1" id="1541387083515846658" >}} </center>
 
 ## The Use Case with Harbor
 
-So, the overall idea is to send the non-CloudEvent payload to the new `kn-go-harbor-webhook` function, get it transformed into a CloudEvent payload and have the new [kn-ps-harbor-slack](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-harbor-slack) function triggered on the delivered and `subscribed` event like e.g. `com.vmware.harbor.push_artifact.v0`.
+The overall idea is to send the non-CloudEvent payload to the new `kn-go-harbor-webhook` function, get it transformed into a CloudEvent and have the new [kn-ps-harbor-slack](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-harbor-slack) function triggered.
 
-This is how the flow looks like when you've deployed it:
+For the used example [above](#webhooks-everywhere), the new event `type` will be `com.vmware.harbor.delete_artifact.v0`.
+
+The following diagram depicts the end-to-end flow of the deployment.
 
 {{< mermaid >}}
 graph TD;
@@ -123,7 +131,9 @@ Let me guide you through the necessary steps in order to:
 
 ### DNS Wildcard Configuration for VEBA
 
-The first required step is to configure your DNS server with a wildcard entry for VEBA. This is necessary because when you're going to deploy functions to VEBA, they'll ultimately run as Pods on Kubernetes, or in Knative terminology as [Knative Services](https://knative.dev/docs/serving/services/) (`serving.knative.dev/service`). Those Services are providing endpoints for which we have to make sure that they are reachable over the wire.
+The first required step is to configure your DNS server with a wildcard entry for VEBA. This is necessary because when you're going to deploy functions to VEBA, they'll ultimately run as Pods on Kubernetes, or in Knative terminology as [Knative Services](https://knative.dev/docs/serving/services/) (`serving.knative.dev/service`).
+
+Those Services are providing endpoints for which we have to make sure that they are reachable over the wire.
 
 It is presented as follows: `https://[function-name].[function-namespace].[veba-fqdn]`.
 
@@ -149,9 +159,11 @@ William is explaining the necessary configurations on his blog when using Unboun
 
 ### Deploy the kn-go-harbor-webhook Function
 
-Deploying functions on VEBA is simple and well documented guidance for each specific example function is available on <i class='fab fa-github fa-fw'></i>. If necessary, the first step is in most cases the creation of a Kubernetes secret in order to store sensible data like e.g. user credentials or a webhook URL on Kubernetes. Having said, we are going to create a new secret called `webhook-auth` for our function in order to enforce basic authentication on the HTTP endpoint.
+Deploying functions on VEBA is simple. Well documented guidance for each specific example function is available on <i class='fab fa-github fa-fw'></i>.
 
-1. Create the `webhook-auth` secret
+If necessary, the first step is in most cases the creation of a Kubernetes secret in order to store sensible data (user credentials, etc.). Having said, we are going to create a new secret called `webhook-auth` for our function in order to enforce basic authentication on the HTTP endpoint.
+
+#### Create the `webhook-auth` secret
 
 ```shell
 kubectl create secret generic webhook-auth \
@@ -189,9 +201,9 @@ replaceme
 
 Compliant :thumbs_up:
 
-2. Create a `SinkBinding`
+#### Create a `SinkBinding`
 
-A Knative `SinkBinding` makes the decoupling of an `event source` (like Harbor) and an `event sink` (Knative Broker) possible. Therefore, it's possible to automatically inject the VEBA default broker into the function.
+A Knative `SinkBinding` decouples the event producer ("`subject`", i.e. kn-go-harbor-webhook) from the receiver ("`sink`", i.e. VEBA broker). With the following `SinkBinding`, Knative injects the address of the VEBA broker to the function.
 
 Create the `SinkBindung`:
 
@@ -216,7 +228,7 @@ EOF
 
 When checking the deployed object by executing `kubectl -n vmware-functions get sinkbinding`, you'll probably notice the info `REASON: SubjectMissing`. This is normal since it is waiting for the actual function deployment.
 
-3. Deploy the kn-go-harbor-webhook function
+#### Deploy the kn-go-harbor-webhook function
 
 The final step now is the deployment of the `kn-go-harbor-webhook` function itself.
 
@@ -320,7 +332,9 @@ Awesome! :rocket:
 
 ### Deploy the kn-ps-harbor-slack Function
 
-With the available CloudEvent payload, we can now configure other functions for being subscribed to incoming events and to ultimately get triggered by those. As aforementioned (low hanging fruits), I wanted to get notified by actions happened related to my Harbor project. The [kn-ps-harbor-slack](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-harbor-slack) function will send a good looking message to your Slack channel webhook (there we go again... web:hook:s everywhere :smile:).
+With the available CloudEvent payload, we can now configure and deploy other functions. As aforementioned (low hanging fruits), I wanted to get notified by actions happened related to my Harbor project (#ChatOps). The [kn-ps-harbor-slack](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-harbor-slack) function will send a message to your Slack channel webhook.
+
+There we go again... webhooks everywhere :smile:
 
 1. Add your Slack channel webhook URL to the [slack_secret.json](https://github.com/vmware-samples/vcenter-event-broker-appliance/blob/development/examples/knative/powershell/kn-ps-harbor-slack/slack_secret.json) file
 2. Create the Kubernetes secret
@@ -385,7 +399,7 @@ spec:
 EOF
 ```
 
-When you now repeat one of the described steps from above, like e.g. `push` or `delete` an artifact, a new message should show up in your Slack channel, like my provided example in *Firgure V*.
+When you are going to e.g. `push` or `delete` an artifact, a new message should show up in your Slack channel, like the provided example in *Firgure V*.
 
 {{< image src="/img/posts/202207_harbor_webhhok_post/rguske-post-harbor-webhook-function-5.png" caption="Figure V: Slack Notification delivered by kn-ps-harbor-slack Function" src-s="/img/posts/202207_harbor_webhhok_post/rguske-post-harbor-webhook-function-5.png" >}}
 
@@ -393,7 +407,13 @@ When you now repeat one of the described steps from above, like e.g. `push` or `
 
 <script id="asciicast-WMgGk65yfymhqAQFkEQfRhQ3S" src="https://asciinema.org/a/WMgGk65yfymhqAQFkEQfRhQ3S.js" async></script>
 
-**Sitenote:** Harbor supports Slack as a configurable [Notify Type](https://goharbor.io/docs/2.5.0/working-with-projects/project-configuration/configure-webhooks/) OOB but it sends the message in a raw JSON format. However, we also have a [Microsoft Teams Function example](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-ngw-teams) available in PowerShell as well :wink:
+**As a side note:** Harbor supports Slack as a configurable [Notify Type](https://goharbor.io/docs/2.5.0/working-with-projects/project-configuration/configure-webhooks/) OOB. But it sends the message in a raw JSON format. However, we also have a [Microsoft Teams Function example](https://github.com/vmware-samples/vcenter-event-broker-appliance/tree/development/examples/knative/powershell/kn-ps-ngw-teams) available in PowerShell as well ... :wink:
+
+---
+
+Big THANKS to Michael for the great work on the kn-go-harbor-webhook function as well as for his review of this post.
+
+---
 
 ## Resources
 
