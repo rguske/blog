@@ -6,7 +6,7 @@ title: "Event-Driven Automation with Project Harbor and Knative"
 date: 2022-07-04T12:00:54+02:00
 draft: false
 featuredImage: /img/harbor-webhook-function-cover.png
-description: "Leveraging a VMware Event Broker Appliance function in order to transform Harbor (webhook) notification events into CloudEvents to ultimately have a Slack-Function example triggered."
+description: "The open-source container registry Harbor supports the configuration of webhook endpoints. Harbor notifies the webhook endpoint of certain events that occur in a project. However, the event sent is not delivered as a CloudEvent. By leveraging the power of VEBA/Knative the non-CloudEvent can be send to a webhook function to get transformed in a CloudEvent. By transforming the event, other functions can be subscribed to the new event to ultimately get triggered. As a use case for it, I'm going to describe how ChatOps can be enabled using event-driven automation."
 categories: ["VMware", "Cloud Native", "FaaS", "Serverless", "Event-Driven"]
 tags:
 - VEBA
@@ -80,9 +80,11 @@ I hope this will change ...
 
 > Session from the tweet: **"Thinking Cloud Native, CloudEvents Future - Scott Nichols, Chainguard"** at KubeCon 2022 Europe :point_down: [Resources](#resources).
 
-For my specific use case with Harbor, I checked the open issue's on Github to see if someone had already raised the idea of adopting CloudEvents. Luckily, <i class='fab fa-github fa-fw'></i> issue [#10146](https://github.com/goharbor/harbor/issues/10146) brings the idea up. Give it a :thumbs_up: :wink:
+For my specific use case with Harbor, I checked the open issue's on Github to see if someone had already raised the idea of adopting CloudEvents.
 
-However, in a brainstorming session with [Michael](https://twitter.com/embano1), I got him hooked and he wrote a complete new function which transforms the incoming Harbor events into CloudEvents :boom:.
+Luckily, <i class='fab fa-github fa-fw'></i> issue [#10146](https://github.com/goharbor/harbor/issues/10146) brings the idea up. Give it a :thumbs_up: :wink:
+
+However, in a brainstorming session with [Michael](https://twitter.com/embano1), I got him hooked and he wrote a complete new webhook function which transforms the incoming Harbor events into CloudEvents :boom:.
 
 <center> {{< tweet user="embano1" id="1541387083515846658" >}} </center>
 
