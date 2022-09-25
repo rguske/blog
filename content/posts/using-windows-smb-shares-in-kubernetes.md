@@ -3,8 +3,8 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Using Windows SMB Shares in Kubernetes"
-date: 2022-06-16T11:00:43+02:00
-draft: true
+date: 2022-09-25T11:21:00+02:00
+draft: false
 featuredImage: /img/csi-smb-cover.png
 description: ""
 categories: ["Kubernetes", "Storage"]
@@ -12,32 +12,116 @@ tags:
 - Kubernetes
 - Storage
 - CSI
+- Windows
 ---
 
-## Using Windows SMB Shares in Kubernetes
+<!--more-->
 
+When it comes to data persistency in Kubernetes, a Persistent Volume[^1] (PV) is the corresponding cluster resource which will serve your application with the desired requirements. A PV "knows" all the necessary implementation details from the given storage in your infrastructure. Typically, these are either block, file or object storage systems.
 
-Source on <i class='fab fa-github fa-fw'></i>: [csi-driver-smb](https://github.com/kubernetes-csi/csi-driver-smb)
+Let's stick with the file-storage. Normally, that's **NFS**, isn't it? But recently a customer of mine wanted to write data from within a Pod to a SMB share. In the first moment, that sounded odd to me.
 
-This driver allows Kubernetes to access SMB server on both Linux and Windows nodes, csi plugin name: `smb.csi.k8s.io`. The driver requires existing and already configured SMB server, it supports dynamic provisioning of Persistent Volumes via Persistent Volume Claims by creating a new sub directory under SMB server.
+Why's that?
 
-The default implementation is in Namespace `kube-system`. Decide to go with the default or to use a different Namespace like e.g. `csi-smb-provisioner` (namespace creation description in RBAC manifest included).
+Because SMB is Windows (Microsoft) specific and is known for transfering data mostly from e.g. a Windows client to a Windows Fileserver. Since Kubernetes nodes are (MOSTLY) running Linux as the underlying operating system, I wasn't familiar with this requirement (Samba aside :wink:).
 
-### 2. Role-Based-Access-Control
+Anyway, a solution had to be found.
 
-Create a new file named `rbac-csi-smb-controller.yaml` in order to create the necessary `ServiceAccount`, `ClusterRole` as well as the `ClusterRoleBinding`.
+## Kubernetes FlexVolumes? No?!
+
+When searching the Kubernetes documentation for SMB, the Volumes[^2] section is mentioning SMB under the subsection FlexVolumes. `flexVolumes` is an out-of-tree plugin interface which gives storage vendors the possibility to write and deploy plugins, which exposes new storage systems in Kubernetes, without ever interfering with the Kubernetes codebase.
+
+But! It is marked **deprecated** for Kubernetes version 1.23+ (and above) in favor of the Container Storage Interface (CSI).
+
+{{< admonition info "flexVolumes Deprecation Proposal" true >}}
+The proposal to depcrecate `flexVolumes` was raised back in October 2021 and can be read here: <i class='fab fa-github fa-fw'></i> issue [#30180](https://github.com/kubernetes/website/issues/30180).
+{{< /admonition >}}
+
+It's generally recommended to use a CSI driver in order to integrate external storage systems with Kubernetes. I'm pretty sure that this fact isn't really suprising you :smile:. I'd even bet that most of us simply don't know it any other way.
+
+However and in general, it's definitely worth reading about the evolution of Volume Plugins in Kubernetes.
+
+Here's a well written article about it: [Kubernetes volume plugins evolution from FlexVolume to CSI](https://medium.com/flant-com/kubernetes-volume-plugins-from-flexvolume-to-csi-c9a011d2670d)
+
+## SMB CSI Driver for Kubernetes
+
+I looked up on the Kubernetes CSI <i class='fab fa-github fa-fw'></i> repository and found what I was looking for. A [SMB CSI Driver](https://github.com/kubernetes-csi/csi-driver-smb) which allows Kubernetes to access SMB server on both Linux and Windows nodes. As of writing this article, the latest version listed on the project page is [v1.9.0](https://github.com/kubernetes-csi/csi-driver-smb/releases/tag/v1.9.0). This will be the version I'm going to install on my [VMware Tanzu Kubernetes Grid](https://tanzu.vmware.com/en/kubernetes-grid) cluster.
+
+> The driver supports dynamic provisioning of Persistent Volumes via Persistent Volume Claims by creating a new sub directory under SMB server.
+
+I'll guide you through each step of the installation and will finish the post by verifying the write-access to an existing SMB-share on my Windows Fileserver.
+
+Nevertheless, if you prefer an automated remote installation, a `install-driver.sh` script is provided on the project page.
+
+- [Install SMB CSI driver v1.9.0 version on a Kubernetes cluster](https://github.com/kubernetes-csi/csi-driver-smb/blob/master/docs/install-csi-driver-v1.9.0.md)
+
+## Installation
+
+Let's kick-off the installation of the CSI SMB Driver/Provisioner step-by-step.
+
+1. Creating a Namespace
+2. Creating RBAC resources
+3. Installing the CSI-SMB-Driver
+4. Rollout of the CSI-SMB-Controller Deployment
+5. Rollout of the CSI-SMB Provisioner DaemonSet
+6. Creating a SMB Secret
+
+### 1. Namespace
+
+By default every resource will be installed in namespace `kube-system`. Personally, I don't like installations in such Kubernetes system namespaces when I'm validating new implementations in my k8s environments. Therefore, I'm going to use a new namespace named `csi-smb-provisioner`.
+
+Just replace the name below and `export` it as an environment variable. I'll use `$NAMESPACE` for the next provided steps of the installation.
+
+```shell
+export NAMESPACE=csi-smb-provisioner
+```
+
+Create the new namespace (copy/paste):
 
 ```yaml
+kubectl create -f - <<EOF
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: csi-smb-provisioner
+  name: ${NAMESPACE}
+EOF
+```
+
+Validate the creation.
+
+```shell
+kubectl get ns
+
+NAME                           STATUS   AGE
+csi-smb-provisioner            Active   4m14s
+default                        Active   2d21h
+kube-node-lease                Active   2d21h
+kube-public                    Active   2d21h
+kube-system                    Active   2d21h
+vmware-system-auth             Active   2d21h
+vmware-system-cloud-provider   Active   2d21h
+vmware-system-csi              Active   2d21h
+```
+
+### 2. RBAC Resources
+
+In order to allow the `csi-smb-driver` interactions with other Kubernetes resources, like e.g. `PersistentVolumes`, `PersistentVolumeClaims` or `Nodes`, the appropriate RBAC resources have to be created. By executing the next manifest, a `ServiceAccount`, a `ClusterRole` as well as a `ClusterRoleBinding` will be created.
+
+```yaml
+kubectl create -f - <<EOF
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: csi-smb-controller-sa
-  namespace: csi-smb-provisioner
+  namespace: ${NAMESPACE}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: csi-smb-node-sa
+  namespace: ${NAMESPACE}
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -76,18 +160,34 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: csi-smb-controller-sa
-    namespace: csi-smb-provisioner
+    namespace: ${NAMESPACE}
 roleRef:
   kind: ClusterRole
   name: smb-external-provisioner-role
   apiGroup: rbac.authorization.k8s.io
+EOF
 ```
+
+As a result you should see...
+
+```shell
+serviceaccount/csi-smb-controller-sa created
+serviceaccount/csi-smb-node-sa created
+clusterroles.rbac.authorization.k8s.io/smb-external-provisioner-role
+clusterrolebinding.rbac.authorization.k8s.io/smb-csi-provisioner-binding created
+```
+
+...as output on your terminal.
 
 ### 3. CSI-SMB-Driver Installation
 
-Create a new `CSIdriver` manifest file and apply it:
+Next up is the installation of the CSI-SMB driver itself. This won't be installed in the newly created namespace (`$NAMESPACE`).
+
+Execute:
 
 ```yaml
+kubectl create -f - <<EOF
+---
 apiVersion: storage.k8s.io/v1
 kind: CSIDriver
 metadata:
@@ -95,26 +195,69 @@ metadata:
 spec:
   attachRequired: false
   podInfoOnMount: true
+EOF
 ```
 
-### 4. Create Image Pull Secret
+Validation can be done by running:
 
-In order to allow the TKC Worker-Nodes pulling images from the private registry, the creation of a Kubernetes secret has to be done first.
+```shell
+kubectl get csidrivers.storage.k8s.io
 
-`kubectl -n csi-smb-provisioner create secret docker-registry harbor-creds --docker-server='harbor.jarvis.tanzu' --docker-username='admin' --docker-password='$PASSWORD'`
+NAME                     ATTACHREQUIRED   PODINFOONMOUNT   STORAGECAPACITY   TOKENREQUESTS   REQUIRESREPUBLISH   MODES        AGE
+csi.vsphere.vmware.com   true             false            false             <unset>         false               Persistent   2d22h
+smb.csi.k8s.io           false            true             false             <unset>         false               Persistent   21s
+```
 
-The new secret (`imagePullSecrets`) has to be added to the `Deployment` as well as to the `DaemonSet` manifest files (Step 5 & 6).
+### Installation from a Private Registry
 
-### 5. Controller Deployment
+When you often have to deal with fully internet-restricted environments (air-gapped) like me, it's important to be well prepared for such offline-installations. One preperation for instance is to make the appropriate container-images offline available first. For the CSI-SMB-Driver it's the images for the:
+
+CSI-SMB-Controller (`deployment`)
+
+- k8s.gcr.io/sig-storage/csi-provisioner
+- k8s.gcr.io/sig-storage/livenessprobe
+- registry.k8s.io/sig-storage/smbplugin
+
+as well as for the CSI-SMB-Node (`DaemonSet`)
+
+- k8s.gcr.io/sig-storage/csi-node-driver-registrar
+- k8s.gcr.io/sig-storage/livenessprobe
+- registry.k8s.io/sig-storage/smbplugin
+
+The `docker save` and `docker load -i` options as well as the [Carvel](https://carvel.dev) CLI tool `imgpkg` are very helpful and powerful for such operations.
+
+I've written a dedicated blog post about the topic how to make container-images available offline in order to share or to upload them to your own private container-registry.
+
+- [Sharing Container Images using the Docker CLI or Carvel's imgpkg](https://rguske.github.io/post/sharing-container-images-using-the-docker-cli-or-carvels-imgpkg/).
+
+Once the images are available offline, you have to create an `imagePullSecret` in Kubernetes which has to be referenced accordingly in the manifest files.
+
+`kubectl -n $NAMESPACE create secret docker-registry harbor-creds --docker-server='harbor.jarvis.tanzu' --docker-username='admin' --docker-password='$PASSWORD'`
+
+To be referenced in `csi-smb-controller.yaml` and `csi-smb-node.yaml`.
+
+**Snipped:**
+
+```yaml
+[...]
+      imagePullSecrets:
+      - name: harbor-creds
+[...]
+```
+
+I'm not going to install it from a private-registry and therefore I stick with the public image-references.
+
+### 4. Deployment - CSI-SMB-Controller
+
+The next step is the installation of the `csi-smb-controller` which will run as a Kubernetes deployment on your cluster. Create a new `.yaml` file, name it e.g. `csi-smb-controller.yaml`, and paste in the following specifications:
 
 ```yaml
 kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: csi-smb-controller
-  namespace: csi-smb-provisioner
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: csi-smb-controller
@@ -123,7 +266,7 @@ spec:
       labels:
         app: csi-smb-controller
     spec:
-      dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: Default  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
       serviceAccountName: csi-smb-controller-sa
       nodeSelector:
         kubernetes.io/os: linux
@@ -135,13 +278,18 @@ spec:
         - key: "node-role.kubernetes.io/controlplane"
           operator: "Exists"
           effect: "NoSchedule"
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: csi-provisioner
-          image: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.2
+          image: registry.k8s.io/sig-storage/csi-provisioner:v3.2.0
           args:
             - "-v=2"
             - "--csi-address=$(ADDRESS)"
             - "--leader-election"
+            - "--leader-election-namespace=kube-system"
+            - "--extra-create-metadata=true"
           env:
             - name: ADDRESS
               value: /csi/csi.sock
@@ -156,7 +304,7 @@ spec:
               cpu: 10m
               memory: 20Mi
         - name: liveness-probe
-          image: k8s.gcr.io/sig-storage/livenessprobe:v2.5.0
+          image: registry.k8s.io/sig-storage/livenessprobe:v2.7.0
           args:
             - --csi-address=/csi/csi.sock
             - --probe-timeout=3s
@@ -173,7 +321,7 @@ spec:
               cpu: 10m
               memory: 20Mi
         - name: smb
-          image: mcr.microsoft.com/k8s/csi/smb-csi:v1.5.0
+          image: registry.k8s.io/sig-storage/smbplugin:v1.9.0
           imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
@@ -208,23 +356,43 @@ spec:
             requests:
               cpu: 10m
               memory: 20Mi
-      imagePullSecrets:
-      - name: harbor-creds
       volumes:
         - name: socket-dir
           emptyDir: {}
 ```
 
-### 6. DaemonSet Node
+Install the csi-smb-controller using the newly created manifest file.
 
-Adjust the image reference accordingly to also match the image repository as well as to use the `imagePullSecret` like used before.
+```shell
+kubectl -n $NAMESPACE apply -f csi-smb-controller.yaml
+```
+
+Validation:
+
+```shell
+kubectl -n csi-smb-provisioner get deploy,po,rs -o wide
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS                           IMAGES                                                                                                                                             SELECTOR
+deployment.apps/csi-smb-controller   1/1     1            1           16d   csi-provisioner,liveness-probe,smb   registry.k8s.io/sig-storage/csi-provisioner:v3.2.0,registry.k8s.io/sig-storage/livenessprobe:v2.7.0,registry.k8s.io/sig-storage/smbplugin:v1.9.0   app=csi-smb-controller
+
+NAME                                      READY   STATUS    RESTARTS   AGE   IP             NODE                                       NOMINATED NODE   READINESS GATES
+pod/csi-smb-controller-7b9cd56676-kg8nl   3/3     Running   0          11d   172.20.6.38    mark50-tkc-1-node-ckr5w-5976457f9c-sx95v   <none>           <none>
+
+NAME                                            DESIRED   CURRENT   READY   AGE   CONTAINERS                           IMAGES                                                                                                                                             SELECTOR
+replicaset.apps/csi-smb-controller-7b9cd56676   1         1         1       16d   csi-provisioner,liveness-probe,smb   registry.k8s.io/sig-storage/csi-provisioner:v3.2.0,registry.k8s.io/sig-storage/livenessprobe:v2.7.0,registry.k8s.io/sig-storage/smbplugin:v1.9.0   app=csi-smb-controller,pod-template-hash=7b9cd56676
+```
+
+### 6. DaemonSet - CSI-SMB-Node
+
+Create another file for the DaemonSet `csi-smb-node`.
+
+E.g. `csi-smb-node.yaml`:
 
 ```yaml
 kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: csi-smb-node
-  namespace: csi-smb-provisioner
 spec:
   updateStrategy:
     rollingUpdate:
@@ -239,7 +407,8 @@ spec:
         app: csi-smb-node
     spec:
       hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: Default  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
+      serviceAccountName: csi-smb-node-sa
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-node-critical
@@ -250,7 +419,7 @@ spec:
           volumeMounts:
             - mountPath: /csi
               name: socket-dir
-          image: k8s.gcr.io/sig-storage/livenessprobe:v2.5.0
+          image: registry.k8s.io/sig-storage/livenessprobe:v2.7.0
           args:
             - --csi-address=/csi/csi.sock
             - --probe-timeout=3s
@@ -263,7 +432,7 @@ spec:
               cpu: 10m
               memory: 20Mi
         - name: node-driver-registrar
-          image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.4.0
+          image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
           args:
             - --csi-address=$(ADDRESS)
             - --kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)
@@ -293,7 +462,7 @@ spec:
               cpu: 10m
               memory: 20Mi
         - name: smb
-          image: mcr.microsoft.com/k8s/csi/smb-csi:v1.5.0
+          image: registry.k8s.io/sig-storage/smbplugin:v1.9.0
           imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
@@ -334,8 +503,6 @@ spec:
             requests:
               cpu: 10m
               memory: 20Mi
-      imagePullSecrets:
-      - name: harbor-creds
       volumes:
         - hostPath:
             path: /var/lib/kubelet/plugins/smb.csi.k8s.io
@@ -351,44 +518,90 @@ spec:
           name: registration-dir
 ```
 
-## Installation
+Deploy the `DaemonSet` to Kubernetes: `kubectl -n $NAMESPACE apply -f csi-smb-node.yaml`
 
-Now that the preperations are done, `apply` all the created manifest files to Kubernetes.
+Validation:
 
-- kubectl apply -f rbac-csi-smb-controller.yaml
-- kubectl apply -f csi-smb-driver.yaml
-- kubectl apply -f csi-smb-controller.yaml
-- kubectl apply -f csi-smb-node.yaml
+```shell
+kubectl -n csi-smb-provisioner get ds,po -o wide
+
+NAME                          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE   CONTAINERS                                 IMAGES                                                                                                                                                       SELECTOR
+daemonset.apps/csi-smb-node   5         5         5       5            5           kubernetes.io/os=linux   16d   liveness-probe,node-driver-registrar,smb   registry.k8s.io/sig-storage/livenessprobe:v2.7.0,registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1,registry.k8s.io/sig-storage/smbplugin:v1.9.0   app=csi-smb-node
+
+NAME                                      READY   STATUS    RESTARTS   AGE   IP             NODE                                       NOMINATED NODE   READINESS GATES
+pod/csi-smb-controller-7b9cd56676-kg8nl   3/3     Running   0          11d   172.20.6.38    mark50-tkc-1-node-ckr5w-5976457f9c-sx95v   <none>           <none>
+pod/csi-smb-node-54s9v                    3/3     Running   0          11d   10.197.96.66   mark50-tkc-1-control-plane-tw2l8           <none>           <none>
+pod/csi-smb-node-jlsbk                    3/3     Running   0          11d   10.197.96.63   mark50-tkc-1-control-plane-6q6x8           <none>           <none>
+pod/csi-smb-node-s9ww5                    3/3     Running   0          11d   10.197.96.69   mark50-tkc-1-node-ckr5w-5976457f9c-2t9hx   <none>           <none>
+pod/csi-smb-node-v87dv                    3/3     Running   0          11d   10.197.96.65   mark50-tkc-1-control-plane-hb5b9           <none>           <none>
+pod/csi-smb-node-w9tnk                    3/3     Running   0          11d   10.197.96.68   mark50-tkc-1-node-ckr5w-5976457f9c-sx95v   <none>           <none>
+```
 
 ## Testing
 
-The following test will be done in Namespace `smb-test`.
+Since all our validations have the desired conditions, we'll finish the installation with a simple test example. In this test, we are going to write from a pod to a SMB share which is accessible through a mounted Persistent Volume.
 
-`kubectl create ns smb-test`.
+Test namespace first!
+
+```shell
+export TESTNS=smb-test
+```
+
+```shell
+kubectl create ns $TESTNS
+
+namespace/smb-test created
+```
 
 ### 1. Create SMB Access Secret
 
-In order to authenticate to a SMB share, create a `secret`first:
+A [user-level authentication](https://learn.microsoft.com/en-us/windows/win32/fileio/microsoft-smb-protocol-authentication) is required to access the share. This will be done by referencing a Kubernetes `secret` in the Persistent Volume resource creation.
 
-`kubectl -n smb-test create secret generic smb-creds --from-literal username=USERNAME --from-literal password="PASSWORD"`
+**PV Snipped:**
 
-> add --from-literal domain=DOMAIN-NAME for domain support
+```yaml
+[...]
+    nodeStageSecretRef:
+      name: smb-creds
+      namespace: smb-test
+[...]
+```
+
+Create the `secret`:
+
+```shell
+export USERNAME='testuser' \
+export PASSWORD='VMware1!' \
+export DOMAIN='jarvis.tanzu'
+```
+
+`kubectl -n $TESTNS create secret generic smb-creds --from-literal username=$USERNAME --from-literal domain=$DOMAIN --from-literal password=$PASSWORD`
+
+> **IMPORTANT!** Securing your Kubernetes Secrets is recommended when using sensible data like your Active Directory credentials in production. Solutions like e.g. [Sealed Secrets by Bitnami](https://bitnami.com/stack/sealed-secrets) or [Vault by HashiCorp](https://www.vaultproject.io/) should be considered being used.
 
 ### 2. Create PersistentVolume
 
 The deployment, which will be created in the next step, will have the SMB share accessible through a `PersistentVolume` and the associated `PersistentVolumeClaim`.
 
-Beginning with the `PersistentVolume`:
+Begin with the `PersistentVolume`:
 
-> Edit `source` in `volumeAttributes`
+> Pay attention to the `spec` for `volumeHandle` and `source`!
+
+```shell
+export VOLUMEID='smb-vol-1' \
+export SOURCE='//dc.jarvis.tanzu/data'
+```
 
 ```yaml
+kubectl create -f - << EOF
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-smb
   namespace: smb-test
 spec:
+  storageClassName: ""
   capacity:
     storage: 50Gi
   accessModes:
@@ -401,21 +614,29 @@ spec:
   csi:
     driver: smb.csi.k8s.io
     readOnly: false
-    volumeHandle: unique-volumeid  # make sure it's a unique id in the cluster
+    volumeHandle: $VOLUMEID  # make sure it's a unique id in the cluster
     volumeAttributes:
-      source: "//smb-server-address/sharename"
+      source: $SOURCE
     nodeStageSecretRef:
       name: smb-creds
       namespace: smb-test
+EOF
 ```
 
-Create the PersitentVolume:
+Validation:
 
-`kubectl apply -f pvc-smb-static.yaml`
+```shell
+kubectl -n smb-test get pv
 
-Continueing with the `PersitstentVolumeClaim` to bound the volume.
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                                                   STORAGECLASS   REASON   AGE
+pv-smb                                     50Gi       RWX            Retain           Available                                                                                   46m
+```
+
+Continue with the `PersitstentVolumeClaim` to bound the volume.
 
 ```yaml
+kubectl create -f - <<EOF
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -428,45 +649,40 @@ spec:
     requests:
       storage: 10Gi
   volumeName: pv-smb
-  storageClassName:
+  storageClassName: ""
+EOF
 ```
-
-Create the `pvc` by executing `kubectl apply -f pvc-smb.yaml`.
 
 Validate that the `STATUS` is in state `Bound`:
 
 ```shell
-kubectl -n smb-test get pv,pvc
+kubectl  -n smb-test get pv,pvc
 
-NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM              STORAGECLASS   REASON   AGE
-persistentvolume/pv-smb   50Gi       RWX            Retain           Bound    smb-test/pvc-smb                           2m22s
+NAME                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   REASON   AGE
+persistentvolume/pv-smb    50Gi       RWX            Retain           Bound    smb-test/pvc-smb                          49m
 
 NAME                            STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-persistentvolumeclaim/pvc-smb   Bound    pv-smb   50Gi       RWX                           20s
+persistentvolumeclaim/pvc-smb   Bound    pv-smb   50Gi       RWX                           13s
 ```
 
-### 3. Create a Deployment to Validate the Access
+### 3. Validating Write-Access
 
-Make the `nginx` image (`image: mcr.microsoft.com/oss/nginx/nginx:1.19.5`) offline available:
+In order to validate that we have access to the provided share on a Windows Fileserver, we'll create a simple `deployment` using the following nginx image `mcr.microsoft.com/oss/nginx/nginx:1.19.5` and write a file named `outfile`
 
-- `docker pull mcr.microsoft.com/oss/nginx/nginx:1.19.5`
-- `docker save mcr.microsoft.com/oss/nginx/nginx:1.19.5 > nginx-1195.tar`
-- `docker load -i nginx-1195.tar`
-- `docker tag ...`
-- `docker push ...`
+(`set -euo pipefail; while true; do echo $(date) >> /mnt/smb/outfile; sleep 1; done`) 
 
-Create the Nginx deployment manifest file `nginx-deployment.yaml`
-
-> Adjust the `image:` section!
+to the mounted share.
 
 ```yaml
+kubectl -n $TESTNS create -f - <<EOF
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: nginx
-  name: deployment-smb
-  namespace: smb-test
+  name: deploy-smb-pod
+  namespace: $TESTNS
 spec:
   replicas: 1
   selector:
@@ -476,12 +692,12 @@ spec:
     metadata:
       labels:
         app: nginx
-      name: deployment-smb
+      name: deploy-smb-pod
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-        - name: deployment-smb
+        - name: deploy-smb-pod
           image: mcr.microsoft.com/oss/nginx/nginx:1.19.5
           command:
             - "/bin/bash"
@@ -495,43 +711,42 @@ spec:
         - name: smb
           persistentVolumeClaim:
             claimName: pvc-smb
-  strategy:
-    rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
-    type: RollingUpdate
+EOF
 ```
 
-Create the deployment with `kubectl apply -f deployment.yaml`.
-
-### 4. Final Test
-
-Validate that the volume was mounted and the Pod has access to the SMB share: 
-`kubectl exec -it nginx-smb -- df -h`
+The successful write can be validated by executing `ls -rtl` from within the pod:
 
 ```shell
-kubectl -n smb-test exec -it deployment-smb-547588d59c-8q9kl -- df -h
-Filesystem              Size  Used Avail Use% Mounted on
-overlay                  16G   11G  4.5G  70% /
-tmpfs                    64M     0   64M   0% /dev
-tmpfs                   2.0G     0  2.0G   0% /sys/fs/cgroup
-//dc.jarvis.tanzu/data   90G   65G   26G  72% /mnt/smb
-/dev/root                16G   11G  4.5G  70% /etc/hosts
-shm                      64M     0   64M   0% /dev/shm
-tmpfs                   2.0G   12K  2.0G   1% /run/secrets/kubernetes.io/serviceaccount
-tmpfs                   2.0G     0  2.0G   0% /proc/acpi
-tmpfs                   2.0G     0  2.0G   0% /sys/firmware
+kubectl -n $TESTNS exec -it deploy-smb-pod-8569fdd89c-dmlzh -- ls -rtl /mnt/smb
+
+total 28
+-rwxrwxrwx 1 root root 26280 Sep 25 17:53 outfile
 ```
 
-Write a file into the folder:
+Also, creating a new file using `kubectl exec` is very easy:
 
-`kubectl -n smb-test exec -it deployment-smb-547588d59c-8q9kl -- touch /mnt/smb/test.txt`
+`kubectl -n $TESTNS exec -it deploy-smb-pod-8569fdd89c-dmlzh -- touch /mnt/smb/test.txt`
 
 Show the folder content:
 
 ```shell
-kubectl -n smb-test exec -it deployment-smb-547588d59c-8q9kl -- ls -la /mnt/smb
-total 12
-drwxrwxrwx 2 root root    0 Mar 31 14:05 .
-drwxr-xr-x 1 root root 4096 Mar 31 14:06 ..
--rwxrwxrwx 1 root root    0 Mar 31 14:10 test.txt
+kubectl -n $TESTNS exec -it deploy-smb-pod-8569fdd89c-dmlzh -- ls -la /mnt/smb
+
+total 48
+drwxrwxrwx 2 root root     0 Sep 25 18:02 .
+drwxr-xr-x 1 root root  4096 Sep 25 17:51 ..
+-rwxrwxrwx 1 root root 43800 Sep 25 18:03 outfile
+-rwxrwxrwx 1 root root     0 Sep 25 18:15 test.txt
+```
+
+Here we go!
+
+{{< image src="/img/posts/202209_smb_kubernetes/rguske-post-smb-kubernetes-1.png" caption="Figure I: Windows Fileserver File Creation" src-s="/img/posts/202209_smb_kubernetes/rguske-post-smb-kubernetes-1.png" class="center" >}}
+
+## Resources
+
+[^1]: [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+[^2]: [Kubernetes Volumes](https://kubernetes.io/docs/concepts/storage/volumes)
+
+- [Kubernetes FlexVolumes (deprecated)](https://kubernetes.io/docs/concepts/storage/volumes/#flexvolume)
+- [Kubernetes volume plugins evolution from FlexVolume to CSI](https://medium.com/flant-com/kubernetes-volume-plugins-from-flexvolume-to-csi-c9a011d2670d)
