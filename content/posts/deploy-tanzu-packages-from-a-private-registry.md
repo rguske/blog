@@ -7,12 +7,11 @@ date: 2022-02-09T12:00:40+01:00
 draft: false
 featuredImage: /img/tanzu_packages_offline_cover.png
 description: "This post is about the preparations which have to be made in order to deploy Tanzu Packages from your own private Container Registry."
-categories: ["VMware", "Tanzu", "Kubernetes"]
+categories: ["Platforms", "Tools"]
 tags:
-- February2022
-- Tanzu
-- TanzuPackages
-- Cloud Native
+- VMware
+- Extensibility
+- CloudNative
 - Kubernetes
 - Harbor
 ---

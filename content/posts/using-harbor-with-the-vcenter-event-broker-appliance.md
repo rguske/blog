@@ -7,12 +7,13 @@ date: 2020-03-23T22:00:36+01:00
 draft: false
 featuredImage: /img/veba_harbor_cover.jpg
 description: "Instead of pulling function images from Docker Hub, I'm going to explorer the use of the enterprise container image registry Harbor this time."
-categories: ["VEBA", "FaaS", "VMware", "Cloud Native"]
+categories: ["Platforms", "Open-Source"]
 tags:
-- March2020
+- VMware
 - VEBA
 - Harbor
-- FaaS
+- Serverless
+- Docker
 ---
 
 <!--more-->

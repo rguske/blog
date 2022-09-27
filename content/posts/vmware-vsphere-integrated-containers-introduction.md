@@ -7,13 +7,11 @@ date: 2018-07-13T13:03:26+02:00
 draft: false
 featuredImage: /img/vic_intro_cover.jpg
 description: "An introduction to VMware's approach to provide a Docker API to Developers and VI Admins."
-categories: ["VMware", "Container", "Cloud Native"]
+categories: ["Platforms"]
 tags:
-- July2018
-- VIC
-- Container
 - VMware
 - vSphere
+- Docker
 ---
 
 <!--more-->

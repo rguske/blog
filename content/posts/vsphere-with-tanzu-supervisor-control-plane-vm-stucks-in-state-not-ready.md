@@ -7,13 +7,11 @@ date: 2021-04-25T16:00:39+02:00
 draft: false
 featuredImage: /img/v7k8s_svcp_not_ready_cover.png
 description: "The vSphere ESX Manager manages the life-cycle of agent VIBs and VMs. This post will give you an idea how it can help if one of your Supervisor Control Plane VMs stucks in state NotReady."
-categories: ["Kubernetes", "Cloud Native", "VMware"]
+categories: ["Platforms"]
 tags:
-- April2021
-- Kubernetes
-- Tanzu
-- TKGs
+- VMware
 - vSphere
+- Kubernetes
 ---
 
 <!--more-->

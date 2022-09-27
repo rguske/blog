@@ -7,14 +7,11 @@ date: 2020-05-01T14:00:24+02:00
 draft: false
 featuredImage: /img/tkgimc17_cover.jpg
 description: ""
-categories: ["VMware", "Kubernetes", "Cloud Native"]
+categories: ["Platforms"]
 tags:
-- April2020
+- VMware
+- vSphere
 - Kubernetes
-- PKS
-- EPMC
-- TKG
-- TKGIMC
 ---
 
 <!--more-->

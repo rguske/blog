@@ -6,11 +6,8 @@ title: "vSphere Integrated Containers Part III: Deployment of a Virtual Containe
 date: 2018-07-13T13:21:33+02:00
 draft: false
 featuredImage: /img/vic_part_3_cover.jpg
-categories: ["VMware", "Container", "Cloud Native"]
+categories: ["Platforms"]
 tags:
-- July2018
-- VIC
-- Container
 - VMware
 - vSphere
 - Docker

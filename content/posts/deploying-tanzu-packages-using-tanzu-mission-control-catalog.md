@@ -7,13 +7,12 @@ date: 2022-01-11T20:00:27+01:00
 draft: false
 featuredImage: /img/tmc_catalog_202201_cover.png
 description: "This post introduces the Tanzu Mission Control Catalog feature and provides a closer look on the provided simplicity to extend your Kubernetes Clusters with the automated installation of Tanzu Packages through the catalog."
-categories: ["VMware", "Tanzu", "Management", "Kubernetes"]
+categories: ["Platforms", "Tools", "Automation"]
 tags:
-- January2022
-- Tanzu
-- TanzuPackages
-- TanzuStandard
-- TMC
+- VMware
+- Extensibility
+- LifecycleManagement
+- SaaS
 - Kubernetes
 ---
 

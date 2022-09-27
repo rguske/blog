@@ -7,14 +7,13 @@ date: 2019-07-04T22:52:18+02:00
 draft: false
 featuredImage: /img/dockerrunvicmachine_cover.jpg
 description: "A guide through the various steps to consume vic-machine and every specific action of it in a simplified fashion AND have it running in a container pulled out of Harbor or from another repository of your choice."
-categories: ["Container", "VMware", "Automation"]
+categories: ["Platforms", "Automation"]
 tags:
-- July2019
-- VIC
-- Docker
-- Hack
-- Harbor
+- VMware
 - vSphere
+- Docker
+- Automation
+- Harbor
 ---
 
 <!--more-->

@@ -7,9 +7,9 @@ date: 2020-02-27T16:32:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_iii_cover.jpg
 description: "Part III - A guide on the \"Highway\" to Shell."
-categories: ["Linux", "VDI", "Desktop", "VMware", "Terminal"]
+categories: ["End User Computing", "Platforms"]
 tags:
-- February2020
+- VMware
 - Linux
 - Horizon
 - VDI

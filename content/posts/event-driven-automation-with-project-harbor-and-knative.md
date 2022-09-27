@@ -7,16 +7,16 @@ date: 2022-07-04T12:00:54+02:00
 draft: false
 featuredImage: /img/harbor-webhook-function-cover.png
 description: "The open-source container registry Harbor supports the configuration of webhook endpoints. Harbor notifies the webhook endpoint of certain events that occur in a project. However, the event sent is not delivered as a CloudEvent. By leveraging the power of VEBA/Knative the non-CloudEvent can be send to a webhook function to get transformed in a CloudEvent. By transforming the event, other functions can be subscribed to the new event to ultimately get triggered. As a use case for it, I'm going to describe how ChatOps can be enabled using event-driven automation."
-categories: ["VMware", "Cloud Native", "FaaS", "Serverless", "Event-Driven"]
+categories: ["Platforms", "Serverless", "Open-Source"]
 tags:
 - VEBA
 - Knative
 - Serverless
 - Kubernetes
-- Cloud Native
-- Harbor
+- CloudNative
 - CloudEvents
-- Functions
+- FaaS
+- Harbor
 ---
 
 <!--more-->

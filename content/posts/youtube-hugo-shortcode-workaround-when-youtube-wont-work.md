@@ -9,9 +9,6 @@ featuredImage: /img/youtubefix_cover.jpg
 description: ""
 categories: ["Blogging"]
 tags:
-- December2018
-- Hugo
-- Shortcode
 - Blogging
 ---
 

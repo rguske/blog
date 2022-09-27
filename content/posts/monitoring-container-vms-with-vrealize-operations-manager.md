@@ -7,14 +7,11 @@ date: 2019-01-21T23:00:09+01:00
 draft: false
 featuredImage: /img/vic_monitoring_cover.jpg
 description: "Read how to use a custom vRealize Operations Manager dashboard to monitor vSphere Integrated Containers (Container-VMs)."
-categories: ["Monitoring", "VMware", "Container"]
+categories: ["Platforms", "Tools"]
 tags:
-- January2019
-- VIC
-- Docker
+- VMware
 - vSphere
 - Monitoring
-- vRealize Operations Manager
 ---
 
 <!--more-->

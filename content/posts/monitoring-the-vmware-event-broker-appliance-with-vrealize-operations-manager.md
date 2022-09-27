@@ -7,12 +7,13 @@ date: 2020-05-12T23:59:50+02:00
 draft: false
 featuredImage: /img/vrops_veba_cover.jpg
 description: "This post covers how to monitor the VMware Event Broker Appliance (VM), plus it's Kubernetes components like the Control Plane (Master), the Node(s) as well as the Pods by using vRealize Operations Manager."
-categories: ["Monitoring", "VEBA", "FaaS", "Open Source", "Cloud Native", "VMware"]
+categories: ["Platforms", "Tools"]
 tags:
-- May2020
+- VMware
+- vSphere
 - VEBA
 - Monitoring
-- vRealize Operations Manager
+- OpenSource
 ---
 
 <!--more-->

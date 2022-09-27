@@ -9,7 +9,6 @@ featuredImage: /img/blog_intro_cover.jpg
 description: "Why should I start blogging?"
 categories: ["Blogging"]
 tags:
-- July2018
 - Blogging
 ---
 

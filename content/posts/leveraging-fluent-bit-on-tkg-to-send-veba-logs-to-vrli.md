@@ -7,15 +7,13 @@ date: 2021-01-13T11:50:23+01:00
 draft: false
 featuredImage: /img/veba_fluentbit_vrli_cover.jpg
 description: "A guide how to leverage the open source project FluentBit to forward logs from a Tanzu Kubernetes Cluster to vRealize Log Insight."
-categories: ["VEBA", "VMware", "Kubernetes", "Logging", "Open Source", "Cloud Native"]
+categories: ["Platforms", "Open-Source", "Tools"]
 tags:
-- FluentBit
-- vRLI
+- Logging
 - Kubernetes
 - VEBA
-- Tanzu
-- TKG
-- OSS
+- Serverless
+- OpenSource
 ---
 
 <!--more-->

@@ -7,13 +7,14 @@ date: 2022-03-15T14:19:55+01:00
 draft: false
 featuredImage: /img/kubernetes_appliance_cover.png
 description: "An introduction post on how to build a VMware PhotonOS based Kubernetes Appliance for vSphere."
-categories: ["VMware", "Kubernetes", "Automation"]
+categories: ["Platforms", "Automation", "Open-Source"]
 tags:
 - VMware
 - vSphere
 - Kubernetes
 - Packer
 - Automation
+- OpenSource
 ---
 
 ## Why a Kubernetes-Appliance?

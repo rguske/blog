@@ -7,15 +7,14 @@ date: 2020-11-23T10:00:14+01:00
 draft: false
 featuredImage: /img/haproxytroubleshooting_cover.jpg
 description: "What I've learned from troubleshooting a failed vSphere with Tanzu HAProxy deployment."
-categories: ["VMware", "Troubleshooting", "Kubernetes", "Open Source"]
+categories: ["Platforms"]
 tags:
-- November2020
+- VMware
 - vSphere
 - Kubernetes
-- Tanzu
-- TKG
 - HAProxy
 - Troubleshooting
+- Hack
 ---
 
 <!--more-->

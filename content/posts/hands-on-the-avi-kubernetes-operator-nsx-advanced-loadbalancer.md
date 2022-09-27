@@ -7,13 +7,12 @@ date: 2021-07-30T11:00:59+02:00
 draft: false
 featuredImage: /img/handsonako_cover.jpg
 description: "A hands on guide which covers the deployment and configuration of the Avi Kubernetes Operator and to ultimately integrate it with the NSX Advanced Load Balancer to make use of the modern and comprehensive features of VMware's Next Gen Load Balancer."
-categories: ["VMware", "Kubernetes", "Open Source", "Cloud Native"]
+categories: ["Platforms", "Open-Source"]
 tags:
-- July2021
-- Helm
+- VMware
 - Kubernetes
-- Tanzu
-- NSX
+- LoadBalancing
+- Networking
 - Avi
 ---
 

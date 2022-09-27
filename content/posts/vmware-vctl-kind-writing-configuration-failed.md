@@ -7,13 +7,14 @@ date: 2021-03-02T10:50:00+01:00
 draft: false
 featuredImage: /img/vctlissue_cover.jpg
 description: "VMware Fusion can instantiate KinD clusters locally on your desktop (project Nautilus) but recently I discovered some restrictions which I'm explaining in this post."
-categories: ["Desktop", "VMware", "Kubernetes"]
+categories: ["Platforms", "End User Computing"]
 tags:
-- March2021
+- VMware
 - Fusion
 - Workstation
 - Kubernetes
-- Desktop
+- KinD
+- Hack
 ---
 
 <!--more-->

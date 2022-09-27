@@ -7,9 +7,9 @@ date: 2020-09-20T11:45:57+02:00
 draft: false
 featuredImage: /img/projectnautilus_cover.jpg
 description: "How project Nautilus provides a single development platform on the desktop by enabling users to run OCI compliant Containers as well as Kubernetes besides Virtual Machines on the desktop."
-categories: ["Desktop", "VMware", "Kubernetes"]
+categories: ["End User Computing", "Platforms"]
 tags:
-- September2020
+- VMware
 - Fusion
 - Workstation
 - Kubernetes

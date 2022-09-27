@@ -6,15 +6,15 @@ title: "Event-driven interactions with vSphere using Functions as a Service"
 date: 2019-02-14T17:40:38+01:00
 draft: false
 featuredImage: /img/vspheretagfn_cover.jpg
-description: "A time pre project VMware Event Broker Appliance"
-categories: ["FaaS", "Kubernetes", "Open Source", "Cloud Native", "Automation", "VMware"]
+description: "This post is basically covering the origin of the VMware Open-Source project VMware Event Broker Appliance."
+categories: ["Platforms"]
 tags:
-- February2019
+- VMware
 - vSphere
 - Kubernetes
 - FaaS
-- Event-driven
-- OSS
+- EventDriven
+- OpenSource
 ---
 
 <!--more-->

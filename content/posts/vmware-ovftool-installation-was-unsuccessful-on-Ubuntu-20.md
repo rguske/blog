@@ -7,13 +7,12 @@ date: 2021-03-21T21:00:34+01:00
 draft: false
 featuredImage: /img/ovftool_cover.jpg
 description: "I couldn't install the VMware ovftool on my Ubuntu 20.04 LTS client and because of this, I'm going to explain how you can run it without having it installed."
-categories: ["Workaround", "Linux", "Desktop", "VMware"]
+categories: ["Tools"]
 tags:
-- March2021
 - Linux
-- Desktop
-- Workaround
+- Hack
 - VMware
+- Tools
 ---
 
 <!--more-->

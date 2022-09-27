@@ -6,14 +6,11 @@ title: "vSphere Integrated Containers Part II: vSphere Client Plug-In"
 date: 2018-07-13T13:17:23+02:00
 draft: false
 featuredImage: /img/vic_part_2_cover.jpg
-categories: ["VMware", "Container", "Cloud Native"]
+categories: ["Platforms"]
 tags:
-- July2018
-- VIC
-- Container
-- Docker
 - VMware
 - vSphere
+- Docker
 ---
 
 In this section, I´d like to give you a walkthrough on how to install the VIC vSphere Client Plug-In for the vCenter Server Appliance. I´m already using the vCenter Server Appliance aka vCSA in Version 6.7.0.

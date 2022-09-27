@@ -7,15 +7,11 @@ date: 2018-10-19T00:11:11+02:00
 draft: false
 featuredImage: /img/vic_upgrade_post_cover.jpg
 description: "A how-to guide to upgrade VIC from one major version to another."
-categories: ["VMware", "Container"]
+categories: ["Platforms"]
 tags:
-- October2018
-- VIC
-- Container
 - VMware
 - vSphere
 - Docker
-- Upgrade
 ---
 
 <!--more-->

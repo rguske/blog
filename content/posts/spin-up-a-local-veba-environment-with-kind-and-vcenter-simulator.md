@@ -7,16 +7,16 @@ date: 2020-10-16T12:00:57+02:00
 draft: false
 featuredImage: /img/vebakindvcsim_cover.jpg
 description: "A practitioner's guide to spin up a local VMware Event Broker Appliance (VEBA) environment by using KinD and the vCenter simulator."
-categories: ["VEBA", "FaaS", "Desktop", "Kubernetes", "Cloud Native", "VMware"]
+categories: ["Platforms", "End User Computing", "Tools", "Open-Source"]
 tags:
-- October2020
+- VMware
 - VEBA
 - Kubernetes
 - KinD
-- vcsim
 - FaaS
 - Fusion
 - Workstation
+- OpenSource
 ---
 
 <!--more-->

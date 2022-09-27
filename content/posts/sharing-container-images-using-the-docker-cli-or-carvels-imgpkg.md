@@ -7,11 +7,13 @@ date: 2022-04-07T16:20:24+02:00
 draft: false
 featuredImage: /img/sharing-container-images-cover.jpeg
 description: "Learn how to make container images available in a shareable format, to support e.g. air-gapped deployments, using the Docker CLI or imgpkg by Carvel."
-categories: ["Kubernetes", "Container"]
+categories: ["Tools", "Open-Source"]
 tags:
 - Kubernetes
 - Docker
 - Carvel
+- Tools
+- OpenSource
 ---
 
 <!--more-->

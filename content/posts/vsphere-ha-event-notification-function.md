@@ -7,11 +7,13 @@ date: 2020-06-29T15:19:05+02:00
 draft: false
 featuredImage: /img/harestartfunction_cover.jpg
 description: "A post about a community function contribution to the open source project VMware Event Broker Appliance to notify you if a ESXi host failure occured."
-categories: ["VEBA", "FaaS", "Automation", "VMware", "Open Source"]
+categories: ["Platforms", "Serverless", "Automation"]
 tags:
-- June2020
+- VMware
+- vSphere
 - VEBA
 - FaaS
+- Serverless
 ---
 
 <!--more-->

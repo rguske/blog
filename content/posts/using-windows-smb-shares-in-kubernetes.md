@@ -7,11 +7,13 @@ date: 2022-09-25T11:21:00+02:00
 draft: false
 featuredImage: /img/csi-smb-cover.png
 description: "Using Windows Fileserver shares in Kubernetes? This post introduce how this can be achieved by installing and using the SMB CSI driver for Kubernetes."
-categories: ["Kubernetes", "Storage"]
+categories: ["Platforms", "Storage"]
 tags:
+- VMware
 - Kubernetes
 - Storage
 - CSI
+- SMB
 - Windows
 ---
 

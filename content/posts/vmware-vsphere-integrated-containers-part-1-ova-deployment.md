@@ -7,14 +7,11 @@ date: 2018-07-13T13:10:38+02:00
 draft: false
 featuredImage: /img/vic_part_1_cover.jpg
 description: "I am describing the deployment pre-requisites for vSphere Integrated Containers through this post."
-categories: ["VMware", "Container", "Cloud Native"]
+categories: ["Platforms"]
 tags:
-- July2018
-- VIC
-- Container
-- Docker
 - VMware
 - vSphere
+- Docker
 ---
 
 <!--more-->

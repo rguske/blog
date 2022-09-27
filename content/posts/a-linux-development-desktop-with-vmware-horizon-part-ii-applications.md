@@ -7,13 +7,14 @@ date: 2020-02-27T16:33:48+01:00
 draft: false
 featuredImage: /img/devdesk_part_ii_cover.jpg
 description: "Part II - In this post I´m going to list a couple of applications which I´m using for my desktop and how you can easily install them from your shell."
-categories: ["Linux", "VDI", "Desktop", "VMware"]
+categories: ["End User Computing", "Platforms"]
 tags:
-- February2020
+- VMware
 - Linux
 - Horizon
 - VDI
-- Application
+- Applications
+- Tools
 ---
 
 <!--more-->
