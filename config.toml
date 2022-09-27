@@ -1,6 +1,6 @@
 baseURL = "https://rguske.github.io/"
 defaultContentLanguage = "en"
-theme = "CodeIt"
+theme = "LoveIt"
 #themesDir = "../.."
 title = "Robert Guske"
 # whether to use robots.txt
