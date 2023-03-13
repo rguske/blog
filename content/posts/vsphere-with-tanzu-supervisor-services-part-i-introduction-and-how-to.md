@@ -6,7 +6,7 @@ title: "vSphere with Tanzu Supervisor Services Part I - Introduction and How-To"
 date: 2023-03-13T16:30:46+01:00
 draft: false
 featuredImage: /img/supervisor-services-1-cover.jpeg
-description: ""
+description: "The Supervisor Services in vSphere with Tanzu (TKGS) offering a multitude of benefits by e.g. providing a simple and opinionated way to deploy central services to DevOps and AppDev teams. This post introduces the Supervisor Services and the concept behind them as well as how-to install such on a Supervisor Cluster."
 categories: ["Platforms", "Open-Source", "Tools", "Security"]
 tags:
 - NSX
@@ -260,7 +260,7 @@ Ultimately, you'd like to establish trust with the new Harbor instance in order 
 
 ## Conclusion Supervisor Services
 
-In conclusion, the Supervisor Services in vSphere with Tanzu (TKGS) provide a multitude of benefits by e.g. providing a simple and opinionated way to deploy central services to DevOps and AppDev teams. These teams can consume these services using common tools and approaches, and deploy instances of these services in their own vSphere Namespaces.
+In conclusion, the Supervisor Services in vSphere with Tanzu (TKGS) offering a multitude of benefits by e.g. providing a simple and opinionated way to deploy central services to DevOps and AppDev teams. These teams can consume these services using common tools and approaches, and deploy instances of these services in their own vSphere Namespaces.
 
 ## Resources
 
