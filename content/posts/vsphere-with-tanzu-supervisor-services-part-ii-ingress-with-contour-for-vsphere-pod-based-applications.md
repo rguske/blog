@@ -26,15 +26,29 @@ In this second part, I'm going to demonstrate how the *Kubernetes Ingress Contro
 
 ## Kubernetes Ingress Controller Service Installed
 
-The *Kubernetes Ingress Controller Service Contour* is already installed in my vSphere with Tanzu w/NSX Networking environment. If you haven't installed a Supervisor Service from the associated Catalog before, and you also skipped reading Part I of this series, I'd recommend making yourself familiar with the installation first.
+The *Kubernetes Ingress Controller Service Contour* is already installed in my vSphere with Tanzu w/NSX environment. If you haven't installed a Supervisor Service from the associated Catalog before, and you also skipped reading Part I of this series, I'd recommend making yourself familiar with the installation first.
 
 Start reading [HERE](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/#add-new-service---contour).
 
-By browsing to the associated vSphere Namespace, a lot of important information can be picked up from here, like e.g. the requested and by NSX assigned L4 Load Balancer IP address for the Envoy Service (*Figure I*).
+
+
+Information such as the requested and by NSX Load Balancer assigned L4 Load Balancer IP address for the Envoy Service (*Figure I*).
+
+*vSphere:*
 
 {{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0a.png" caption="Figure I: Assigned External IP for Envoy" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0a.png" >}}
 
-This IP address will be used for creating your DNS A-Records like e.g. shown in *Table I*.
+*Kubernetes:*
+
+```shell
+kubectl -n svc-contour-domain-c8 get svc
+
+NAME      TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)                      AGE
+contour   ClusterIP      10.96.0.164   <none>        8001/TCP                     58d
+envoy     LoadBalancer   10.96.2.14    10.15.8.9     80:30077/TCP,443:32173/TCP   58d
+```
+
+This IP address will be used for creating your application DNS A-Records like e.g. shown in *Table I*.
 
 | Name | Data |
 | :--: | :--: |
@@ -44,7 +58,8 @@ This IP address will be used for creating your DNS A-Records like e.g. shown in 
 
 <center><i> Table I: Application DNS A-Records </i></center>
 
-Further deployment specific information can be gathered at the vSphere Namespace as well. For example, if you need to know if any **Persistent Volume Claims** exists, go to the **Storage** section. If you need to know if **Network Policies** are created or which **Endpoints** exists, go to **Network**. If you are interested about **vSphere Pods**, **Deployments**, **Daemon Sets**, **Stateful Sets**, etc. go to **Compute** and select the specific category (*Figure II* & *Figure III*).
+I'll go over this more specific topic further down in this post.
+
 
 {{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0b.png" caption="Figure II: vSphere Namespace Compute Section Details" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0b.png" >}}
 
@@ -149,6 +164,20 @@ spec:
     - protocol: TCP
       port: 80
 ```
+
+By browsing to the associated vSphere Namespace, a lot of valuable application deployment specific information can be picked up from here without having to interact with Kubernetes on the terminal (`kubectl get [...]`).
+
+Further deployment specific information can be gathered at the vSphere Namespace as well. For example, if you need to know if any **Persistent Volume Claims** exists, go to the **Storage** section. If you need to know if **Network Policies** are created or which **Endpoints** exists, go to **Network**. If you are interested about **vSphere Pods**, **Deployments**, **Daemon Sets**, **Stateful Sets**, etc. go to **Compute** and select the specific category (*Figure II* & *Figure III*).
+
+
+{{< mermaid >}}
+graph LR;
+    A( User ) -->| browsing | B(https://app1.mydomain.com)
+    B -->|DNS resolution | C(NSX Load Balancer - 10.15.8.9)
+    C ---|VIP assigned| E(Envoy Proxy - serviceType: LoadBalancer)
+    E --- F(Contour)
+    F -->|routed| G(Application Web GUI)
+{{< /mermaid >}}
 
 {{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0.png" caption="Figure I: " src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0.png" >}}
 
