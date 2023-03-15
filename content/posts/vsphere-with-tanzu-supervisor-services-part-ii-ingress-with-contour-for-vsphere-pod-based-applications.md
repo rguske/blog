@@ -16,9 +16,51 @@ tags:
 - Kubernetes
 ---
 
-In [Part I](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/) of my blog series about the *Supervisor Services in vSphere with Tanzu* I introdcued the concept of vSphere Pods and how they come to be used for these.
+## Recap on vSphere with Tanzu Supervisor Services Part I
 
-## Zero-Trust by Default
+In [Part I](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/) of my blog series on the *Supervisor Services in vSphere with Tanzu (TKGS)*, I introdcued the overall concept, the idea, the requirements as well as how to register and install a new Supervisor Service in vSphere. [HERE](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/#supervisor-services)
+
+Furthermore, I covered the feature vSphere Pods and how they come to beneficial use for the Supervisor Services. [HERE](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/#vsphere-pods)
+
+In this second part, I'm going to demonstrate how the *Kubernetes Ingress Controller Service (Contour)* will be used for serving a vSphere Pods based web-shop application with Ingress functionalities. Also, I'm going over the NSX-site of the house in terms of Networking, Distributed Firewall as well as troubleshooting when using vSphere Pods based apps in TKGS.
+
+## Kubernetes Ingress Controller Service Installed
+
+The *Kubernetes Ingress Controller Service Contour* is already installed in my vSphere with Tanzu w/NSX Networking environment. If you haven't installed a Supervisor Service from the associated Catalog before, and you also skipped reading Part I of this series, I'd recommend making yourself familiar with the installation first.
+
+Start reading [HERE](https://rguske.github.io/post/vsphere-with-tanzu-supervisor-services-part-i-introduction-and-how-to/#add-new-service---contour).
+
+By browsing to the associated vSphere Namespace, a lot of important information can be picked up from here, like e.g. the requested and by NSX assigned L4 Load Balancer IP address for the Envoy Service (*Figure I*).
+
+{{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0a.png" caption="Figure I: Assigned External IP for Envoy" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0a.png" >}}
+
+This IP address will be used for creating your DNS A-Records like e.g. shown in *Table I*.
+
+| Name | Data |
+| :--: | :--: |
+| app1.mydomain.com | 10.15.8.9 |
+| app2.mydomain.com | 10.15.8.9 |
+| app3.mydomain.com | 10.15.8.9 |
+
+<center><i> Table I: Application DNS A-Records </i></center>
+
+Further deployment specific information can be gathered at the vSphere Namespace as well. For example, if you need to know if any **Persistent Volume Claims** exists, go to the **Storage** section. If you need to know if **Network Policies** are created or which **Endpoints** exists, go to **Network**. If you are interested about **vSphere Pods**, **Deployments**, **Daemon Sets**, **Stateful Sets**, etc. go to **Compute** and select the specific category (*Figure II* & *Figure III*).
+
+{{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0b.png" caption="Figure II: vSphere Namespace Compute Section Details" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0b.png" >}}
+
+{{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0c.png" caption="Figure III: vSphere Pod YAML Data" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0c.png" >}}
+
+## Example Web-Shop Application
+
+To begin with, it's necessary to have an application of your choice deployed which works with an Ingress configuration. Mostly, these applications provide an user interface via a web browser and which often use Ingress to route traffic to their backend services.
+
+A couple of popular and demo-proven example applications like e.g. Yelb or the ACME Fitness app can be found on [William Lam's](https://williamlam.com/) blog post: [Interesting Kubernetes application demos](https://williamlam.com/2020/06/interesting-kubernetes-application-demos.html).
+
+I'm going to deploy a web-shop application which is called **Hackazon**. I like a lot using this example application, because when browsing the shop website, the names of the serving Pods are showing up on the shop-item of which they are responsible for (*Figure VI*).
+
+{{< image src="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0.png" caption="Figure VI: Pod Name on each Shop Item" src-s="/img/posts/202303_supervisor_services_part_2/202303_supervisor_services_part_2_0.png" >}}
+
+`upstream connect error or disconnect/reset before headers. reset reason: connection failure`
 
 ```yaml
 kind: Deployment
@@ -134,4 +176,4 @@ spec:
 
 ## Credits
 
-Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3143432">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3143432">Pixabay</a>
+I'd like to **THANK** my very respected fellow [Andreas Marqvardsen](https://blog.andreasm.io/) who helped me getting a better understanding how networking with VMware NSX is used properly in vSphere with Tanzu (TKGS).
