@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "VMware Tanzu Cloud Native Runtimes Part I - Prerequisites and Installation"
-date: 2023-04-24T11:38:31+02:00
+date: 2023-05-16T11:38:31+02:00
 draft: true
 featuredImage: /img/pan-yunbo-EgL0EtzL0Wc-unsplash.jpg
 categories: ["Platforms", "Serverless"]
