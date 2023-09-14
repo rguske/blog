@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "VMware Tanzu Cloud Native Runtimes Part I - Prerequisites and Installation"
-date: 2023-05-16T11:38:31+02:00
+date: 2023-07-20T08:38:31+02:00
 draft: true
 featuredImage: /img/pan-yunbo-EgL0EtzL0Wc-unsplash.jpg
 categories: ["Platforms", "Serverless"]
@@ -313,7 +313,7 @@ tanzu package repository delete tap-1.5.0 -n tap-packages
 After...
 
 ```shell
-tanzu package repository add tap-1.5.0 --url harbor01.cpod-nsxv8.az-stc.cloud-garage.net/tap/tap-packages-1.5.0:v1.5.0 -n tap-packages
+tanzu package repository add tap-1.5.0 --url harbor01.cpod-nsxv8.az-stc.cloud-garage.net/tap/tap-packages-1.5.0:1.5.0 -n tap-packages
 ℹ   Adding package repository 'tap-1.5.0'
 ℹ   Validating provided settings for the package repository
 ℹ   Creating package repository resource
