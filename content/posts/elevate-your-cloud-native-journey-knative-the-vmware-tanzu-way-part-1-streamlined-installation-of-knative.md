@@ -2,7 +2,7 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Elevate Your Cloud-Native Journey: Knative the VMware Tanzu Way Part I - Streamlined Installation of Knative"
+title: "Elevate your Cloud-Native Journey: Knative the VMware Tanzu Way Part I - Streamlined Installation of Knative"
 date: 2023-10-04T21:30:31+02:00
 draft: false
 Description: "Knative offers a robust and flexible framework for building event-driven architectures (EDA) that seamlessly integrate diverse components, enhance automation, and enable real-time data processing. This first part of my blog series on Knative starts with the installation of Knative Serving and Eventing going the VMware Tanzu way. Embark with me on a transformative odyssey."
