@@ -2,8 +2,8 @@
 author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
-title: "Quickly Recover a broken VMware Avi Controller Instance"
-date: 2024-02-07T19:46:58+01:00
+title: "Rebuilding from the Break - Restoring the VMware Avi Controller"
+date: 2024-02-10T09:30:58+01:00
 draft: true
 Description: ""
 featuredImage: /img/recover_avi_ctrl_cover.png
