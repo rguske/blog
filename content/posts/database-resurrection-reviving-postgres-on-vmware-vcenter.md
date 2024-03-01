@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Database Resurrection - Reviving vPostgres DB on VMware vCenter Server"
-Description: "The VCSA vPostgres service fails starting. In this post I describe how I was able to revive my Postgres instance with the help of the Postgres Write-Ahead log (WAL). The Postgres Write-Ahead Log contains enough data for Postgres to restore its state to the last committed transaction. Nevertheless, this action should be done with care."
+description: "The VCSA vPostgres service fails starting. In this post I describe how I was able to revive my Postgres instance with the help of the Postgres Write-Ahead log (WAL). The Postgres Write-Ahead Log contains enough data for Postgres to restore its state to the last committed transaction. Nevertheless, this action should be done with care."
 date: 2024-02-07T23:44:08+01:00
 draft: false
 featuredImage: /img/vcsa_vpostgres_trouble_cover.png

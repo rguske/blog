@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Fixing vCenter Postgres Archiver Service - Dead Postgres Replication Slot"
-Description: "After a homelab crash, the VCSA file-based backup isn't working anymore. In this post I'm describing how I was able to get the VMware Postgres Archiver service back into operating state by interfere with vCenters vPostgres instance."
+description: "After a homelab crash, the VCSA file-based backup isn't working anymore. In this post I'm describing how I was able to get the VMware Postgres Archiver service back into operating state by interfere with vCenters vPostgres instance."
 date: 2024-02-09T16:00:47+01:00
 draft: false
 featuredImage: /img/vcsa_vpostgres_archiver_trouble_cover.png
