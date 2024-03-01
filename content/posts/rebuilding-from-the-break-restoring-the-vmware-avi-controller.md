@@ -3,10 +3,10 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Rebuilding from the Break - Restoring the VMware Avi Controller"
+description: "This article describes my made experiences with restoring the Avi controller. It demonstrates how easy and effective a restore procedure can be. As kind of bonus material, I also added two scripts to the article which can be used to backup the configuration backup-files to a remote location as well as an explanation on how you can run the Avi shell/cli in a container from outside the controller."
 date: 2024-03-01T09:00:58+01:00
 draft: false
 featuredImage: /img/recover_avi_ctrl_cover.png
-description: "This article describes my made experiences with restoring the Avi controller. It demonstrates how easy and effective a restore procedure can be. As kind of bonus material, I also added two scripts to the article which can be used to backup the configuration backup-files to a remote location as well as an explanation on how you can run the Avi shell/cli in a container from outside the controller."
 categories: ["Platforms"]
 tags:
 - VMware
