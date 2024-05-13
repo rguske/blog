@@ -17,22 +17,20 @@ draft: false
 - vExpert: [#3288](https://vexpert.vmware.com/directory/3288)
 
 ```yaml
-apiVersion: v1
-kind: about
+apiVersion: profile/v1
+kind: About
 metadata:
   name: Robert Guske
   region: EMEA
   country: Germany
-  company: VMware Global, Inc.
-  businessUnit: Modern Applications & Management Business Group (MAMBG)
+  company: VMware by Broadcom
+  businessUnit: Tanzu and VMware Cloud Foundation Division
 replicas: 2
-
 ---
-
-apiVersion: v1
+apiVersion: profile/v1
 kind: Role
 metadata:
-  name: Lead Tanzu Emerging Solutions Engineer
+  name: Lead Emerging Solutions Engineer
   programs:
     vmware/internally: Office of the CTO, Ambassador
     vmware/externally: vExpert
@@ -50,9 +48,9 @@ subject:
 
 ## Professional Information
 
-Robert Guske is an accomplished, hands-on, & well informed IT professional with 15+ years of experience in providing strategic guidance regarding IT technology and infrastructural enhancements. He's a tech enthusiast who's actively engaged in shaping the future of cloud-native tech through his commitment and passion for the principles of collaboration and innovation that drive the community forward.
+Robert is an accomplished, hands-on, & well informed IT professional with 20+ years of experience in providing strategic guidance regarding IT technology and infrastructural enhancements. He's a tech enthusiast who's actively engaged in shaping the future of cloud-native tech through his commitment and passion for the principles of collaboration and innovation.
 
-In his current role as a Lead Tanzu Emergings Solution Engineer within VMware’s Modern Applications & Management Business Group (MAMBG), he’s supporting clients and organizations adopting new technologies to accomplish business goals and IT objectives, which are mainly oriented towards application modernization as well as on the platforms to run such modern applications (Microservices).
+In his current role as a Lead Emergings Solution Engineer within VMware by Broadcom, he’s supporting clients and organizations adopting new technologies to accomplish business goals and IT objectives, which are mainly oriented towards application modernization as well as on the platforms to run such modern applications (Microservices).
 
 Robert is also part of VMware's [Office of the CTO Ambassador](https://octo.vmware.com/author/ctoa/) program and helps to ensure an active collaboration between VMware's R&D and field organizations as well as customers across Europe.
 
@@ -92,7 +90,7 @@ Details via Robert's [Linked<i class="fab fa-linkedin fa-fw"></i>](https://www.l
 
 {{< image src="/img/about/vmware-vexpert.png" src-s="/img/about/vmware-vexpert.png" >}}
 
-**Status**: Active 2019 - 2022
+**Status**: Active 2019 - 2024
 
 **vExpert Directory**: [#3288](https://vexpert.vmware.com/directory/3288)
 
@@ -106,9 +104,11 @@ The annual VMware vExpert title is given to individuals who have significantly c
 
 ### vExpert Subprograms
 
-{{< image src="/img/about/vexpert_modernapps_2022.jpg" src-s="/img/about/vexpert_modernapps_2022.jpg" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_modernapps.jpg" src-s="/img/about/vexpert_modernapps.jpg" height="200" width="300" >}}
 
 {{< image src="/img/about/vexpert_avi_2022.png" src-s="/img/about/vexpert_avi_2022.png" height="200" width="300" >}}
+
+{{< image src="/img/about/vexpert_modernapps_2022.jpg" src-s="/img/about/vexpert_modernapps_2022.jpg" height="200" width="300" >}}
 
 {{< image src="/img/about/vexpert_modernapps_2021.jpg" src-s="/img/about/vexpert_modernapps_2021.jpg" height="200" width="300" >}}
 
