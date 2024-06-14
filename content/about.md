@@ -52,7 +52,7 @@ Robert is an accomplished, hands-on, & well informed IT professional with 20+ ye
 
 In his current role as a Lead Emergings Solution Engineer within VMware by Broadcom, he’s supporting clients and organizations adopting new technologies to accomplish business goals and IT objectives, which are mainly oriented towards application modernization as well as on the platforms to run such modern applications (Microservices).
 
-Robert is also part of VMware's [Office of the CTO Ambassador](https://octo.vmware.com/author/ctoa/) program and helps to ensure an active collaboration between VMware's R&D and field organizations as well as customers across Europe.
+Robert was also part of VMware's former [Office of the CTO Ambassador](https://octo.vmware.com/author/ctoa/) program. Members are involved in advocating VMware's technological innovations, assisting with customer engagements, and contributing to the company's strategic technological direction. Furthermore, ensuring an active collaboration between VMware's R&D, field organizations as well as customers across the globe is also an important part of the program.
 
 ## Open-Source Contributions
 
@@ -62,7 +62,6 @@ He's very keen on cloud native technologies and an active team-member and contri
 
 - Homepage: https://vmweventbroker.io
 - <i class='fab fa-github fa-fw'></i> Repository: https://github.com/vmware-samples/vcenter-event-broker-appliance/
-- VEBA @ vBrownBag: https://www.youtube.com/watch?v=tOjp5_qn-Fg&feature=youtu.be
 - VEBA related articles written by Robert: https://rguske.github.io/tags/veba/
 - VEBA related articles written by William Lam:  https://williamlam.com/?s=veba
 
@@ -77,6 +76,7 @@ Details via Robert's [Linked<i class="fab fa-linkedin fa-fw"></i>](https://www.l
 {{< image src="/img/about/ckad-certified-kubernetes-application-developer.png" src-s="/img/about/ckad-certified-kubernetes-application-developer.png" height="220" width="220" >}}
 
 ---
+{{< image src="/img/about/vmware_cert_tko_2024.png" src-s="/img/about/vmware_cert_tko_2024.png" height="200" width="200" >}}
 
 {{< image src="/img/about/VMware_cert_cna_master_2022.png" src-s="/img/about/VMware_cert_cna_master_2022.png" height="200" width="200" >}}
 
@@ -100,19 +100,19 @@ Acknowledgement by sharing passion and gained experience with the community.
 The annual VMware vExpert title is given to individuals who have significantly contributed to the community of VMware users over the past year. The title is awarded to individuals (not employers) for their commitment to sharing their knowledge and passion for VMware technology above and beyond their job requirements.
 {{< /admonition >}}
 
-<img src="https://vexpert.vmware.com/directory/3288/vexpert-badge-stars.png" width="256" alt="vExpert Badge" title="vExpert Badge" />
+<img src="https://vexpert.vmware.com/directory/3288/vexpert-badge-stars.png" width="300" alt="vExpert Badge" title="vExpert Badge"/>
 
 ### vExpert Subprograms
 
-{{< image src="/img/about/vexpert_modernapps.jpg" src-s="/img/about/vexpert_modernapps.jpg" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_modernapps.png" src-s="/img/about/vexpert_modernapps.png" height="100" width="200" >}}
 
-{{< image src="/img/about/vexpert_avi_2022.png" src-s="/img/about/vexpert_avi_2022.png" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_avi_2022.png" src-s="/img/about/vexpert_avi_2022.png" height="100" width="200" >}}
 
-{{< image src="/img/about/vexpert_modernapps_2022.jpg" src-s="/img/about/vexpert_modernapps_2022.jpg" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_modernapps_2022.png" src-s="/img/about/vexpert_modernapps_2022.png" height="100" width="200" >}}
 
-{{< image src="/img/about/vexpert_modernapps_2021.jpg" src-s="/img/about/vexpert_modernapps_2021.jpg" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_modernapps_2021.png" src-s="/img/about/vexpert_modernapps_2021.png" height="100" width="200" >}}
 
-{{< image src="/img/about/vexpert_modernapps_2020.jpg" src-s="/img/about/vexpert_modernapps_2020.jpg" height="200" width="300" >}}
+{{< image src="/img/about/vexpert_modernapps_2020.png" src-s="/img/about/vexpert_modernapps_2020.png" height="100" width="200" >}}
 
 ## Public Events - Speaking, Demoing, Staff and Initiatives
 
