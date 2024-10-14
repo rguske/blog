@@ -55,14 +55,14 @@ ignoreErrors = ["error-remote-getjson"]
         url = "/categories/"
         title = ""
         weight = 3
-      [[languages.en.menu.main]]
-        identifier = "VMware Microsites"
-        pre = ""
-        post = ""
-        name = "VMware Microsites"
-        url = "https://rguske.github.io/post/vmware-microsites-you-should-bookmark/"
-        title = "VMware Microsites"
-        weight = 4
+#      [[languages.en.menu.main]]
+#        identifier = "VMware Microsites"
+#        pre = ""
+#        post = ""
+#        name = "VMware Microsites"
+#        url = "https://rguske.github.io/post/vmware-microsites-you-should-bookmark/"
+#        title = "VMware Microsites"
+#        weight = 4
       [[languages.en.menu.main]]
         identifier = "about"
         pre = ""
