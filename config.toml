@@ -22,8 +22,6 @@ ignoreErrors = ["error-remote-getjson"]
     languageName = "English"
     # default amount of posts in each pages
     paginate = 15
-    # [UA-XXXXXXXX-X] google analytics code
-    googleAnalytics = "UA-122353302-1"
     # copyright description used only for seo schema
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. © All rights reserved -2018"
     # Menu config
@@ -88,11 +86,18 @@ ignoreErrors = ["error-remote-getjson"]
         title = "GitHub"
         weight = 7
     [languages.en.params]
+      # [UA-XXXXXXXX-X] google analytics code
+      googleAnalytics = "UA-122353302-1"
       # site description
-      description = "rguske.github.io is a personal website which provides informational & detailed content, based on Robert Guske´s gained experiences with solutions by VMware (primarily)."
+      description = "rguske.github.io is a personal website which provides informational & detailed content, based on Robert Guske´s gained experiences with different technologies."
       # site keywords
-      keywords = ["Robert", "Guske", "VMware", "CNA", "Cloud-Native", "Tanzu", "vRealize", "vSphere"]
+      keywords = ["Robert", "Guske", "VMware", "Red Hat", "OpenShift", "Kubernetes", "Cloud-Native", "Tanzu", "vSphere", "Cloud Native Applications"]
       # App icon config
+    [languages.en.params.author]
+      # Author config
+      name = "Robert Guske"
+      email = "robert.guske@gmail.com"
+      link = "/about/"
       [languages.en.params.app]
         # optional site title override for the app when added to an iOS home screen or Android launcher
         title = "Robert Guske"
@@ -156,8 +161,8 @@ ignoreErrors = ["error-remote-getjson"]
       # Social config in home page
       [languages.en.params.social]
         GitHub = "rguske"
-        Linkedin = "robert-guske-830853111"
-        Twitter = "vmw_rguske"
+        Linkedin = "robertguske"
+        Twitter = "RobertGuske"
         # Instagram = "xxxx"
         # Facebook = "xxxx"
         # Telegram = "xxxx"
@@ -179,7 +184,7 @@ ignoreErrors = ["error-remote-getjson"]
         # Odnoklassniki = ""
         # VK = ""
         # Flickr = ""
-        Xing = "https://www.xing.com/profile/Robert_Guske/"
+        # Xing = "https://www.xing.com/profile/Robert_Guske/"
         # Snapchat = ""
         # Soundcloud = ""
         # Spotify = ""
@@ -224,7 +229,7 @@ ignoreErrors = ["error-remote-getjson"]
 
 [params]
   # LoveIt theme version
-  version = "0.2.X"
+  version = "0.2.11"
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
@@ -545,12 +550,6 @@ ignoreErrors = ["error-remote-getjson"]
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
-
-# Author config
-[author]
-  name = "Robert Guske"
-  email = "robert.guske@gmail.com"
-  link = "/about/"
 
 # Sitemap config
 [sitemap]
