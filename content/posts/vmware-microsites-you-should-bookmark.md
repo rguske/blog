@@ -7,10 +7,10 @@ date: 2019-09-24T10:00:00+02:00
 draft: false
 featuredImage: /img/vmwaremicrosites_cover.jpg
 description: "This post documents a large set of existing Microsites from VMware."
-categories: ["Hints"]
+categories: ["Miscellaneous"]
 tags:
 - VMware
-- Hint
+- Miscellaneous
 ---
 
 <!--more-->
