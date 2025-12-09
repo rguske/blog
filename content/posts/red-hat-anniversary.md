@@ -4,7 +4,7 @@ authorLink: "/about/"
 lightgallery: true
 title: "Time Flies! One Year at Red Hat"
 date: 2025-12-09T16:27:57+01:00
-draft: true
+draft: false
 featuredImage: /img/red_hat_anniversary_cover.png
 categories: ["Miscellaneous"]
 toc: false
