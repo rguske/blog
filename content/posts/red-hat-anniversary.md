@@ -3,6 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Time Flies! One Year at Red Hat"
+description: "I'm looking back on my first year at Red Hat. I feel genuinely grateful to be part of something that’s not only big in scale, but truly meaningful in impact. Red Hat isn’t just “another tech company” to me! It’s a place where open source, community, and collaboration aren’t slogans on a slide deck, but the way we actually work every day."
 date: 2025-12-09T16:27:57+01:00
 draft: false
 featuredImage: /img/red_hat_anniversary_cover.png
@@ -27,7 +28,7 @@ By reading my anniversary email and inspecting my received virtual puck, I kept 
 
 If we know each other or in case we haven't met yet but you know my blog, you might also know my past with VMware. Leaving VMware wasn't easy at all for me. Feelings-wise, it was a heavy ride in a rollercoaster.
 
-LinkedIn post to my ["THANK YOU VMWARE"](https://www.linkedin.com/posts/robertguske_vmware-vcommunity-grateful-activity-7256685239232606211-d93Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAABwRXeQB4ezoeTMEqEGTf7Rl0JjiBDivw_s).
+I shared my gratitude via this LinkedIn post. - ["THANK YOU VMWARE"](https://www.linkedin.com/posts/robertguske_vmware-vcommunity-grateful-activity-7256685239232606211-d93Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAABwRXeQB4ezoeTMEqEGTf7Rl0JjiBDivw_s).
 
 Evidence of this was reflected in my extremely low level of activity on social media and unfortunately on my blog as well. The more it was important to **feel home again** and find back my motivation.
 
