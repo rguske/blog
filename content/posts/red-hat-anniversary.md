@@ -3,10 +3,11 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "Time Flies! One Year at Red Hat"
-date: 2025-11-17T11:30:57+01:00
+date: 2025-12-09T16:27:57+01:00
 draft: true
 featuredImage: /img/red_hat_anniversary_cover.png
 categories: ["Miscellaneous"]
+toc: false
 tags:
 - Miscellaneous
 - RedHat
@@ -14,58 +15,70 @@ tags:
 
 <!--more-->
 
-I recently received an email reminding me that I'm a Red Hatter for ONE YEAR already.
+See what exciting email just recently found its way into my inbox:
 
-> Congratulations Robert,
-> You’ve been a Red Hatter for 1 year! Today, we are celebrating your service to Red Hat and dedication to our mission.
-> Your virtual puck is attached. Thank you for contributing to our success and helping to make Red Hat the best place to make a difference together!
+{{< admonition quote "You’ve been a Red Hatter for One Year! 👏🏻" true >}}
+Congratulations Robert, you’ve been a Red Hatter for one year! Today, we are celebrating your service to Red Hat and dedication to our mission. Your virtual puck is attached. Thank you for contributing to our success and helping to make Red Hat the best place to make a difference together!
+{{< /admonition >}}
 
-By reading the email and inspecting my received virtual puck, I kept holding myself back for a moment and started realizing what a hell of a journey my carreer in tech has been so far.
+## Me being Grateful
 
-If you know me, you might also know my past with VMware. [Leaving VMware](https://www.linkedin.com/posts/robertguske_vmware-vcommunity-grateful-activity-7256685239232606211-d93Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAABwRXeQB4ezoeTMEqEGTf7Rl0JjiBDivw_s) wasn't easy at all for me. Feelings-wise, it was a heavy ride on a rollercoaster. Evidence of this was reflected in my extremely low level of activity on popular social media platforms and on my blog. The more it was important to feel home again.
+By reading my anniversary email and inspecting my received virtual puck, I kept holding myself back for a moment and started realizing what a hell of a journey my carreer in tech has been so far (in a positive way).
 
-**Joining Red Hat in November 2024, made me feel home again.**
+If we know each other or in case we haven't met yet but you know my blog, you might also know my past with VMware. Leaving VMware wasn't easy at all for me. Feelings-wise, it was a heavy ride in a rollercoaster.
 
-Looking back on my first 12 months at Red Hat, I feel genuinely grateful to be part of something that’s not only big in scale, but truly meaningful in impact. Red Hat isn’t just “another tech company” to me! It’s a place where open source, community, and collaboration aren’t slogans on a slide deck, but the way we actually work every day.
+LinkedIn post to my ["THANK YOU VMWARE"](https://www.linkedin.com/posts/robertguske_vmware-vcommunity-grateful-activity-7256685239232606211-d93Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAABwRXeQB4ezoeTMEqEGTf7Rl0JjiBDivw_s).
 
-From day one, I noticed how deeply the idea of open runs through the company. Red Hat describes itself as an open organization, where collaboration and openness shape how people work together, what we build, and the value we create for customers and the world. I’ve experienced it in countless moments: from open discussions on mailing lists and chats, to architecture reviews where anyone can ask tough questions, to business units and leaders who share context.
+Evidence of this was reflected in my extremely low level of activity on social media and unfortunately on my blog as well. The more it was important to **feel home again** and find back my motivation.
 
-One statement that really resonates with me is Red Hat’s belief that [“Open source unlocks potential](https://www.redhat.com/en/about/our-culture)”.
-Red Hat
-+1
- Over this past year, I’ve seen how seriously the company lives that purpose. The commitment to open source clearly goes beyond technology—it shapes how teams are formed, how ideas are evaluated, and how decisions are made. Instead of top-down directives, there’s a genuine effort to include diverse perspectives and to treat good ideas as something that can come from anywhere, regardless of title or role. 
-Red Hat
-+1
+## Feel Home Again
 
-I’m especially proud to be part of a company that uses a community-powered approach to build enterprise solutions that the world relies on. Red Hat is widely recognized as the leading provider of enterprise open source software, using this community-driven model to deliver reliable, high-performing Linux, hybrid cloud, container, and Kubernetes technologies. 
-Red Hat
-+1
- Being on the inside, you really feel that connection between upstream communities, customers, and internal teams—it’s a loop of feedback, contribution, and collaboration that keeps things honest and innovative.
+Looking back on my first year at Red Hat, I feel genuinely grateful to be part of something that’s not only big in scale, but truly meaningful in impact. Red Hat isn’t just “another tech company” to me! It’s a place where open source, community, and collaboration aren’t slogans on a slide deck, but the way we actually work every day.
 
-Culture-wise, joining Red Hat has been a bit of a paradigm shift for me. The open source way here isn’t just about publishing code. It’s about principles like transparency, participation, and meritocracy being baked into everyday work. 
-SD Times
-+1
- I’ve been encouraged to speak up, challenge assumptions, and share my ideas even when I’m the “new person in the room.” At the same time, people are incredibly generous with their knowledge. Documentation, internal discussions, and even decision rationales are shared widely, so everyone can learn and understand the bigger picture.
+From day one, I noticed how deeply the idea of open runs through the company. Red Hat describes itself as an open organization, where collaboration and openness shape how people work together, what we build, and the value we create for customers and the community.
+One little but important example for me is my first Red Hat Summit Connect in Germany. This event is a regional (`fork`) version of the (`origin/main`) Red Hat Summit, providing localized content, networking, and learning opportunities focused on accelerating digital transformation through open source.
 
-One thing I really appreciate is how Red Hat talks about open source as more than a methodology—“it’s an attitude.” 
-Red Hat
- That attitude shows up in small details, like how teams default to working in public channels instead of private ones, how feedback is given openly but respectfully, and how experiments and failures are treated as part of the learning process. There’s a strong sense that we’re all stewards of something bigger than ourselves: the communities we work with, the products we ship, and the ecosystem we help build.
+I just joined Red Hat and my well appreciated manager [Sebastian Faulhaber](https://www.linkedin.com/in/sebastianfaulhaber/) wanted me to be part of the event to get to know the team. You should know, that a business purpose needs to exist to attend such events. Otherwise, you can't hold the balance between partners, customers and Red Hatters.
 
-Over this past year, I’ve had the chance to learn from incredibly passionate colleagues, contribute to projects that matter, and see firsthand how an open organizational culture can drive both innovation and resilience. Red Hat often talks about using open source principles across the organization to maximize flexibility, transparency, and speed—and I can honestly say I’ve felt all three in my day-to-day work. 
-Balance The Grind
-+1
+But there was no need to worry since my dear and brilliant colleague and mentor (during my first year) [Robert Bohne](https://www.linkedin.com/in/robertbohne/) had already a plan in place. I joined the team which is responsible for the project [Cloud Native Robotz Hackathon](https://github.com/cloud-native-robotz-hackathon/) and supported the hands-on day pre Summit Connect. This project is providing a comprehensive and intense hands-on workshop experience in which our customers and the community are learning to train DIY Robotz finding a Red Hat Fedora using AI capabilities such as image recognition.
 
-So, as I celebrate my first anniversary, I mainly want to say thank you:
+{{< image src="/img/posts/202512_redhatanniversary/robotz.jpg" caption="Figure I: Red Hat Summit Connect Germany 2024" src-s="/img/posts/202512_redhatanniversary/robotz.jpg" >}}
 
-To my teammates and mentors who’ve answered endless questions, shared context, and trusted me with real responsibilities.
+I was very delighted to kick-off the tires quickly and to start helping and contributing to something really, really cool. There are lots of efforts put into this project and the technologies involved are pretty awesome!
 
-To the broader Red Hat community—inside and outside the company—for showing what’s possible when we build together, in the open.
+Retrospective speaking, this particular Red Hat Summit Connect (2024) was important and special to me...**because it made me feel home again**.
 
-And to everyone who keeps our culture grounded in the belief that openness isn’t just the best way to build software, but a powerful way to work and to lead.
+{{< image src="/img/posts/202512_redhatanniversary/summit2.jpg" caption="Figure II: Red Hat Summit Connect Germany 2024 - Awesome Peers" src-s="/img/posts/202512_redhatanniversary/summit2.jpg" >}}
 
-Here’s to year one at Red Hat—rooted in open source, powered by community—and to many more years of learning, contributing, and helping “open unlock the world’s potential.” 💫
+## It's About Culture
 
+I’ve experienced Red Hat's cultural pillars in countless moments: from open discussions on mailing lists and chats, to architecture reviews where anyone can ask tough questions, to business units and leaders who share context.
 
+One statement that really resonates with me is Red Hat’s belief that "[Open source unlocks potential](https://www.redhat.com/en/about/our-culture)”.
 
-{{< image src="/img/posts//" caption="Figure I: " src-s="/img/posts//" >}}
+Over this past year, I’ve seen how seriously the company lives that purpose. The commitment to open source clearly goes beyond technology, it shapes how teams are formed, how ideas are evaluated, and how decisions are made. There’s a genuine effort to include diverse perspectives and to treat good ideas as something that can come from anywhere, regardless of title or role.
 
+Being on the inside, you really feel that connection between upstream communities, customers, and internal teams, it’s a loop of [feedback, contribution, and collaboration](https://issues.redhat.com/secure/BrowseProjects.jspa) that keeps things honest and innovative. I’ve been encouraged to speak up, challenge assumptions, and share my ideas even when I’m the “new person in the room”. At the same time, people are incredibly generous with their knowledge. Documentation, internal discussions, and e.g. [roadmap content ("What's Next")](https://www.youtube.com/@OpenShift) are shared widely, so everyone can learn and understand the bigger picture.
+
+## Community is Key
+
+I'm of the opinion that building a broad, healthy and diverse community is very important for almost every tech-company. I was always trying to fullfil the role of being an ambassador for such communities and executed this at my past employers with passion. The more it made me very happy joining the team which is responsible for the [OpenShift Anwender](https://www.openshift-anwender.de/) community here in Germany.
+
+This community aims to provide users of OpenShift with a platform for knowledge transfer and the exchange of experiences. There is a clear focus on users presenting and discussing practical, solution-oriented topics. The community covers the entire spectrum from introduction and development to operation of an OpenShift platform.
+
+Based on shared information, the OpenShift community was created first 10y ago and luckily others picked up on the great example.
+
+* [RHEL Anwender (German)](https://enterprise-linux-anwender.de/)
+* [Ansible Anwender (German)](https://www.ansible-anwender.de/)
+
+## Thank You
+
+Thanks to everyone who keeps our culture grounded in the belief that openness isn’t just the best way to build software, but a powerful way to work and to lead.
+
+Here’s to year one at Red Hat, rooted in open source, powered by community and to many more years of learning, contributing, and helping "**Open unlock the World’s Potential**".
+
+{{< admonition success "🤝" true >}}
+Open-Source is more than a Methodology — “It’s an Attitude.”
+{{< /admonition >}}
+
+Thanks for reading.
