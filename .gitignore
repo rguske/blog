@@ -1,0 +1,4 @@
+.cache
+.local
+hooks/__pycache__/
+.DS_Store
