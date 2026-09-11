@@ -92,6 +92,106 @@ That's exactly the "trims the fat" problem the `EventTransform` API solves. Intr
 
 We won't write the JSONata expression itself just yet, that's coming up next, where we configure `EventTransform` to emit exactly the columns our `vmdb` PostgreSQL table expects: name, namespace, CPU cores/sockets, memory, storage size, storage class, and network.
 
+## Prerequisites
+
+Everything from here on assumes Knative Serving and Eventing (or, on OpenShift, the OpenShift Serverless Operator) plus KubeVirt/OpenShift Virtualization are already installed and healthy on the cluster; this section covers only the Knative/Serverless half of that equation, getting KubeVirt itself running is a separate exercise and out of scope here, [KubeVirt's own quickstart](https://kubevirt.io/quickstart_minikube/) is the place to start if you need it.
+
+### On OpenShift: the OpenShift Serverless Operator
+
+On OpenShift, the OpenShift Serverless Operator is the fastest path to a healthy cluster: it manages Knative Serving, Knative Eventing, and the Knative broker for Apache Kafka as a single product, so there's one Operator lifecycle to watch instead of three.
+
+Start by subscribing the cluster to the Operator with a `Namespace`, `OperatorGroup`, and `Subscription`, saved as `serverless-subscription.yaml`:
+
+```yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-serverless
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: serverless-operators
+  namespace: openshift-serverless
+spec: {}
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: serverless-operator
+  namespace: openshift-serverless
+spec:
+  channel: stable
+  name: serverless-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+```
+
+```shell
+oc apply -f serverless-subscription.yaml
+```
+
+Give it a moment, then confirm the cluster service version has reached `Succeeded`:
+
+```shell
+oc get csv
+```
+
+```text
+NAME                          DISPLAY                        VERSION   REPLACES                      PHASE
+serverless-operator.v1.25.0   Red Hat OpenShift Serverless   1.25.0    serverless-operator.v1.24.0   Succeeded
+```
+
+With the Operator in place, install Knative Serving by applying a minimal `KnativeServing` CR (`serving.yaml`):
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+```
+
+```shell
+oc apply -f serving.yaml
+```
+
+```shell
+oc get knativeserving.operator.knative.dev/knative-serving -n knative-serving --template='{{range .status.conditions}}{{printf "%s=%s\n" .type .status}}{{end}}'
+```
+
+```text
+DependenciesInstalled=True
+DeploymentsAvailable=True
+InstallSucceeded=True
+Ready=True
+```
+
+Same pattern for Knative Eventing (`eventing.yaml`), this is the piece that actually matters for everything below, `Broker`, `Trigger`, `ApiServerSource`, and `EventTransform` all live here:
+
+```yaml
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeEventing
+metadata:
+  name: knative-eventing
+  namespace: knative-eventing
+```
+
+```shell
+oc apply -f eventing.yaml
+```
+
+```shell
+oc get knativeeventing.operator.knative.dev/knative-eventing -n knative-eventing --template='{{range .status.conditions}}{{printf "%s=%s\n" .type .status}}{{end}}'
+```
+
+Once that reports `InstallSucceeded=True` and `Ready=True` alongside the same result for `knativeserving`, the cluster is ready for the `oc create -f -` manifests coming up next.
+
+### Everywhere Else: Upstream Knative Serving and Eventing
+
+Not on OpenShift? Install upstream Knative Serving and Eventing directly. For a supported, long-term install on any Kubernetes cluster, the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/) gives you the same CRD-driven approach used above. For quick local experimentation, the [Knative Quickstart](https://knative.dev/docs/install/quickstart-install/)'s `kn` plugin spins up a `kind`/`minikube` cluster with Serving and Eventing already wired together in a couple of commands, useful for kicking the tyres, not for production. Either way, no manifests to paste here, everything from "Deploying the Event Pipeline" onward is plain `oc`/`kubectl` resources and doesn't care which install path got you to a healthy `knative-serving`/`knative-eventing` pair.
+
 ## Deploying the Event Pipeline
 
 Theory's out of the way, time to actually roll this out on an OpenShift cluster. Everything below is applied in order, since later objects reference the names created earlier.
