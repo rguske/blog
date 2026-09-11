@@ -507,3 +507,47 @@ With that applied, the pipeline is complete end to end: `VirtualMachine` create/
 {{< admonition info "Skipping duplicate events" true >}}
 Knative Eventing's delivery guarantee is at-least-once, not exactly-once, so the same CloudEvent can legitimately show up at the function's door more than once, a retry after a slow response, a redelivery after a brief network hiccup, and so on. Left unchecked, a repeated `add` event would simply run the same `INSERT` again. `kn-py-vmdata-psql-fn` guards against this by remembering the CloudEvent `id` it has already processed and short-circuiting on a repeat, logging a line to that effect and returning a "skipped" response instead of touching the database a second time. It's a small check, but it's what keeps `virtual_machines` an accurate mirror of cluster state instead of quietly drifting under retries.
 {{< /admonition >}}
+
+## Validating End-to-End
+
+With every piece deployed, the only thing left is proof: create and delete a handful of VMs, then query `vmdb` directly to confirm `virtual_machines` actually tracked them.
+
+```shell
+for i in $(seq 1 5); do oc process -n openshift rhel9-server-medium -p NAME=vm${i} | oc apply -f - ; done;
+```
+
+I ran that loop to spin up five VMs, deleted them again, and then connected with `psql` to check whether both the adds and the deletes made it into the table:
+
+```shell
+psql -U postgres -h 10.32.98.110 -p 5432 -d vmdb -c 'SELECT * FROM "virtual_machines"'
+
+Password for user postgres:
+                 type                  |                  id                  |      kind      |    name    |    namespace    |           time           | cpucores | cpusockets | memory | storageclass | network
+---------------------------------------+--------------------------------------+----------------+------------+-----------------+--------------------------+----------+------------+--------+--------------+---------
+ dev.knative.apiserver.resource.add    | 6ee40bfe-7c9d-445c-943e-5ddb8f4fd47c | VirtualMachine | rguske-vm1 | rguske-eventing | 2025-04-10T08:59:25.407Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.add    | c769cae2-6743-4923-afe5-46b44af5a5f7 | VirtualMachine | rguske-vm2 | rguske-eventing | 2025-04-10T08:59:26.695Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.add    | 39c73b7d-4842-4e72-9329-5c8b8d14d12f | VirtualMachine | rguske-vm3 | rguske-eventing | 2025-04-10T08:59:27.995Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.add    | 66af44d6-6b97-4a51-a06c-29f7a775e78b | VirtualMachine | rguske-vm4 | rguske-eventing | 2025-04-10T08:59:29.203Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.add    | f2561dd5-2020-47b3-86f3-038b943c5d10 | VirtualMachine | rguske-vm5 | rguske-eventing | 2025-04-10T08:59:31.309Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.delete | 8915c52d-4e54-4b2c-a5a2-34ac3aea70d9 | VirtualMachine | rguske-vm1 | rguske-eventing | 2025-04-10T09:09:48.276Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.delete | dcbc4779-184e-43d7-af2e-afc3b3762e16 | VirtualMachine | rguske-vm2 | rguske-eventing | 2025-04-10T09:09:48.396Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.delete | febeab4e-bd9d-451e-b0df-b2dc4e2d83c6 | VirtualMachine | rguske-vm3 | rguske-eventing | 2025-04-10T09:09:48.515Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.delete | 3d166a04-29f1-4968-aaf2-ac5657b79570 | VirtualMachine | rguske-vm4 | rguske-eventing | 2025-04-10T09:09:48.624Z | 1        | 1          | 2Gi    |              | default
+ dev.knative.apiserver.resource.delete | e873eadc-c54b-4df9-aa70-9b1dfb864128 | VirtualMachine | rguske-vm5 | rguske-eventing | 2025-04-10T09:09:48.755Z | 1        | 1          | 2Gi    |              | default
+(10 rows)
+```
+
+Five `add` rows, five `delete` rows, each carrying the CloudEvent `id` that made it unique, exactly what the pipeline was built to produce.
+
+### Reading the Data with pgAdmin (Optional)
+
+`psql` gets the job done, but if you'd rather browse `virtual_machines` than type SQL, pgAdmin is a friendlier alternative:
+
+```shell
+podman run -p 80:80 \
+    -e 'PGADMIN_DEFAULT_EMAIL=rguske@redhat.com' \
+    -e 'PGADMIN_DEFAULT_PASSWORD=redhat' \
+    -d dpage/pgadmin4:9.2.0
+```
+
+{{< image src="" caption="Figure II: virtual_machines table browsed in pgAdmin" src-s="" >}}
