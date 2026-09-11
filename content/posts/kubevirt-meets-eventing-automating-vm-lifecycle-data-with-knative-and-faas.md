@@ -299,3 +299,92 @@ EOF
 ```
 
 With this in place, the full pipeline is live end to end: `VirtualMachine` create/delete → `ApiServerSource` → `broker-apiserversource` → `Trigger` → `EventTransform` → `broker-eventtransform`. The only thing missing now is something actually subscribing to `broker-eventtransform` and doing something useful with those trimmed events, which is exactly where the Knative Function comes in next.
+
+## The PostgreSQL Backend
+
+Everything up to this point has been about getting events into the right shape and to the right place. The other half of the "CMDB-like PostgreSQL table" idea from the introduction is the database itself: a StatefulSet-backed PostgreSQL 16 instance sitting behind a `ClusterIP` `Service`. To be upfront about it, what's running here is homelab/demo-grade: a single replica backed by `ReadWriteOnce` `PersistentVolumeClaim`s, not something you'd take to production as-is. That's fine for this post though, because the interesting part isn't the `StatefulSet`, it's the schema. Swap this out for any Postgres instance or Operator you already have reachable from your cluster; as long as it can run the `CREATE TABLE` statement coming up below, it'll work just as well.
+
+The one credential involved is the database password, held in a small `Secret`:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql-secret
+  labels:
+    app: postgres
+type: Opaque
+data:
+  POSTGRES_PASSWORD: 'cmVkaGF0Cg=='
+EOF
+```
+
+I'm skipping the full `PersistentVolumeClaim`/`StatefulSet`/`Service` YAML here (roughly 140 lines): it's a completely standard Kubernetes Postgres deployment with nothing KubeVirt- or Knative-specific about it, so pasting all of it would just be noise, adapt your own Postgres instance or Operator of choice instead.
+
+### Initializing the `vmdb` Database
+
+With PostgreSQL reachable, a one-off Kubernetes `Job` creates the `vmdb` database and a `virtual_machines` table whose columns mirror the trimmed event fields coming out of the `EventTransform` we defined earlier, `type`, `id`, `kind`, `name`, `namespace`, `time`, `cpucores`, `cpusockets`, `memory`, `storageclass` and `network`, letter for letter, minus a couple of CloudEvent envelope attributes (`specversion`, `source`, `subject`) and the `datasource` size field that simply aren't persisted:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-vmdb
+  namespace: postgres
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: init-vmdb
+        image: registry.redhat.io/rhel9/postgresql-15
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: pg-credentials
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: pg-credentials
+              key: DB_USER
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pg-credentials
+              key: DB_PASSWORD
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+
+          echo "Checking database vmdb..."
+
+          psql -h ${DB_HOST} -U ${DB_USER} -d postgres -tAc \
+            "SELECT 1 FROM pg_database WHERE datname='vmdb'" | grep -q 1 \
+            || psql -h ${DB_HOST} -U ${DB_USER} -d postgres -c \
+            "CREATE DATABASE vmdb;"
+
+          echo "Creating table virtual_machines..."
+
+          psql -h ${DB_HOST} -U ${DB_USER} -d vmdb <<EOF
+          CREATE TABLE IF NOT EXISTS public.virtual_machines (
+              type TEXT,
+              id TEXT,
+              kind TEXT,
+              name TEXT,
+              namespace TEXT,
+              time TEXT,
+              cpucores TEXT,
+              cpusockets TEXT,
+              memory TEXT,
+              storageclass TEXT,
+              network TEXT
+          );
+          EOF
+
+          echo "Database initialization completed."
+```
