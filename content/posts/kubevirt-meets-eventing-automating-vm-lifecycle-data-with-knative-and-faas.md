@@ -91,3 +91,211 @@ Here's a trimmed, illustrative excerpt of what that raw `dev.knative.apiserver.r
 That's exactly the "trims the fat" problem the `EventTransform` API solves. Introduced in Knative Eventing v1.18, `EventTransform` is a CRD that uses [JSONata](https://jsonata.org/) expressions to reshape a CloudEvent's payload in-flight, picking out only the attributes you care about and dropping everything else. It's a standalone building block too, not tied to any single source or sink, so it can sit anywhere in your event flow: right after the `Broker`, in front of a `Trigger`, wherever trimming makes sense for that hop.
 
 We won't write the JSONata expression itself just yet, that's coming up next, where we configure `EventTransform` to emit exactly the columns our `vmdb` PostgreSQL table expects: name, namespace, CPU cores/sockets, memory, storage size, storage class, and network.
+
+## Deploying the Event Pipeline
+
+Theory's out of the way, time to actually roll this out on an OpenShift cluster. Everything below is applied in order, since later objects reference the names created earlier.
+
+### Setting the Stage: Brokers & RBAC
+
+We deploy two `Broker`s rather than one: `broker-apiserversource` receives the raw, untrimmed events straight from the `ApiServerSource`, while `broker-eventtransform` only ever sees the already-trimmed events coming out of `EventTransform`. Keeping them separate means a `Trigger` subscribing to either one always gets events of a predictable shape, instead of having to filter raw and transformed events apart downstream.
+
+```yaml
+oc create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker-apiserversource
+spec: {}
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: broker-eventtransform
+spec: {}
+EOF
+```
+
+Neither `Broker` has a `spec` beyond its name, that's the memory-backed, no-frills default, perfectly fine to get started with.
+
+The `ApiServerSource` we're about to create doesn't get to watch cluster resources for free. By default there's no ServiceAccount with permission to `get`/`list`/`watch` `VirtualMachine`/`VirtualMachineInstance` objects, so we need a dedicated `ServiceAccount` plus a `Role`/`RoleBinding` granting exactly that:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: events-sa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: event-watcher
+rules:
+  - apiGroups:
+      - "kubevirt.io"
+    resources:
+      - virtualmachines
+      - virtualmachineinstances
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: role-event-watcher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: event-watcher
+subjects:
+  - kind: ServiceAccount
+    name: events-sa
+EOF
+```
+
+### Wiring Up the ApiServerSource
+
+With the plumbing in place, we can finally create the `ApiServerSource` itself. The important bit here is `mode: Resource`: instead of forwarding the generic, small Kubernetes `Event` objects (the kind you see with `oc get events`), `mode: Resource` makes the source watch the *actual resource* listed under `resources` and emit a CloudEvent carrying that resource's full current state every time it changes. We scope it to exactly one `apiVersion`/`kind` pair, `kubevirt.io/v1` `VirtualMachine`, so we only hear about VM lifecycle changes and nothing else running in the cluster. The source authenticates as the `events-sa` ServiceAccount we just created, and sinks its events straight into `broker-apiserversource`:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: sources.knative.dev/v1
+kind: ApiServerSource
+metadata:
+  name: apiserversource
+  labels:
+    app: apiserversource
+spec:
+  mode: Resource
+  resources:
+    - apiVersion: kubevirt.io/v1
+      kind: VirtualMachine
+  serviceAccountName: events-sa
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker-apiserversource
+EOF
+```
+
+From this point on, every `VirtualMachine` create or delete in the cluster shows up as a `dev.knative.apiserver.resource.add` / `dev.knative.apiserver.resource.delete` CloudEvent inside `broker-apiserversource`, looking exactly like the verbose payload shown earlier.
+
+### Transforming the Event
+
+Now for the piece that actually does the trimming: an `EventTransform` named `vmdata-transform`, sinking its output into the second `Broker`, `broker-eventtransform`:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: eventing.knative.dev/v1alpha1
+kind: EventTransform
+metadata:
+  name: vmdata-transform
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: broker-eventtransform
+  jsonata:
+    expression: |
+      {
+        "specversion": specversion,
+        "type": type,
+        "source": source,
+        "subject": subject,
+        "id": id,
+        "time": time,
+        "kind": kind,
+        "name": name,
+        "namespace": namespace,
+        "cpucores": data.spec.template.spec.domain.cpu.cores,
+        "cpusockets": data.spec.template.spec.domain.cpu.sockets,
+        "memory": data.spec.template.spec.domain.memory.guest,
+        "datasource": data.spec.dataVolumeTemplates.spec.storage.resources.resources.storage,
+        "storageclass": data.spec.dataVolumeTemplates.spec.storage.storageClassName,
+        "network": data.spec.template.spec.networks.name
+      }
+EOF
+```
+
+Mapping this back to the raw event excerpt from earlier: `cpucores` and `cpusockets` come straight from `data.spec.template.spec.domain.cpu.cores`/`.sockets` (`4` and `2` for `rhel-vm-2`), `memory` from `data.spec.template.spec.domain.memory.guest` (`8Gi`), `datasource` and `storageclass` from the VM's `dataVolumeTemplates` entry (`30Gi` on `coe-netapp-san`), and `network` from `data.spec.template.spec.networks[].name` (`default`). Everything else in that few-hundred-line payload, status, resource versions, UID, the works, simply isn't referenced in the expression, so it's dropped.
+
+Once this is in place, the event `broker-eventtransform` receives is a fraction of the size of the original, something like this (illustrative, using the same `rhel-vm-2` example as before):
+
+```code
+Context Attributes,
+  specversion: 1.0
+  type: dev.knative.apiserver.resource.add
+  source: https://172.30.0.1:443
+  subject: /apis/kubevirt.io/v1/namespaces/kubevirt-eventing/virtualmachines/rhel-vm-2
+  id: 5508cafb-3332-4709-a1b1-a8657111d82c
+  time: 2025-07-07T13:02:18.124Z
+Extensions,
+  cpucores: 4
+  cpusockets: 2
+  datasource: 30Gi
+  kind: VirtualMachine
+  memory: 8Gi
+  name: rhel-vm-2
+  namespace: kubevirt-eventing
+  network: default
+  storageclass: coe-netapp-san
+```
+
+That's exactly the shape our downstream function needs, no more, no less.
+
+### Triggers: Routing Add/Delete Events
+
+The last piece connecting `broker-apiserversource` to `vmdata-transform` is a pair of `Trigger`s. A `Trigger` binds a `Broker` to a subscriber via an event-type filter: "when an event matching this filter shows up on this `Broker`, deliver it to this subscriber." Here, `trigger-transformer-vm-add` matches `dev.knative.apiserver.resource.add` and `trigger-transformer-vm-delete` matches `dev.knative.apiserver.resource.delete`, both forwarding to the `vmdata-transform` `EventTransform` we just created, with a small retry policy in case the transform is momentarily unavailable:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-apiserversource
+  name: trigger-transformer-vm-add
+spec:
+  broker: broker-apiserversource
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.add
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: EventTransform
+      name: vmdata-transform
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-apiserversource
+  name: trigger-transformer-vm-delete
+spec:
+  broker: broker-apiserversource
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.delete
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: EventTransform
+      name: vmdata-transform
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+EOF
+```
+
+With this in place, the full pipeline is live end to end: `VirtualMachine` create/delete → `ApiServerSource` → `broker-apiserversource` → `Trigger` → `EventTransform` → `broker-eventtransform`. The only thing missing now is something actually subscribing to `broker-eventtransform` and doing something useful with those trimmed events, which is exactly where the Knative Function comes in next.
