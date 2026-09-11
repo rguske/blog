@@ -551,3 +551,32 @@ podman run -p 80:80 \
 ```
 
 {{< image src="" caption="Figure II: virtual_machines table browsed in pgAdmin" src-s="" >}}
+
+## Closing the Loop: A Web Frontend to Read the Data
+
+Both of the options above still expect you to be comfortable with `psql` or willing to stand up pgAdmin just to peek at a table, and that's exactly the gap I flagged back in the intro as *my own addition* on top of the original Knative blog article: a small, read-only web frontend for `vmdb`. Nothing fancy, no write access, no auth beyond what sits in front of it, just a page that queries `virtual_machines` and renders it so anyone on the team can check what's running (or what used to be) without ever touching a terminal.
+
+<i class='fab fa-github fa-fw'></i> repository :point_right: [rguske/postgresql-read-webapp](https://github.com/rguske/postgresql-read-webapp)
+
+Deploying it follows the same pattern as the rest of this pipeline. First, the app needs the same DB credentials the init `Job` used earlier, packaged as a `secret`:
+
+```shell
+oc -n rguske-eventing create secret generic pg-credentials \
+  --from-literal=DB_HOST=10.32.98.110 \
+  --from-literal=DB_USER=postgres \
+  --from-literal=DB_PASSWORD='redhat'
+```
+
+Then the app itself ships as a Knative Service, scaling to zero when nobody's looking and back up on the next request:
+
+```shell
+kn service create postgresql-read-webapp \
+  --image=quay.io/rguske/psql-read-webapp:v1.1 \
+  --env-from secret:pg-credentials \
+  --env DB_NAME=vmdb \
+  --env DB_PORT=5432 \
+  --scale-min=0 \
+  --scale-max=2
+```
+
+{{< image src="" caption="Figure III: postgresql-read-webapp displaying the virtual_machines table" src-s="" >}}
