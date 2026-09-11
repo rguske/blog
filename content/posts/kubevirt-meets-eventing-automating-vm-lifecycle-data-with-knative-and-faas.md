@@ -47,3 +47,47 @@ Let's walk through the diagram hop by hop, since every box in there is a piece w
 6. **The `kn-py-vmdata-psql-fn` Function** - a Python Knative Function that receives the transformed event and writes (or removes) the corresponding row.
 7. **PostgreSQL** - the actual "CMDB" table, always reflecting the current state of VMs in the cluster.
 8. **The web frontend** (not shown in the diagram above) - a small, read-only UI on top of that PostgreSQL table, so you don't have to reach for `psql` every time you want to know what's running. This piece is my own addition on top of the original article's scope, and we'll build it later in this post.
+
+## What Is the Event Transformer?
+
+Step 4 in the list above deserves its own explanation before we start deploying anything. The `ApiServerSource` doesn't just tell you "a VM named `rhel-vm-2` was created", it forwards the *entire* Kubernetes API object for that `VirtualMachine`, wrapped in a CloudEvent. That's the full spec, the full status, all the metadata Kubernetes tracks internally, easily a few hundred lines of JSON for something as simple as a VM create event. Great for completeness, not so great when all a small Python function actually needs is a name, a namespace, and a handful of spec fields.
+
+Here's a trimmed, illustrative excerpt of what that raw `dev.knative.apiserver.resource.add` event looks like (real payloads are considerably longer, this is not the full object):
+
+```json
+{
+  "specversion": "1.0",
+  "type": "dev.knative.apiserver.resource.add",
+  "source": "https://172.30.0.1:443",
+  "subject": "/apis/kubevirt.io/v1/namespaces/kubevirt-eventing/virtualmachines/rhel-vm-2",
+  "id": "5508cafb-3332-4709-a1b1-a8657111d82c",
+  "time": "2025-07-07T13:02:18.124Z",
+  "data": {
+    "spec": {
+      "template": {
+        "spec": {
+          "domain": {
+            "cpu": { "cores": 4, "sockets": 2 },
+            "memory": { "guest": "8Gi" }
+          },
+          "networks": [{ "name": "default" }]
+        }
+      },
+      "dataVolumeTemplates": [
+        {
+          "spec": {
+            "storage": {
+              "resources": { "requests": { "storage": "30Gi" } },
+              "storageClassName": "coe-netapp-san"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+That's exactly the "trims the fat" problem the `EventTransform` API solves. Introduced in Knative Eventing v1.18, `EventTransform` is a CRD that uses [JSONata](https://jsonata.org/) expressions to reshape a CloudEvent's payload in-flight, picking out only the attributes you care about and dropping everything else. It's a standalone building block too, not tied to any single source or sink, so it can sit anywhere in your event flow: right after the `Broker`, in front of a `Trigger`, wherever trimming makes sense for that hop.
+
+We won't write the JSONata expression itself just yet, that's coming up next, where we configure `EventTransform` to emit exactly the columns our `vmdb` PostgreSQL table expects: name, namespace, CPU cores/sockets, memory, storage size, storage class, and network.
