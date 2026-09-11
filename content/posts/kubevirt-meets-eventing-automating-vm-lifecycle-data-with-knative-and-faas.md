@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "KubeVirt meets Eventing: Automating VM Lifecycle Data with Knative and FaaS"
-description: "A hands-on, end-to-end walkthrough of tracking KubeVirt virtual machine lifecycle events (create/delete) with Knative Eventing's ApiServerSource, Broker and EventTransform, persisting the trimmed CloudEvents into PostgreSQL via a Python Knative Function, and reading them back out through a small web frontend."
+description: "A hands-on, end-to-end walkthrough of tracking KubeVirt virtual machine lifecycle events (create/delete) with Knative Eventing's ApiServerSource, Broker, EventTransform and Trigger, persisting the trimmed CloudEvents into PostgreSQL via a Python Knative Function and reading them back out through a small web frontend. Written as the deeper, hands-on, OpenShift-flavored companion to the original Knative blog article on the same topic, with full copy-pasteable manifests end-to-end."
 date: 2026-09-11T09:00:00+02:00
 draft: true
 featuredImage: /img/kubevirt_meets_eventing_cover.png
@@ -580,3 +580,17 @@ kn service create postgresql-read-webapp \
 ```
 
 {{< image src="" caption="Figure III: postgresql-read-webapp displaying the virtual_machines table" src-s="" >}}
+
+## Wrap-Up
+
+Stepping back, the actual takeaway here has very little to do with VMs specifically. The interesting bit is the pattern: `ApiServerSource` watching a resource, a `Broker` routing what it hears, `EventTransform` trimming the noise, and `Trigger`s filtering by event type before handing off to a function. Swap `VirtualMachine` for `Deployment`, `Pod`, `Namespace`, or any other Kubernetes resource, built-in or a CRD of your own, and the exact same four building blocks apply. That's the real win of going event-driven instead of polling: you stop writing "check every N minutes and diff against last time" scripts, and you start reacting the moment something actually changes.
+
+From here, a few natural next steps come to mind: hooking an alerting path onto VM deletion events so someone actually gets notified when a VM disappears, extending the same pipeline to other KubeVirt resource types (`VirtualMachineInstance`, `DataVolume`), or, for anyone taking this beyond a homelab, swapping the in-memory `Broker`s used throughout this post for a Kafka-backed `Broker` to get durable, replayable event storage in production.
+
+## Resources
+
+- [Monitoring Virtual Machines with Knative Eventing](https://knative.dev/blog/articles/kubevirt_meets_eventing/) - the original article this post builds on
+- <i class='fab fa-github fa-fw'></i> [rguske/knative-functions/kn-py-vmdata-psql-fn](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn)
+- <i class='fab fa-github fa-fw'></i> [rguske/postgresql-read-webapp](https://github.com/rguske/postgresql-read-webapp)
+- [Knative Eventing docs](https://knative.dev/docs/eventing/)
+- [KubeVirt](https://kubevirt.io/)
