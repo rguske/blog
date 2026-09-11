@@ -472,3 +472,49 @@ git commit -m "post: add wrap-up, resources, and finalize KubeVirt meets Eventin
 
 - User to capture and drop in the two placeholder screenshots (pgAdmin table view, web-frontend UI), then update the two empty `{{< image src="" ... >}}` shortcodes in Tasks 7 and 8.
 - User to flip `draft: true` → `draft: false` when ready to publish.
+
+---
+
+## Task 4a (added post-hoc): Prerequisites section
+
+**Inserted between the existing "What Is the Event Transformer?" section (Task 3) and "## Deploying the Event Pipeline" (Task 4).** Requested by the user after Tasks 1-9 were already complete: a reader following this post needs to know how to get Knative Serving/Eventing (or OpenShift Serverless) installed before the manifests in "Deploying the Event Pipeline" will apply cleanly.
+
+**Files:**
+- Modify: `content/posts/kubevirt-meets-eventing-automating-vm-lifecycle-data-with-knative-and-faas.md` (insert new `## Prerequisites` section immediately before the existing `## Deploying the Event Pipeline` heading)
+
+**Sources (verified against live Red Hat docs on 2026-09-11):**
+- [Installing the OpenShift Serverless Operator (CLI)](https://docs.redhat.com/en/documentation/red_hat_openshift_serverless/1.37/html/installing_openshift_serverless/install-serverless-operator) — `Namespace`/`OperatorGroup`/`Subscription` YAML, `oc apply -f serverless-subscription.yaml`, verify via `oc get csv`.
+- [Installing Knative Serving by using YAML](https://docs.redhat.com/en/documentation/red_hat_openshift_serverless/1.37/html/installing_openshift_serverless/installing-knative-serving) — `KnativeServing` CR, `oc apply -f serving.yaml`, verify via `oc get knativeserving.operator.knative.dev/knative-serving -n knative-serving --template=...`.
+- [Installing Knative Eventing by using YAML](https://docs.redhat.com/en/documentation/red_hat_openshift_serverless/1.37/html/installing_openshift_serverless/installing-knative-eventing) — `KnativeEventing` CR, `oc apply -f eventing.yaml`, verify via `oc get knativeeventing.operator.knative.dev/knative-eventing -n knative-eventing --template=...`.
+- [Knative Quickstart](https://knative.dev/docs/install/quickstart-install/) and the [Knative Operator install docs](https://knative.dev/docs/install/operator/knative-with-operators/) — for the one-paragraph "not on OpenShift?" callout.
+
+**Interfaces:**
+- Consumes: nothing (standalone infra prerequisite section); positioned right after Task 3's "What Is the Event Transformer?" section.
+- Produces: confirms `knative-serving` and `knative-eventing` namespaces/CRs exist, which every manifest from Task 4 onward assumes is already true.
+
+- [ ] **Step 1: Write the Prerequisites section**
+
+Insert `## Prerequisites` (as its own top-level section, before `## Deploying the Event Pipeline`) with:
+1. One sentence: everything from here on assumes Knative Serving and Eventing (or, on OpenShift, the OpenShift Serverless Operator) plus KubeVirt/OpenShift Virtualization are already installed and healthy on the cluster — this section covers the Knative/Serverless side only (KubeVirt install is out of scope, link to [KubeVirt's own quickstart](https://kubevirt.io/quickstart_minikube/) or OpenShift Virtualization docs for readers who need it).
+2. `### On OpenShift: the OpenShift Serverless Operator` subsection:
+   - One sentence: the Operator manages both Knative Serving and Eventing (and the Kafka broker) as a single product, so it's the fastest path on OpenShift.
+   - The `Namespace`/`OperatorGroup`/`Subscription` YAML as a ```yaml``` block (verbatim from the Red Hat doc above), followed by `oc apply -f serverless-subscription.yaml` as a ```shell``` block, then the `oc get csv` verification command + its expected example output line.
+   - The `KnativeServing` CR YAML as a ```yaml``` block, `oc apply -f serving.yaml`, and the verification command `oc get knativeserving.operator.knative.dev/knative-serving -n knative-serving --template='{{range .status.conditions}}{{printf "%s=%s\n" .type .status}}{{end}}'` with its expected `...=True` output lines.
+   - The `KnativeEventing` CR YAML as a ```yaml``` block, `oc apply -f eventing.yaml`, and the equivalent verification command for `knativeeventing`.
+3. `### Everywhere Else: Upstream Knative Serving and Eventing` subsection:
+   - One short paragraph: on non-OpenShift Kubernetes, install upstream Knative Serving and Eventing directly — either via the [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/) for a supported long-term install, or the [Knative Quickstart](https://knative.dev/docs/install/quickstart-install/) `kn` plugin for local experimentation only (not production).
+   - No need to paste upstream YAML manifests in full — link out, this post's actual manifests from here on use `oc`/OpenShift conventions.
+
+- [ ] **Step 2: Verify build**
+
+```bash
+cd "/Users/rguske/Documents/blog" && hugo build -D 2>&1 | grep -i "kubevirt-meets-eventing"
+```
+Expected: no errors.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add content/posts/kubevirt-meets-eventing-automating-vm-lifecycle-data-with-knative-and-faas.md
+git commit -m "post: add Prerequisites section (OpenShift Serverless / upstream Knative install)"
+```
