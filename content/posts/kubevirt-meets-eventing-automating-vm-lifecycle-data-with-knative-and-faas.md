@@ -388,3 +388,122 @@ spec:
 
           echo "Database initialization completed."
 ```
+
+## Deploying the `kn-py-vmdata-psql-fn` Function
+
+With the pipeline delivering trimmed events to `broker-eventtransform` and `vmdb` standing by to receive them, the last piece is the function that actually connects the two. `kn-py-vmdata-psql-fn` is a small Python Knative Function: it receives the transformed CloudEvent and, depending on the event `type`, either inserts a new row into `virtual_machines` (`dev.knative.apiserver.resource.add`) or removes the matching one (`dev.knative.apiserver.resource.delete`). It also keeps track of the CloudEvent `id`s it has already handled, so if the same event ever gets redelivered, it recognizes the duplicate and skips it rather than writing (or deleting) the row twice.
+
+<i class='fab fa-github fa-fw'></i> repository :point_right: [rguske/knative-functions/kn-py-vmdata-psql-fn](https://github.com/rguske/knative-functions/tree/main/kn-py-vmdata-psql-fn)
+
+The function needs the same DB connection details as the `init-vmdb` `Job` from earlier, held in their own `Secret`:
+
+```shell
+oc create secret generic psql-secret \
+  --from-literal=db_host="192.168.50.50" \
+  --from-literal=db_port="5432" \
+  --from-literal=db_name="vmdb" \
+  --from-literal=db_user="postgres" \
+  --from-literal=db_password="redhat"
+```
+
+With the secret in place, deploy the function itself as a Knative `Service`. Each `DB_*` environment variable is sourced straight from `psql-secret`, and just like the pipeline's other single-purpose components, `min`/`maxScale` are both pinned to `1`:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: kn-py-psql-vmdata-fn
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "1"
+        autoscaling.knative.dev/minScale: "1"
+    spec:
+      containers:
+        - image: quay.io/rguske/kn-py-psql-vmdata-fn:v1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: db_host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: db_port
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: db_name
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: db_user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secret
+                  key: db_password
+EOF
+```
+
+The last step is hooking the function up to `broker-eventtransform` with the same add/delete `Trigger` pattern used earlier for the transformer: `trigger-vm-add` matches `dev.knative.apiserver.resource.add`, `trigger-vm-delete` matches `dev.knative.apiserver.resource.delete`, and both point at the `kn-py-psql-vmdata-fn` `Service` we just created:
+
+```yaml
+oc create -f - <<EOF
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-eventtransform
+  name: trigger-vm-add
+spec:
+  broker: broker-eventtransform
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.add
+  subscriber:
+    ref:
+      apiVersion:  serving.knative.dev/v1
+      kind: Service
+      name: kn-py-psql-vmdata-fn
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: broker-eventtransform
+  name: trigger-vm-delete
+spec:
+  broker: broker-eventtransform
+  filter:
+    attributes:
+      type: dev.knative.apiserver.resource.delete
+  subscriber:
+    ref:
+      apiVersion:  serving.knative.dev/v1
+      kind: Service
+      name: kn-py-psql-vmdata-fn
+  delivery:
+    retry: 1
+    backoffPolicy: linear
+    backoffDelay: PT5S
+EOF
+```
+
+With that applied, the pipeline is complete end to end: `VirtualMachine` create/delete → `ApiServerSource` → transform → `broker-eventtransform` → `Trigger` → `kn-py-psql-vmdata-fn` → `virtual_machines`.
+
+{{< admonition info "Skipping duplicate events" true >}}
+Knative Eventing's delivery guarantee is at-least-once, not exactly-once, so the same CloudEvent can legitimately show up at the function's door more than once, a retry after a slow response, a redelivery after a brief network hiccup, and so on. Left unchecked, a repeated `add` event would simply run the same `INSERT` again. `kn-py-vmdata-psql-fn` guards against this by remembering the CloudEvent `id` it has already processed and short-circuiting on a repeat, logging a line to that effect and returning a "skipped" response instead of touching the database a second time. It's a small check, but it's what keeps `virtual_machines` an accurate mirror of cluster state instead of quietly drifting under retries.
+{{< /admonition >}}
