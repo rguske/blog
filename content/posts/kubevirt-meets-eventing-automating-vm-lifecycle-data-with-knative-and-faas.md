@@ -315,7 +315,7 @@ spec:
         "cpucores": data.spec.template.spec.domain.cpu.cores,
         "cpusockets": data.spec.template.spec.domain.cpu.sockets,
         "memory": data.spec.template.spec.domain.memory.guest,
-        "datasource": data.spec.dataVolumeTemplates.spec.storage.resources.resources.storage,
+        "datasource": data.spec.dataVolumeTemplates.spec.storage.resources.requests.storage,
         "storageclass": data.spec.dataVolumeTemplates.spec.storage.storageClassName,
         "network": data.spec.template.spec.networks.name
       }
@@ -404,7 +404,7 @@ With this in place, the full pipeline is live end to end: `VirtualMachine` creat
 
 Everything up to this point has been about getting events into the right shape and to the right place. The other half of the "CMDB-like PostgreSQL table" idea from the introduction is the database itself: a StatefulSet-backed PostgreSQL 16 instance sitting behind a `ClusterIP` `Service`. To be upfront about it, what's running here is homelab/demo-grade: a single replica backed by `ReadWriteOnce` `PersistentVolumeClaim`s, not something you'd take to production as-is. That's fine for this post though, because the interesting part isn't the `StatefulSet`, it's the schema. Swap this out for any Postgres instance or Operator you already have reachable from your cluster; as long as it can run the `CREATE TABLE` statement coming up below, it'll work just as well.
 
-The one credential involved is the database password, held in a small `Secret`:
+The credentials involved, the database host, user and password, are held in a small `Secret`. Reusing this same `Secret` later for the `init-vmdb` `Job` keeps things simple instead of introducing a second, redundant credentials object:
 
 ```yaml
 oc create -f - <<EOF
@@ -416,6 +416,8 @@ metadata:
     app: postgres
 type: Opaque
 data:
+  DB_HOST: 'MTAuMzIuOTguMTEw'
+  DB_USER: 'cG9zdGdyZXM='
   POSTGRES_PASSWORD: 'cmVkaGF0Cg=='
 EOF
 ```
@@ -443,18 +445,18 @@ spec:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: pg-credentials
+              name: postgresql-secret
               key: DB_HOST
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: pg-credentials
+              name: postgresql-secret
               key: DB_USER
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
-              name: pg-credentials
-              key: DB_PASSWORD
+              name: postgresql-secret
+              key: POSTGRES_PASSWORD
         command:
         - /bin/bash
         - -c
@@ -499,7 +501,7 @@ The function needs the same DB connection details as the `init-vmdb` `Job` from 
 
 ```shell
 oc create secret generic psql-secret \
-  --from-literal=db_host="192.168.50.50" \
+  --from-literal=db_host="10.32.98.110" \
   --from-literal=db_port="5432" \
   --from-literal=db_name="vmdb" \
   --from-literal=db_user="postgres" \
@@ -645,7 +647,7 @@ Five `add` rows, five `delete` rows, each carrying the CloudEvent `id` that made
 
 ```shell
 podman run -p 80:80 \
-    -e 'PGADMIN_DEFAULT_EMAIL=rguske@redhat.com' \
+    -e 'PGADMIN_DEFAULT_EMAIL=your-email@example.com' \
     -e 'PGADMIN_DEFAULT_PASSWORD=redhat' \
     -d dpage/pgadmin4:9.2.0
 ```
