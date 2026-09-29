@@ -3,7 +3,7 @@ author: "Robert Guske"
 authorLink: "/about/"
 lightgallery: true
 title: "KubeVirt meets Eventing: Automating VM Lifecycle Data with Knative and FaaS"
-description: "A hands-on, end-to-end walkthrough of tracking KubeVirt virtual machine lifecycle events (create/delete) with Knative Eventing's ApiServerSource, Broker, EventTransform and Trigger, persisting the trimmed CloudEvents into PostgreSQL via a Python Knative Function and reading them back out through a small web frontend. Written as the deeper, hands-on, OpenShift-flavored companion to the original Knative blog article on the same topic, with full copy-pasteable manifests end-to-end."
+description: "A hands-on, end-to-end walkthrough of tracking KubeVirt virtual machine lifecycle events (create/delete) with Knative Eventing's ApiServerSource, Broker, EventTransform and Trigger, persisting the trimmed CloudEvents data into a PostgreSQL DB via a Python Knative Function. Written as the deeper, hands-on, OpenShift-flavored companion to the original Knative blog article on the same topic, with full copy-pasteable manifests."
 date: 2026-09-28T16:00:00+02:00
 draft: false
 featuredImage: /img/kubevirt_meets_eventing_cover.png
@@ -259,6 +259,8 @@ metadata:
   name: ${NAMESPACE}
 EOF
 ```
+
+On OpenShift, simply `oc new-project kubevirt-eventing`.
 
 ```yaml
 oc create -f - <<EOF
