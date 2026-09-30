@@ -3,3 +3,4 @@
 hooks/__pycache__/
 .DS_Store
 .hugo_build.lock
+.worktrees/
