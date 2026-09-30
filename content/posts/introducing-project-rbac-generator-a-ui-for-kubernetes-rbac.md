@@ -37,7 +37,7 @@ Connecting a cluster is optional. Paste or upload a kubeconfig and RBAC-Generato
 
 - A guided rule builder with cascading, searchable dropdowns: `apiGroups` → `resources` → `subresources` → `verbs`. Live API discovery backs those lists when you are connected, and Custom Resources are called out separately from built-ins. Offline, the same builder uses a built-in static catalog.
 - An always-on split pane. Edit the form or the YAML and the other side updates, with inline errors when the YAML is invalid.
-- Persona templates that pre-fill either a `ClusterRole` or a namespaced `Role`: Cluster-Admin, Cluster-Viewer, VirtualMachine-Admin, VirtualMachine-Viewer, Platform-Operator, and Network-Engineer.
+- Persona templates that pre-fill either a `ClusterRole` or a namespaced `Role`: Cluster-Admin, Cluster-Viewer, VirtualMachine-Admin, VirtualMachine-Viewer, Platform-Operator, Network-Engineer, and Storage-Admin.
 - With a cluster connected: live API discovery, `ServiceAccount` lookup, server-side dry-run, and direct apply.
 - Read-only browse of existing `Role`, `ClusterRole`, `RoleBinding`, and `ClusterRoleBinding` resources, with one-click copy of the YAML. Browse does not edit or delete.
 - Light and dark mode, and the YAML editor follows it.

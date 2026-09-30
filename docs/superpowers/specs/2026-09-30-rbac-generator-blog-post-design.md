@@ -88,7 +88,7 @@ Then replace the archetype front matter and body with the content specified belo
 3. `## Features` — a short list, not an implementation explanation:
    - Guided rule builder with cascading, searchable `apiGroups` → `resources` → `subresources` → `verbs`, backed by live API discovery (Custom Resources called out separately from built-ins) or a built-in static catalog when offline.
    - Always-on split pane: edit the form or the YAML and the other side updates, with inline errors for invalid YAML.
-   - Persona templates that pre-fill a `ClusterRole` or a namespaced `Role`: Cluster-Admin, Cluster-Viewer, VirtualMachine-Admin, VirtualMachine-Viewer, Platform-Operator, Network-Engineer.
+   - Persona templates that pre-fill a `ClusterRole` or a namespaced `Role`: Cluster-Admin, Cluster-Viewer, VirtualMachine-Admin, VirtualMachine-Viewer, Platform-Operator, Network-Engineer, Storage-Admin.
    - When connected: live API discovery, `ServiceAccount` lookup, server-side dry-run, and direct apply.
    - Read-only browse of existing `Role`, `ClusterRole`, `RoleBinding`, and `ClusterRoleBinding` resources, with one-click copy of the YAML. Browse does not edit or delete.
    - Light and dark mode, including the YAML editor.
